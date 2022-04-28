@@ -1,5 +1,4 @@
 import React from "react";
-
 import Form from "../Form/Form";
 import store from "./img/store.jpg";
 import HeaderHome from "./../Headers/HeaderHome";
