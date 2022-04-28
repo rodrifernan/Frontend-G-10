@@ -1,8 +1,8 @@
 import React from "react";
-
 import Form from "../Form/Form";
-import store from "./img/store.jpg";
+import store from "./img/store.png";
 import HeaderHome from "./../Headers/HeaderHome";
+import { Route, Switch } from "react-router-dom";
 
 const Home = () => {
   return (

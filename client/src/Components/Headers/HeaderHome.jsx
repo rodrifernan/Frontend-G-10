@@ -14,7 +14,7 @@ const HeaderLanding = () => {
                 data-placement="bottom"
                 title="Ingresa como invitado"
                 className="nav-link btn text-light"
-                href="/Shop"
+                href="/invitado"
               >
                 Invitado
               </a>
@@ -72,7 +72,7 @@ const HeaderLanding = () => {
           </ul>
         </div>
         <div className="col-4 mainTitle text-center">
-          <h3>MassiveMachine</h3>
+          <h3>SHOPBAG</h3>
         </div>
         <div className="col-4">
           <ul className="btn nav justify-content-end">
