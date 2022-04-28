@@ -1,10 +1,12 @@
-import './App.css';
+import Home from "./Components/Home/Home";
+import "./App.css";
+import { Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Final Project Group #10</h1>
-    </div>
+    <Switch>
+      <Route exact path="/" component={Home}></Route>
+    </Switch>
   );
 }
 
