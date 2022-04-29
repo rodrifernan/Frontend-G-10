@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 import axios from "axios";
 
 export const fetchProducts = createAsyncThunk(
@@ -12,12 +13,34 @@ export const fetchProducts = createAsyncThunk(
     return response.data;
   }
 );
+export const getByCategories = createAsyncThunk(
+  "products/getByCategories",
+  async (payload) => {
+    const response = await axios
+      .get(`http://localhost:3001/api/filterCategory?name=${payload}`)
+      .catch((err) => {
+        console.log(err);
+      });
+    return response.data;
+  }
+);
+export const getByName = createAsyncThunk(
+  "search/getByName",
+  async (payload) => {
+    const response = await axios
+      .get(`http://localhost:3001/api/products?name=${payload}`)
+      .catch((err) => {
+        console.log(err);
+      });
+    return response.data;
+  }
+);
 
 const initialState = {
   products: [],
 };
 
-export const productsSlice = createSlice({
+const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
@@ -26,6 +49,18 @@ export const productsSlice = createSlice({
       console.log("pending");
     },
     [fetchProducts.fulfilled]: (state, action) => {
+      return { ...state, products: action.payload };
+    },
+    [getByName.pending]: () => {
+      console.log("Pendinente");
+    },
+    [getByName.fulfilled]: (state, action) => {
+      return { ...state, products: action.payload };
+    },
+    [getByCategories.pending]: () => {
+      console.log("Trayendo por categoria");
+    },
+    [getByCategories.fulfilled]: (state, action) => {
       return { ...state, products: action.payload };
     },
   },

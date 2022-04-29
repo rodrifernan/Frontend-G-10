@@ -1,7 +1,9 @@
-import Home from "./Components/Home/Home";
-import "./App.css";
-import HomeAcrticles from "./Components/Home/Home-article";
 import { Route } from "react-router-dom";
+import "./App.css";
+
+import Registro from "./Components/Home/Registro";
+import Home from "./Components/Home/Home";
+import HomeAcrticles from "./Components/Home/Home-article";
 import { CreateProducts } from "./Components/createProduct/CreateProducts";
 import Header from "./Components/Headers/Header";
 

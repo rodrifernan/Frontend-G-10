@@ -1,6 +1,7 @@
 import React from "react";
 import Enlaces from "./Enlaces";
 import SearchBar from "./SearchBar";
+
 import "./Header.css";
 import logo from "./LogoEcommerce.png"
 import { Link } from "react-router-dom";
