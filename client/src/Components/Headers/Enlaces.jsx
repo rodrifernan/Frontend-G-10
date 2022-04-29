@@ -4,19 +4,27 @@ const Enlaces = () => {
   return (
     <div className="enlaces col-4 text-center ">
       <ul className="nav">
-        <li className="nav-item">
+        <li>
+        <div className=" isesion ">
+          <a className=" registrarse btn text-white " href="/registro">
+            <i class="fas fa-user"></i>
+            Ingresar/Registrarse
+          </a>
+        </div>
+        </li>
+        {/* <li className="nav-item">
           <a className=" btn  text-white nav-link" href="https://picsum.photos/300">
             <i className="fas fa-fire"></i>
             Los mas Vendidos
           </a>
-        </li>
+        </li> */}
 
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <a className="btn text-white nav-link" href="https://picsum.photos/300">
             <i className="fas fa-shopping-bag"></i>
             Mis compras
           </a>
-        </li>
+        </li> */}
         <li className="nav-item">
           <a className="nav-link btn text-white" href="https://picsum.photos/300">
             <i className="fas fa-shopping-cart "></i>
