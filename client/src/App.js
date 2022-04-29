@@ -1,6 +1,6 @@
 import Home from "./Components/Home/Home";
 import "./App.css";
-import HomeAcrticles from "./Components/Home/Home-article";
+import Registro from "./Components/Home/Registro";
 import { Route, Switch } from "react-router-dom";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
         <Route exact path="/" component={Home}></Route>
       </Switch>
       <Switch>
-        <Route exact path="/Shop" component={HomeAcrticles}></Route>
+        <Route exact path="/registro" component={Registro}></Route>
       </Switch>
     </>
   );
