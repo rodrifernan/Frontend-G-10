@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import Logo from "../Home/img/faviconBag.png";
 import "./Form.css";
 
@@ -48,7 +48,7 @@ const Form = () => {
   return (
     <div>
       <div className="text-center">
-        <img className="icono" src={Logo} />
+        <img className="icono" src={Logo} alt='logo'/>
       </div>
       <div className="container w-50 my-2">
         <form onSubmit={handleOnSubmit}>
@@ -91,8 +91,8 @@ const Form = () => {
               />
             </div>
             <div className="input-group pt-4 flex-nowrap">
-              <span class="input-group-text" id="pass">
-                <i class="fas fa-lock"></i>
+              <span className="input-group-text" id="pass">
+                <i className="fas fa-lock"></i>
               </span>
               <input
                 type="password"
@@ -122,9 +122,9 @@ const Form = () => {
             </div>
           </div>
           <div className="mb-4 d-flex">
-            <div class="input-group flex-nowrap col-6">
-              <span class="input-group-text" id="user">
-                <i class="fas fa-user-circle"></i>
+            <div className="input-group flex-nowrap col-6">
+              <span className="input-group-text" id="user">
+                <i className="fas fa-user-circle"></i>
               </span>
               <input
                 type="text"
@@ -136,9 +136,9 @@ const Form = () => {
                 onChange={handleOnchangeActivity}
               />
             </div>
-            <div class="input-group flex-nowrap col-6">
-              <span class="input-group-text" id="user">
-                <i class="fas fa-user-circle"></i>
+            <div className="input-group flex-nowrap col-6">
+              <span className="input-group-text" id="user">
+                <i className="fas fa-user-circle"></i>
               </span>
               <input
                 type="text"
@@ -152,9 +152,9 @@ const Form = () => {
             </div>
           </div>
           <div className="mb-4 d-flex">
-            <div class="input-group flex-nowrap col-4">
-              <span class="input-group-text" id="user">
-                <i class="fas fa-address-book"></i>
+            <div className="input-group flex-nowrap col-4">
+              <span className="input-group-text" id="user">
+                <i className="fas fa-address-book"></i>
               </span>
               <input
                 type="text"
@@ -166,9 +166,9 @@ const Form = () => {
                 onChange={handleOnchangeActivity}
               />
             </div>
-            <div class="input-group flex-nowrap col-4">
-              <span class="input-group-text" id="user">
-                <i class="fas fa-phone"></i>
+            <div className="input-group flex-nowrap col-4">
+              <span className="input-group-text" id="user">
+                <i className="fas fa-phone"></i>
               </span>
               <input
                 type="number"
@@ -180,9 +180,9 @@ const Form = () => {
                 onChange={handleOnchangeActivity}
               />
             </div>
-            <div class="input-group flex-nowrap col-4">
-              <span class="input-group-text" id="user">
-                <i class="fas fa-address-card"></i>
+            <div className="input-group flex-nowrap col-4">
+              <span className="input-group-text" id="user">
+                <i className="fas fa-address-card"></i>
               </span>
               <input
                 type="number"

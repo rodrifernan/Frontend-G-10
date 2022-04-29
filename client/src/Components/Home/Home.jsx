@@ -40,16 +40,16 @@ const Home = () => {
         <div className="col-6 filtrado justify-content-end">
           <div className="col-3">
             <select
-              class="form-select form-select-lg mb-3"
+              className="form-select form-select-lg mb-3"
               aria-label=".form-select-lg example"
               onChange={handleOnChange}
             >
-              <option value={"All"} selected>
+              <option value={"All"} defaultValue>
                 Categoria
               </option>
               {Array.isArray(categories) ? (
                 categories.map((cat, i) => {
-                  return <option value={cat.name}> {cat.name}</option>;
+                  return <option key={cat.id} value={cat.name}> {cat.name}</option>;
                 })
               ) : (
                 <div>{categories}</div>
@@ -63,6 +63,7 @@ const Home = () => {
           products.map((pr) => {
             return (
               <Card
+                key={pr.id}
                 description={pr.description}
                 name={pr.name}
                 image={pr.image}

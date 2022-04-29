@@ -33,10 +33,10 @@ const SearchBar = () => {
           />
           <button
             onClick={handleOnSubmit}
-            class="input-group-text border-0"
+            className="input-group-text border-0"
             id="search-addon"
           >
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
           </button>
         </div>
       </div>
