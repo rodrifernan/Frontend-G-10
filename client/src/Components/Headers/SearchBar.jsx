@@ -1,6 +1,9 @@
+
 import React, { useState } from "react";
 import { getByName } from "../../redux/reducer/products";
 import { useDispatch } from "react-redux";
+import "./SearchBar.css"
+
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [input, setInput] = useState("");
@@ -17,11 +20,7 @@ const SearchBar = () => {
   return (
     <div className="col-4 px-4 search ">
       <div className="search-content justify-content-end d-flex">
-        <div className=" isesion ">
-          <a className=" registrarse btn text-white " href="/registro">
-            Registrarse
-          </a>
-        </div>
+        
         <div className="input-group rounded col-6">
           <input
             type="search"
