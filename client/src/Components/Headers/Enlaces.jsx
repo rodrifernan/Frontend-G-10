@@ -5,21 +5,21 @@ const Enlaces = () => {
     <div className="enlaces col-4 text-center ">
       <ul className="nav">
         <li className="nav-item">
-          <a className=" btn  text-white nav-link" href="#">
-            <i class="fas fa-fire"></i>
+          <a className=" btn  text-white nav-link" href="https://picsum.photos/300">
+            <i className="fas fa-fire"></i>
             Los mas Vendidos
           </a>
         </li>
 
         <li className="nav-item">
-          <a className="btn text-white nav-link" href="#">
-            <i class="fas fa-shopping-bag"></i>
+          <a className="btn text-white nav-link" href="https://picsum.photos/300">
+            <i className="fas fa-shopping-bag"></i>
             Mis compras
           </a>
         </li>
-        <li class="nav-item">
-          <a className="nav-link btn text-white" href="#">
-            <i class="fas fa-shopping-cart "></i>
+        <li className="nav-item">
+          <a className="nav-link btn text-white" href="https://picsum.photos/300">
+            <i className="fas fa-shopping-cart "></i>
             Mi carrito
           </a>
         </li>

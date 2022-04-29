@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React } from "react";
 
 const Form = () => {
   /*const [validate, setValidate] = useState({});
@@ -62,10 +62,17 @@ const Form = () => {
       setError(true);
     }
   }, [form, setError]);*/
+const handleOnSubmit  = () => {
+
+}
+const handleOnchangeActivity = () => {
+
+}
+
   return (
     <div>
       <div className="container w-50 my-5">
-        <form onSubmit={"handleOnSubmit"}>
+        <form onSubmit={handleOnSubmit}>
           <div className="text-left py-3 title-form">
             <h1 className="text-white">Formulario </h1>
             <h1 className="text-white">De </h1>
@@ -75,9 +82,9 @@ const Form = () => {
             </h4>
           </div>
           <div className="mb-4">
-            <div class="input-group flex-nowrap">
-              <span class="input-group-text" id="email">
-                <i class="fas fa-envelope"></i>
+            <div className="input-group flex-nowrap">
+              <span className="input-group-text" id="email">
+                <i className="fas fa-envelope"></i>
               </span>
               <input
                 type={"email"}
@@ -86,14 +93,14 @@ const Form = () => {
                 id="exampleInputEmail1"
                 aria-describedby="email"
                 placeholder="Correo electronico"
-                onChange={"handleOnchangeActivity"}
+                onChange={handleOnchangeActivity}
               />
             </div>
           </div>
           <div className="mb-4">
             <div className="input-group flex-nowrap">
-              <span class="input-group-text" id="pass">
-                <i class="fas fa-lock"></i>
+              <span className="input-group-text" id="pass">
+                <i className="fas fa-lock"></i>
               </span>
               <input
                 type="password"
@@ -101,15 +108,15 @@ const Form = () => {
                 className="form-control"
                 aria-describedby="pass"
                 id="exampleInputPassword1"
-                onChange={"handleOnchangeActivity"}
+                onChange={handleOnchangeActivity}
                 placeholder="Contraseña"
               />
             </div>
           </div>
           <div className="mb-4 ">
-            <div class="input-group flex-nowrap">
-              <span class="input-group-text" id="user">
-                <i class="fas fa-user"></i>
+            <div className="input-group flex-nowrap">
+              <span className="input-group-text" id="user">
+                <i className="fas fa-user"></i>
               </span>
               <input
                 type="text"
@@ -118,7 +125,7 @@ const Form = () => {
                 placeholder="Nombre de usuario"
                 aria-describedby="user"
                 id="Nickname"
-                onChange={"handleOnchangeActivity"}
+                onChange={handleOnchangeActivity}
               />
             </div>
           </div>

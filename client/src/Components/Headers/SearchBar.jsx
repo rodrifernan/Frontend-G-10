@@ -9,16 +9,16 @@ const SearchBar = () => {
             Registrarse
           </a>
         </div>
-        <div class="input-group rounded col-6">
+        <div className="input-group rounded col-6">
           <input
             type="search"
-            class="form-control rounded"
+            className="form-control rounded"
             placeholder="Buscar un producto..."
             aria-label="Search"
             aria-describedby="search-addon"
           />
-          <button class="input-group-text border-0" id="search-addon">
-            <i class="fas fa-search"></i>
+          <button className="input-group-text border-0" id="search-addon">
+            <i className="fas fa-search"></i>
           </button>
         </div>
       </div>
