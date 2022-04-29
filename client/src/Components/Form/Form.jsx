@@ -43,6 +43,8 @@ const Form = () => {
     });
     // history.push('/home')
   };
+
+ 
   return (
     <div>
       <div className="text-center">
@@ -58,9 +60,9 @@ const Form = () => {
             </h4>
           </div>
           <div className="mb-4">
-            <div class="input-group flex-nowrap">
-              <span class="input-group-text" id="email">
-                <i class="fas fa-envelope"></i>
+            <div className="input-group flex-nowrap">
+              <span className="input-group-text" id="email">
+                <i className="fas fa-envelope"></i>
               </span>
               <input
                 type={"email"}
@@ -75,8 +77,8 @@ const Form = () => {
           </div>
           <div className="mb-4">
             <div className="input-group flex-nowrap">
-              <span class="input-group-text" id="pass">
-                <i class="fas fa-lock"></i>
+              <span className="input-group-text" id="pass">
+                <i className="fas fa-lock"></i>
               </span>
               <input
                 type="password"
@@ -104,9 +106,9 @@ const Form = () => {
             </div>
           </div>
           <div className="mb-4 ">
-            <div class="input-group flex-nowrap">
-              <span class="input-group-text" id="user">
-                <i class="fas fa-user"></i>
+            <div className="input-group flex-nowrap">
+              <span className="input-group-text" id="user">
+                <i className="fas fa-user"></i>
               </span>
               <input
                 type="text"

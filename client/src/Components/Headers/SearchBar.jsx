@@ -22,10 +22,10 @@ const SearchBar = () => {
             Registrarse
           </a>
         </div>
-        <div class="input-group rounded col-6">
+        <div className="input-group rounded col-6">
           <input
             type="search"
-            class="form-control rounded"
+            className="form-control rounded"
             placeholder="Buscar un producto..."
             aria-label="Search"
             aria-describedby="search-addon"
