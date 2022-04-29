@@ -2,16 +2,18 @@ import React from "react";
 import Enlaces from "./Enlaces";
 import SearchBar from "./SearchBar";
 import "./Header.css";
+import logo from "./LogoEcommerce.png"
 
 const Header = () => {
   return (
-    <header>
-      <div className="col-12 d-flex py-2 align-items-center">
-        <Enlaces />
+    <header >
+      <div className="header col-12 d-flex py-2 align-items-center">
+        <img src={logo} alt="no hay imagen" height={"50px"}/>
         <div className="col-4 text-light text-center">
           <h3>ShopBag</h3>
         </div>
         <SearchBar />
+        <Enlaces />
       </div>
     </header>
   );

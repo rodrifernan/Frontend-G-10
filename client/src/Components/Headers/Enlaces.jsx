@@ -4,6 +4,13 @@ const Enlaces = () => {
   return (
     <div className="enlaces col-4 text-center ">
       <ul className="nav">
+        <li>
+        <div className=" isesion ">
+          <a className=" registrarse btn text-white " href="/registro">
+            Ingresar/Registrarse
+          </a>
+        </div>
+        </li>
         <li className="nav-item">
           <a className=" btn  text-white nav-link" href="https://picsum.photos/300">
             <i className="fas fa-fire"></i>

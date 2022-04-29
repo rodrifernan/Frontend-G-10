@@ -4,11 +4,7 @@ const SearchBar = () => {
   return (
     <div className="col-4 px-4 search ">
       <div className="search-content justify-content-end d-flex">
-        <div className=" isesion ">
-          <a className=" registrarse btn text-white " href="/registro">
-            Registrarse
-          </a>
-        </div>
+        
         <div className="input-group rounded col-6">
           <input
             type="search"
