@@ -13,14 +13,51 @@ import {
   categoriesAll,
 } from "../../redux/reducer/getCategorie";
 import { useDispatch, useSelector } from "react-redux";
-
-import Card from "../Card/Cards";
+import Header from "../Headers/Header";
+import Card from "../Card/Cards-article";
 
 const Home = () => {
+  const [category, setCategory] = useState("");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+    dispatch(getAllCategories());
+  }, [dispatch]);
+  const handleOnChange = (e) => {
+    dispatch(getByCategories(e.target.value));
+    if (e.target.value === "All") {
+      dispatch(fetchProducts());
+    }
+    setCategory(e.target.value);
+  };
+  let categories = useSelector(categoriesAll);
+
+  let products = useSelector(getAllProducts);
+
+  const handleOnChangeOrder = (e) => {
+    if (e.target.value === "sinalterar") {
+      dispatch(fetchProducts());
+    } else if (e.target.value === "AaZ") {
+      console.log(e.target.value);
+      dispatch(order());
+      console.log(products);
+    } else if (e.target.value === "ZaA") {
+      dispatch(inversa());
+    } else if (e.target.value === "lowPrice") {
+      dispatch(precioOrder());
+    } else {
+      dispatch(precioInvers());
+    }
+  };
+  console.log(products);
+  if (products.length === 0) {
+    products = "No hay resultados que mostrar";
+  }
   return (
     <>
+      <Header />
       <div className="col-12 d-flex mt-4 ">
-        <div className="col-6 "></div>
+        <div className="col-6 ">Algo</div>
         <div className="col-6 filtrado d-flex justify-content-end">
           <div className="col-6">
             <select
@@ -28,17 +65,12 @@ const Home = () => {
               aria-label=".form-select-lg example"
               onChange={handleOnChange}
             >
-              <option value={"All"} defaultValue>
+              <option value={"All"} selected>
                 Categoria
               </option>
               {Array.isArray(categories) ? (
                 categories.map((cat, i) => {
-                  return (
-                    <option key={cat.id} value={cat.name}>
-                      {" "}
-                      {cat.name}
-                    </option>
-                  );
+                  return <option value={cat.name}> {cat.name}</option>;
                 })
               ) : (
                 <div>{categories}</div>
@@ -63,7 +95,7 @@ const Home = () => {
         </div>
       </div>
       <div className="col-12 justify-content-center  d-flex py-3">
-        <div className="row col-12">
+        <div className="row text-center">
           {Array.isArray(products) ? (
             products.map((pr) => {
               return (
@@ -85,5 +117,4 @@ const Home = () => {
     </>
   );
 };
-
 export default Home;

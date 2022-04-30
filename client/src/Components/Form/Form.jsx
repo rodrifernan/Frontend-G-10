@@ -1,77 +1,60 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
+import Logo from "../Home/img/faviconBag.png";
+import "./Form.css";
 
+import { userPost } from "../../redux/reducer/userPost";
+import { useDispatch } from "react-redux";
 const Form = () => {
-  /*const [validate, setValidate] = useState({});
   const dispatch = useDispatch();
-  const [error, setError] = useState(true);
   const [form, setForm] = useState({
-    email: "",
+    userName: "",
     password: "",
-    nickName: "",
+    passwordConfirmation: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    address: "",
+    roleId: "1",
+    idPersonal: "",
   });
-
-  const validation = (form) => {
-    let validations = {};
-    let validator =
-      /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
-    if (!form.email.trim()) {
-      validations.email = "El campo esta vacio";
-      console.log(form.email);
-    } else if (!validator.test(form.email.trim())) {
-      validations.email = "El correo es desconocido";
-    }
-    if (!form.password) {
-      validations.password = "El campo esta vacio";
-    }
-    if (!form.password.trim()) {
-      validations.nickName = "El campo está vacio";
-    }
-    return validations;
-  };
   const handleOnchangeActivity = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
-    setValidate(
-      validation({
-        ...form,
-        [e.target.name]: e.target.value,
-      })
-    );
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(postClient(form));
-    alert("Usuario Ingresado");
+    console.log(form);
+    dispatch(userPost(form));
+    alert("Usuario Creado Satisfactoriamente");
     setForm({
-      email: "",
+      userName: "",
       password: "",
-      nickName: "",
+      passwordConfirmation: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      address: "",
+      roleId: "1",
+      idPersonal: "",
     });
+    // history.push('/home')
   };
-
-  useEffect(() => {
-    if (
-      form.email.length > 0 &&
-      form.password.length > 0 &&
-      form.nickName.length > 0
-    ) {
-      setError(false);
-    } else {
-      setError(true);
-    }
-  }, [form, setError]);*/
   return (
     <div>
-      <div className="container w-50 my-5">
-        <form onSubmit={"handleOnSubmit"}>
-          <div className="text-left py-3 title-form">
-            <h1 className="text-white">Formulario </h1>
-            <h1 className="text-white">De </h1>
-            <h1 className="text-white">Registro </h1>
-            <h4 className="text-white text-left pt-3">
-              Sus futuros productos los espera
+      <div className="text-center">
+        <img className="icono" src={Logo} />
+      </div>
+      <div className="container w-50 my-2">
+        <form onSubmit={handleOnSubmit}>
+          <div className="text-center py-3 title-form">
+            <h1 className="text-white">Formulario de Registro </h1>
+
+            <h4 className="text-white  pt-3">
+              Sus futuros productos los espera en ShopBag
             </h4>
           </div>
           <div className="mb-4">
@@ -86,7 +69,7 @@ const Form = () => {
                 id="exampleInputEmail1"
                 aria-describedby="email"
                 placeholder="Correo electronico"
-                onChange={"handleOnchangeActivity"}
+                onChange={handleOnchangeActivity}
               />
             </div>
           </div>
@@ -101,8 +84,22 @@ const Form = () => {
                 className="form-control"
                 aria-describedby="pass"
                 id="exampleInputPassword1"
-                onChange={"handleOnchangeActivity"}
+                onChange={handleOnchangeActivity}
                 placeholder="Contraseña"
+              />
+            </div>
+            <div className="input-group pt-4 flex-nowrap">
+              <span class="input-group-text" id="pass">
+                <i class="fas fa-lock"></i>
+              </span>
+              <input
+                type="password"
+                name={"passwordConfirmation"}
+                className="form-control"
+                aria-describedby="pass"
+                id="exampleInputPassword1"
+                onChange={handleOnchangeActivity}
+                placeholder="Confirmar contraseña"
               />
             </div>
           </div>
@@ -113,12 +110,86 @@ const Form = () => {
               </span>
               <input
                 type="text"
-                name={"nickName"}
+                name={"userName"}
                 className="form-control"
                 placeholder="Nombre de usuario"
                 aria-describedby="user"
                 id="Nickname"
-                onChange={"handleOnchangeActivity"}
+                onChange={handleOnchangeActivity}
+              />
+            </div>
+          </div>
+          <div className="mb-4 d-flex">
+            <div class="input-group flex-nowrap col-6">
+              <span class="input-group-text" id="user">
+                <i class="fas fa-user-circle"></i>
+              </span>
+              <input
+                type="text"
+                name={"firstName"}
+                className="form-control"
+                placeholder="Nombre"
+                aria-describedby="user"
+                id="Nickname"
+                onChange={handleOnchangeActivity}
+              />
+            </div>
+            <div class="input-group flex-nowrap col-6">
+              <span class="input-group-text" id="user">
+                <i class="fas fa-user-circle"></i>
+              </span>
+              <input
+                type="text"
+                name={"lastName"}
+                className="form-control"
+                placeholder="Apellido"
+                aria-describedby="user"
+                id="Nickname"
+                onChange={handleOnchangeActivity}
+              />
+            </div>
+          </div>
+          <div className="mb-4 d-flex">
+            <div class="input-group flex-nowrap col-4">
+              <span class="input-group-text" id="user">
+                <i class="fas fa-address-book"></i>
+              </span>
+              <input
+                type="text"
+                name={"address"}
+                className="form-control"
+                placeholder="Direccion"
+                aria-describedby="user"
+                id="Nickname"
+                onChange={handleOnchangeActivity}
+              />
+            </div>
+            <div class="input-group flex-nowrap col-4">
+              <span class="input-group-text" id="user">
+                <i class="fas fa-phone"></i>
+              </span>
+              <input
+                type="number"
+                name={"phone"}
+                className="phone"
+                placeholder="Celular"
+                aria-describedby="user"
+                id="Nickname"
+                onChange={handleOnchangeActivity}
+              />
+            </div>
+            <div class="input-group flex-nowrap col-4">
+              <span class="input-group-text" id="user">
+                <i class="fas fa-address-card"></i>
+              </span>
+              <input
+                type="number"
+                name={"idPersonal"}
+                className="form-control"
+                placeholder="ID personal"
+                aria-describedby="user"
+                id="Nickname"
+                onChange={handleOnchangeActivity}
               />
             </div>
           </div>

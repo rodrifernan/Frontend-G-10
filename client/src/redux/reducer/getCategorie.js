@@ -17,17 +17,13 @@ const initialState = {
   categories: [],
 };
 
-export const categorieSlice = createSlice({
+const categorieSlice = createSlice({
   name: "categories",
   initialState,
-  reducers: {
-    setCategories: (state, action) => {
-      state.categories = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [getAllCategories.pending]: () => {
-      console.log("pending");
+      console.log("Trayendo Categorias");
     },
     [getAllCategories.fulfilled]: (state, action) => {
       return { ...state, categories: action.payload };
@@ -35,8 +31,5 @@ export const categorieSlice = createSlice({
   },
 });
 
-export const { setCategories } = categorieSlice.actions;
-
 export default categorieSlice.reducer;
-
-export const allCategories = (state) => state.categories.categories;
+export const categoriesAll = (state) => state.categories.categories;

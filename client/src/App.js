@@ -1,7 +1,7 @@
 import { Route } from "react-router-dom";
 import "./App.css";
 import Form from "./Components/Form/Form";
-import Registro from "./Components/Home/Registro";
+
 import Home from "./Components/Home/Home";
 
 import { CreateProducts } from "./Components/createProduct/CreateProducts";
