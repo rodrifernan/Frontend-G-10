@@ -65,7 +65,6 @@ export const CreateProducts = () => {
 	};
 	return (
 		<div>
-			<Header />
 			<div className="create__formContainer">
 				<form onSubmit={handleSubmit} className="create__formBody">
 					<div className="row">
