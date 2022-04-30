@@ -1,0 +1,12 @@
+.registrarse:hover {
+  background-color: black;
+}
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #54248a;
+}
+.enlaces {
+  width: fit-content;
+}
