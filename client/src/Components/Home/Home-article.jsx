@@ -103,6 +103,11 @@ const Home = () => {
                   name={pr.name}
                   image={pr.image}
                   price={pr.price}
+                  id={pr.id}
+                  color={pr.color}
+                  brand={pr.brand}
+                  stock={pr.stock}
+                  warranty={pr.warranty}
                 />
               );
             })
