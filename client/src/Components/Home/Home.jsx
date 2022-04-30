@@ -1,10 +1,3 @@
-<<<<<<< Updated upstream
-import React from "react";
-import Form from "../Form/Form";
-import store from "./img/store.png";
-import HeaderHome from "./../Headers/HeaderHome";
-import { Route, Switch } from "react-router-dom";
-=======
 import React, { useEffect, useState } from "react";
 import {
   fetchProducts,
@@ -22,20 +15,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import Card from "../Card/Cards";
->>>>>>> Stashed changes
 
 const Home = () => {
   return (
     <>
-<<<<<<< Updated upstream
-      <HeaderHome />
-      <div className="col-12 content">
-        <div className="col-6">
-          <Form />
-        </div>
-        <div className="col-6">
-          <img src={store} alt="store" />
-=======
       <div className="col-12 d-flex mt-4 ">
         <div className="col-6 "></div>
         <div className="col-6 filtrado d-flex justify-content-end">
@@ -97,7 +80,6 @@ const Home = () => {
               <h3>{products}</h3>
             </div>
           )}
->>>>>>> Stashed changes
         </div>
       </div>
     </>
