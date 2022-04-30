@@ -6,7 +6,6 @@ import Header from "../Headers/Header";
 const Registro = () => {
   return (
     <>
-      <Header />
       <div className="col-12 content">
         <div className="col-12">
           <Form />
