@@ -2,33 +2,33 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getAllCategories = createAsyncThunk(
-  "categories/getAllCategories",
-  async () => {
-    const response = await axios
-      .get("http://localhost:3001/api/categories")
-      .catch((err) => {
-        console.log(err);
-      });
-    return response.data;
-  }
+	"categories/getAllCategories",
+	async () => {
+		const response = await axios
+			.get("http://localhost:3001/api/categories")
+			.catch((err) => {
+				console.log(err);
+			});
+		return response.data;
+	}
 );
 
 const initialState = {
-  categories: [],
+	categories: [],
 };
 
 const categorieSlice = createSlice({
-  name: "categories",
-  initialState,
-  reducers: {},
-  extraReducers: {
-    [getAllCategories.pending]: () => {
-      console.log("Trayendo Categorias");
-    },
-    [getAllCategories.fulfilled]: (state, action) => {
-      return { ...state, categories: action.payload };
-    },
-  },
+	name: "categories",
+	initialState,
+	reducers: {},
+	extraReducers: {
+		[getAllCategories.pending]: () => {
+			console.log("Trayendo Categorias");
+		},
+		[getAllCategories.fulfilled]: (state, action) => {
+			return { ...state, categories: action.payload };
+		},
+	},
 });
 
 export default categorieSlice.reducer;
