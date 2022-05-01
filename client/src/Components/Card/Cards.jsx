@@ -27,7 +27,7 @@ const Card = ({
 				data-toggle="modal"
 				data-target={`#${idModal}`}
 			>
-				<img className="card-img-top" src={image[0]} alt="foto" />
+				<img className="card-img-top" src={image} alt="foto" />
 				<div className="card-body">
 					<h5 className="card-title">{name}</h5>
 					<div
@@ -64,7 +64,7 @@ const Card = ({
 										<div className="col-6">
 											<img
 												className=""
-												src={image[0]}
+												src={image}
 												alt="foto"
 											/>
 										</div>
