@@ -17,7 +17,7 @@ export const CreateProducts = () => {
 	const [image, setImage] = useState({ value: "", valid: null });
 	const [discount, setDiscount] = useState({ value: "", valid: null });
 	const [formValid, setFormvalid] = useState(null);
-
+	// regex del formulario
 	const regex = {
 		name: /^.{1,20}$/,
 		description: /^.{1,200}$/,
@@ -28,6 +28,7 @@ export const CreateProducts = () => {
 		image: /^.{1,100}$/,
 		discount: /^.{1,20}$/,
 	};
+	//submit del fomr
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -40,10 +41,9 @@ export const CreateProducts = () => {
 				image.valid === true &&
 				discount.valid === true
 			) {
+				//no mostrar error
 				setFormvalid(true);
-				console.log("send");
-
-				// //reset del formulario
+				// crear obj de creacion de producto
 				const formData = {
 					name: name.value,
 					description: description.value,
@@ -54,7 +54,7 @@ export const CreateProducts = () => {
 					image: image.value,
 					discount: discount.value,
 				};
-				console.log(formData);
+				//enviar post para la creacion en db
 				await axios.post("http://127.0.0.1:3001/api/product", formData);
 				// //alert de exito
 				swal(
@@ -65,15 +65,16 @@ export const CreateProducts = () => {
 				// // push to home
 				history.push("/");
 			} else {
+				//set error
 				setFormvalid(false);
 			}
 		} catch (error) {
+			//enviar advertencia si hay error con db
 			swal(
 				"Error!",
 				`Producto ${name.value} NO cargado correctamente`,
 				"warning"
 			);
-			console.log(error);
 		}
 	};
 	return (
@@ -166,16 +167,7 @@ export const CreateProducts = () => {
 							onChange={setDescription}
 						></textarea>
 					</div>
-					<div className="form-check">
-						<input
-							type="checkbox"
-							className="form-check-input"
-							id="check"
-						/>
-						<label className="form-check-label" htmlFor="check">
-							Check me out
-						</label>
-					</div>
+
 					{formValid === false && (
 						<div className="create__msgError">
 							<p>
