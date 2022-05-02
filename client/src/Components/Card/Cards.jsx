@@ -21,7 +21,7 @@ const Card = ({
 		twarranty = "año";
 	}
 	return (
-		<div className="col-3 mt-3">
+		<div className="d-flex flex-wrap">
 			<div
 				className="card"
 				type="button"

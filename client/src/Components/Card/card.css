@@ -5,7 +5,8 @@
 .card {
     padding: 10px;
     border-radius: 15px;
-    width: 220px;
+    width: 250px;
+    
 }
 .card:hover {
     animation: shake 300ms;
