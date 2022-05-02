@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Enlaces = () => {
 	return (
@@ -7,13 +8,12 @@ const Enlaces = () => {
 			<ul className="nav">
 				<li>
 					<div className=" isesion ">
-						<a
-							className=" registrarse btn text-white "
-							href="/registro"
-						>
-							<i className="fas fa-user"></i>
-							<span> Sing In</span>
-						</a>
+						<Link to="/registro">
+							<div className=" registrarse btn text-white ">
+								<i className="fas fa-user"></i>
+								<span> Sing In</span>
+							</div>
+						</Link>
 					</div>
 				</li>
 				{/* <li className="nav-item">
