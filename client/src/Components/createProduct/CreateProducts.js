@@ -177,7 +177,10 @@ export const CreateProducts = () => {
 							</p>
 						</div>
 					)}
-					<button type="submit" className="btn btn-primary">
+					<button
+						type="submit"
+						className="create__button btn btn-primary"
+					>
 						Submit
 					</button>
 				</form>
