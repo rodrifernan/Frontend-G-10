@@ -10,7 +10,7 @@ export const Footer = () => {
 					<span>Registrate gratis</span>
 					<Link to="/registro">
 						<button className="btn btn-primary btn-rounded">
-							SING UP
+							INICIAR SESIÓN
 						</button>
 					</Link>
 				</div>

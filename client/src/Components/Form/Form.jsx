@@ -52,9 +52,9 @@ const Form = () => {
 			<div className="container w-50 my-2">
 				<form onSubmit={handleOnSubmit}>
 					<div className="text-center py-3 title-form">
-						<h1 className="text-white">Formulario de Registro </h1>
+						<h1 className="text-black">Formulario de Registro </h1>
 
-						<h4 className="text-white  pt-3">
+						<h4 className="text-black  pt-3">
 							Sus futuros productos los espera en ShopBag
 						</h4>
 					</div>

@@ -11,7 +11,7 @@ const Enlaces = () => {
             <Link to="/registro">
               <div className=" registrarse btn text-white ">
                 <i className="fas fa-user"></i>
-                <span> Sing In</span>
+                <span> Registrarse/Iniciar secion</span>
               </div>
             </Link>
           </div>
@@ -32,7 +32,7 @@ const Enlaces = () => {
         <li className="nav-item">
           <a className="nav-link btn text-white" href="/carrito">
             <i className="fas fa-shopping-cart "></i>
-            <span> Cart</span>
+            <span> Carrito</span>
           </a>
         </li>
       </ul>
