@@ -1,0 +1,20 @@
+.registrarse:hover {
+  background-color: black;
+}
+.header{
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #5534A5;
+}
+.enlaces{
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+.p{
+  font-weight: 500;
+  text-decoration: none;
+
+}
