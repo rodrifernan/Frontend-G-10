@@ -6,10 +6,10 @@
     padding: 10px;
     border-radius: 15px;
     width: 250px;
-    
+    transition: all .3 ease;
 }
 .card:hover {
-    animation: shake 300ms;
+    transform: scale(1.03);
 }
 .card-title{
     height: 40px;
@@ -17,14 +17,37 @@
 .card-img-top{
     height: 200px;
 }
-@keyframes shake {
-    25%{
-        transform: translateX(4px);
-    }
-    50%{
-        transform: translateX(-4px);
-    }
-    75%{
-        transform: translateX(4px);
-    }
+.modal__description {
+    max-height: 200px;
+    overflow-y: auto;
 }
+.Pets{
+    background-color: blueviolet;
+}
+.Beaty {
+    background-color: pink;
+}
+.Sports {
+    background-color: green;
+}
+.Electronic {
+    background-color: orange;
+}
+
+.card__precio{
+    background-color: aquamarine;
+    border-radius: 15px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+
+
+
+
+
+
+
+
+
