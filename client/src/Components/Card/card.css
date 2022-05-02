@@ -35,11 +35,12 @@
 }
 
 .card__precio{
-    background-color: aquamarine;
+    background-color: #A85CF9;
     border-radius: 15px;
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 0px;
+    color: white;
 }
 
 

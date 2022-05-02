@@ -1,8 +1,9 @@
 import React from "react";
+import "./Header.css";
 
 const Enlaces = () => {
 	return (
-		<div className="enlaces col-4 text-center ">
+		<div className="enlaces col text-center ">
 			<ul className="nav">
 				<li>
 					<div className=" isesion ">
@@ -11,7 +12,7 @@ const Enlaces = () => {
 							href="/registro"
 						>
 							<i className="fas fa-user"></i>
-							Ingresar/Registrarse
+							<span> Sing In</span>
 						</a>
 					</div>
 				</li>
@@ -34,7 +35,7 @@ const Enlaces = () => {
 						href="https://picsum.photos/300"
 					>
 						<i className="fas fa-shopping-cart "></i>
-						Mi carrito
+						<span> Cart</span>
 					</a>
 				</li>
 			</ul>
