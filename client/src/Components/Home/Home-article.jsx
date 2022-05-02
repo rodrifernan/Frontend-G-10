@@ -68,8 +68,7 @@ const Home = () => {
 							{Array.isArray(categories) ? (
 								categories.map((cat, i) => {
 									return (
-										<option value={cat.name}>
-											{" "}
+										<option key={i} value={cat.name}>
 											{cat.name}
 										</option>
 									);
@@ -108,6 +107,7 @@ const Home = () => {
 						products.map((pr) => {
 							return (
 								<Card
+									key={pr.id}
 									description={pr.description}
 									name={pr.name}
 									image={pr.image}
@@ -117,6 +117,7 @@ const Home = () => {
 									brand={pr.brand}
 									stock={pr.stock}
 									warranty={pr.warranty}
+									category={pr.category}
 								/>
 							);
 						})
