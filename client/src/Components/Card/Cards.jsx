@@ -12,6 +12,7 @@ const Card = ({
 	brand,
 	stock,
 	warranty,
+	category,
 }) => {
 	let idModal = `modal${id}`;
 	let twarranty = "";
@@ -31,6 +32,7 @@ const Card = ({
 				<img className="card-img-top" src={image[0]} alt="foto" />
 				<div className="card-body">
 					<h5 className="card-title">{name}</h5>
+					<span className="badge bg-success">{category}</span>
 					<p className="card-text">Precio: ${price}</p>
 				</div>
 			</div>
