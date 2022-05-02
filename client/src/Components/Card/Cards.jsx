@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import "./Cards.css";
+import { addCarrito, addPush } from "../../redux/reducer/carrito";
+import { myKart } from "../../redux/reducer/carrito";
 // import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const Card = ({
   description,
@@ -12,6 +17,26 @@ const Card = ({
   stock,
   warranty,
 }) => {
+  const [carrito, setCarrito] = useState({
+    title: "",
+    price: "",
+    stock: "",
+    image: "",
+  });
+  const dispatch = useDispatch();
+  const agregarCarrito = (tit, precio, img, stock) => {
+    setCarrito({
+      title: tit,
+      price: precio,
+      stock: stock,
+      image: img,
+    });
+
+    alert("Agregado al carro");
+  };
+  useEffect(() => {
+    dispatch(addPush(carrito));
+  }, [carrito]);
   let idModal = `modal${id}`;
   let twarranty = "";
   if (warranty > 1) {
@@ -75,7 +100,11 @@ const Card = ({
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-success">
+                  <button
+                    type="button"
+                    className="btn btn-success "
+                    onClick={() => agregarCarrito(name, price, image[0], stock)}
+                  >
                     Agregar al carrito
                   </button>
                   <button type="button" className="btn btn-primary">
@@ -85,8 +114,8 @@ const Card = ({
               </div>
             </div>
           </div>
-          <p className="card-text">{description}</p>
-          <p className="card-text">Precio: ${price}</p>
+          <p className="card-text">{brand}</p>
+          <p className="card-text">${price}</p>
         </div>
       </div>
     </div>

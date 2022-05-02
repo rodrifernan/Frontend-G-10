@@ -13,8 +13,9 @@ import {
   categoriesAll,
 } from "../../redux/reducer/getCategorie";
 import { useDispatch, useSelector } from "react-redux";
-
 import Card from "../Card/Cards";
+
+import { myKart } from "../../redux/reducer/carrito";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -28,11 +29,12 @@ const Home = () => {
       dispatch(fetchProducts());
     }
   };
+
   let categories = useSelector(categoriesAll);
 
   let products = useSelector(getAllProducts);
 
-  const handleOnChangeOrder = (e) => {
+  const HandleOnChange = (e) => {
     if (e.target.value === "sinalterar") {
       dispatch(fetchProducts());
     } else if (e.target.value === "AaZ") {
@@ -47,10 +49,14 @@ const Home = () => {
       dispatch(precioInvers());
     }
   };
-  console.log(products);
+
   if (products.length === 0) {
     products = "No hay resultados que mostrar";
   }
+
+  const carrito = useSelector(myKart);
+  let saveData = localStorage.setItem("carrito", JSON.stringify(carrito));
+  console.log(carrito);
   return (
     <>
       <div className="col-12 d-flex mt-4 ">
@@ -78,7 +84,7 @@ const Home = () => {
             <select
               className="form-select form-select-lg mb-1"
               aria-label=".form-select-lg example"
-              onChange={handleOnChangeOrder}
+              onChange={HandleOnChange}
             >
               <option value={"sinalterar"} defaultValue>
                 Ordenamiento
