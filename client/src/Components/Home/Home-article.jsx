@@ -3,10 +3,10 @@ import {
   fetchProducts,
   getAllProducts,
   getByCategories,
-  order,
-  inversa,
-  precioOrder,
-  precioInvers,
+  sortByName,
+  sortByNameInversa,
+  sortByPrice,
+  sortByPriceInversa,
 } from "../../redux/reducer/products";
 import {
   getAllCategories,
@@ -37,14 +37,14 @@ const Home = () => {
       dispatch(fetchProducts());
     } else if (e.target.value === "AaZ") {
       console.log(e.target.value);
-      dispatch(order());
+      dispatch(sortByName());
       console.log(products);
     } else if (e.target.value === "ZaA") {
-      dispatch(inversa());
+      dispatch(sortByNameInversa());
     } else if (e.target.value === "lowPrice") {
-      dispatch(precioOrder());
+      dispatch(sortByPrice());
     } else {
-      dispatch(precioInvers());
+      dispatch(sortByPriceInversa());
     }
   };
   console.log(products);
@@ -65,7 +65,7 @@ const Home = () => {
               onChange={handleOnChange}
             >
               <option value={"All"} defaultValue>
-                Categoria
+                Todos
               </option>
               {Array.isArray(categories) ? (
                 categories.map((cat, i) => {
