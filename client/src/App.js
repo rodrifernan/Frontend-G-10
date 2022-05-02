@@ -7,6 +7,7 @@ import { Footer } from "./Components/footer/Footer";
 import { CreateProducts } from "./Components/createProduct/CreateProducts";
 import Home from "./Components/Home/Home-article";
 import Carrito from "./Components/Carrito/Carrito";
+import Login from "./Components/Login/Login";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
       <Route path="/create" component={CreateProducts} />
       <Route path="/registro" component={Form} />
       <Route path="/carrito" component={Carrito}></Route>
+      <Route path="/iniciar-sesion" component={Login}></Route>
       <Route path="/" component={Footer}></Route>
     </>
   );

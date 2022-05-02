@@ -14,6 +14,7 @@ import productsSlice from "./reducer/products";
 import userSlice from "./reducer/userPost";
 import categoriesSlice from "./reducer/getCategorie";
 import carritoReducer from "./reducer/carrito";
+import LoginSlice from "./reducer/Login";
 
 const persistConfig = { key: "root", version: 1, storage };
 const persistedReducer = persistReducer(persistConfig, carritoReducer);
@@ -23,6 +24,7 @@ export const store = configureStore({
     user: userSlice,
     categories: categoriesSlice,
     carrito: persistedReducer,
+    login: LoginSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
