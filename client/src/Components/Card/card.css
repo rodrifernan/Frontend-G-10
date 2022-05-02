@@ -1,0 +1,29 @@
+.card-title{
+    font-size: medium;
+    font-weight: bold;
+}
+.card {
+    padding: 10px;
+    border-radius: 15px;
+    width: 220px;
+}
+.card:hover {
+    animation: shake 300ms;
+}
+.card-title{
+    height: 40px;
+}
+.card-img-top{
+    height: 200px;
+}
+@keyframes shake {
+    25%{
+        transform: translateX(4px);
+    }
+    50%{
+        transform: translateX(-4px);
+    }
+    75%{
+        transform: translateX(4px);
+    }
+}
