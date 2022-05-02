@@ -11,6 +11,7 @@ const Header = () => {
 		<header>
 			<div className="header col-12 d-flex py-2 align-items-center">
 				<img src={logo} alt="no hay imagen" height={"50px"} />
+
 				<Link to="/" className="col-4 text-light">
 					<p className="p m-0">ShopBag</p>
 				</Link>

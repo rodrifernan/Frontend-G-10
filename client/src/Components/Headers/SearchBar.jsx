@@ -16,9 +16,10 @@ const SearchBar = () => {
 		setInput("");
 	};
 
+
 	return (
 		<div className="col  search ">
-			<div className="search-content justify-content-center d-flex">
+			<div className="search-content justify-content-start d-flex">
 				<div className="input-group rounded col">
 					<input
 						type="search"
