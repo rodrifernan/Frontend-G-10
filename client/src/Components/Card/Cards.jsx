@@ -32,8 +32,8 @@ const Card = ({
 				<img className="card-img-top" src={image[0]} alt="foto" />
 				<div className="card-body">
 					<h5 className="card-title">{name}</h5>
-					<span className="badge bg-success">{category}</span>
-					<p className="card-text">Precio: ${price}</p>
+					<span className={`badge ${category}`}>{category}</span>
+					<p className="card__precio">Precio: ${price}</p>
 				</div>
 			</div>
 			{/* inicio modal */}
@@ -75,7 +75,9 @@ const Card = ({
 								</div>
 								<div className="col-6 text-left">
 									<p>Nombre: {name}</p>
-									<p>Descripcion: {description}</p>
+									<p className="modal__description">
+										Descripcion: {description}
+									</p>
 									<p>Brand: {brand}</p>
 									<p>Price: ${price}</p>
 									<p>Color: {color}</p>
