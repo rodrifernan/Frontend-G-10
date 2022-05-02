@@ -10,3 +10,6 @@
 .enlaces{
   width: fit-content;
 }
+.titulo{
+  text-decoration: none;
+}

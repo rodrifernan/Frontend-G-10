@@ -19,7 +19,7 @@ const SearchBar = () => {
 
   return (
     <div className="col-4 px-4 search ">
-      <div className="search-content justify-content-end d-flex">
+      <div className="search-content justify-content-start d-flex">
         
         <div className="input-group rounded col-6">
           <input
