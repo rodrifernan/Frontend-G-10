@@ -6,16 +6,18 @@ import Header from "./Components/Headers/Header";
 import { Footer } from "./Components/footer/Footer";
 import { CreateProducts } from "./Components/createProduct/CreateProducts";
 import Home from "./Components/Home/Home-article";
+import Carrito from "./Components/Carrito/Carrito";
 function App() {
-	return (
-		<>
-			<Route path="/" component={Header}></Route>
-			<Route exact path="/" component={Home}></Route>
-			<Route path="/create" component={CreateProducts} />
-			<Route path="/registro" component={Form} />
-			<Route path="/" component={Footer}></Route>
-		</>
-	);
+  return (
+    <>
+      <Route path="/" component={Header}></Route>
+      <Route exact path="/" component={Home}></Route>
+      <Route path="/create" component={CreateProducts} />
+      <Route path="/registro" component={Form} />
+      <Route path="/carrito" component={Carrito}></Route>
+      <Route path="/" component={Footer}></Route>
+    </>
+  );
 }
 
 export default App;

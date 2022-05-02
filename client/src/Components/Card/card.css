@@ -1,54 +1,44 @@
-.card-title{
-    font-size: medium;
-    font-weight: bold;
+.card-title {
+  font-size: medium;
+  font-weight: bold;
 }
 .card {
-    padding: 10px;
-    border-radius: 15px;
-    width: 250px;
-    transition: all .3 ease;
+  padding: 10px;
+  border-radius: 15px;
+  width: 250px;
+  transition: all 0.3 ease;
 }
 .card:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
 }
-.card-title{
-    height: 40px;
+.card-title {
+  height: 40px;
 }
-.card-img-top{
-    height: 200px;
+.card-img-top {
+  height: 200px;
 }
 .modal__description {
-    max-height: 200px;
-    overflow-y: auto;
+  max-height: 200px;
+  overflow-y: auto;
 }
-.Pets{
-    background-color: blueviolet;
+.Pets {
+  background-color: blueviolet;
 }
-.Beaty {
-    background-color: pink;
+.Beauty {
+  background-color: pink;
 }
 .Sports {
-    background-color: green;
+  background-color: green;
 }
 .Electronic {
-    background-color: orange;
+  background-color: orange;
 }
 
-.card__precio{
-    background-color: #A85CF9;
-    border-radius: 15px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    color: white;
+.card__precio {
+  background-color: #a85cf9;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  color: white;
 }
-
-
-
-
-
-
-
-
-
-
