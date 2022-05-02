@@ -14,6 +14,7 @@ const Carrito = () => {
   console.log(getData);
   let Parse = JSON.parse(getData);
   console.log(Parse);
+
   var total = Array.isArray(Parse)
     ? Parse.reduce(
         (sum, value) =>
