@@ -13,3 +13,8 @@
   display: flex;
   justify-content: flex-end;
 }
+.p{
+  font-weight: 500;
+  text-decoration: none;
+
+}
