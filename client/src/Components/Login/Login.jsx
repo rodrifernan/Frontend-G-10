@@ -1,10 +1,11 @@
 import { React, useState } from "react";
 import Logo from "../Home/img/faviconBag.png";
-
-import { Login, LoginAll } from "../../redux/reducer/Login";
+import { Login, LoginAll, Logout } from "../../redux/reducer/Login";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const LoginIn = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     userOrEmail: "",
@@ -26,10 +27,13 @@ const LoginIn = () => {
       userOrEmail: "",
       password: "",
     });
-
+    history.push("/sesion");
     // history.push('/home')
   };
   console.log(loginin);
+  const LogOut = (e) => {
+    dispatch(Logout());
+  };
   return (
     <div>
       <div className="text-center">
@@ -76,8 +80,17 @@ const LoginIn = () => {
               />
             </div>
           </div>
-          <button type="sumbit">Registrarse</button>
+          <button className="btn text-light bg-info col-12" type="submit">
+            Iniciar sesion
+          </button>
         </form>
+        <button
+          className="mt-3 btn text-white bg-danger col-12"
+          type="submit"
+          onClick={LogOut}
+        >
+          Cerrar sesion
+        </button>
       </div>
     </div>
   );

@@ -8,10 +8,12 @@ import { CreateProducts } from "./Components/createProduct/CreateProducts";
 import Home from "./Components/Home/Home-article";
 import Carrito from "./Components/Carrito/Carrito";
 import Login from "./Components/Login/Login";
+
 function App() {
   return (
     <>
       <Route path="/" component={Header}></Route>
+
       <Route exact path="/" component={Home}></Route>
       <Route path="/create" component={CreateProducts} />
       <Route path="/registro" component={Form} />
