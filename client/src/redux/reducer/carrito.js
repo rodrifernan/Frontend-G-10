@@ -14,6 +14,11 @@ const carritoSlice = createSlice({
         ? void state.carrito.push(action.payload)
         : void null,
     emptycarrito: (state) => (state = initialState),
+    eraseAProduct: (state, action) => {
+      let newState = state.carrito.filter((pr) => pr.title !== action.payload);
+      console.log(newState);
+      state.carrito = newState;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(addCarrito, (state, action) => {
@@ -22,6 +27,6 @@ const carritoSlice = createSlice({
   },
 });
 
-export const { addPush, emptycarrito } = carritoSlice.actions;
+export const { addPush, emptycarrito, eraseAProduct } = carritoSlice.actions;
 export default carritoSlice.reducer;
 export const myKart = (state) => state.carrito.carrito;

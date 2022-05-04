@@ -2,13 +2,15 @@ import React from "react";
 import { myKart } from "../../redux/reducer/carrito";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { emptycarrito } from "../../redux/reducer/carrito";
+import { emptycarrito, eraseAProduct } from "../../redux/reducer/carrito";
 import { useDispatch } from "react-redux";
 import "./Carrito.css";
 const Carrito = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const carrito = useSelector(myKart);
+
+  localStorage.setItem("carrito", JSON.stringify(carrito));
   console.log(carrito);
   let getData = localStorage.getItem("carrito");
   console.log(getData);
@@ -26,6 +28,10 @@ const Carrito = () => {
   const handleOnElminarAll = (e) => {
     dispatch(emptycarrito());
     localStorage.clear();
+  };
+  const handleOnEraseProduct = (title) => {
+    console.log(title);
+    dispatch(eraseAProduct(title));
   };
   return (
     <div>
@@ -52,7 +58,10 @@ const Carrito = () => {
                         ? "Unidades en stock!"
                         : "Sin disponibilidad"}
                     </p>
-                    <button className="btn text-light btn-dark">
+                    <button
+                      className="btn text-light btn-dark"
+                      onClick={() => handleOnEraseProduct(pr.title)}
+                    >
                       {" "}
                       Eliminar
                     </button>
