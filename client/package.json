@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@greatsumini/react-facebook-login": "^3.2.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.1",
@@ -10,6 +11,7 @@
     "axios": "^0.26.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-google-login": "^5.2.2",
     "react-redux": "^8.0.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.0",
@@ -19,6 +21,7 @@
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.4.10",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
