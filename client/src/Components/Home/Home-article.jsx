@@ -14,7 +14,7 @@ import {
 } from "../../redux/reducer/getCategorie";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card/Cards";
-import { myKart } from "../../redux/reducer/carrito";
+
 import Banner from "../Banner/Banner";
 
 const Home = () => {
@@ -52,11 +52,10 @@ const Home = () => {
   if (products.length === 0) {
     products = "No hay resultados que mostrar";
   }
-  let carrito = useSelector(myKart);
-  let saveData = localStorage.setItem("carrito", JSON.stringify(carrito));
+
   return (
     <>
-    <Banner />
+      <Banner />
       <div className="col-12 d-flex mt-4  ">
         <div className="col-6 "></div>
         <div className="col-6 filtrado d-flex justify-content-end">
