@@ -13,14 +13,13 @@ import { LoginPage } from './Components/Login/LoginPage';
 function App() {
   return (
     <>
-
+      <Route exact  path='/login' component={LoginPage}></Route>
       <Route path='/' component={Header}></Route>
       <Route exact path='/' component={Home}></Route>
       <Route path='/create' component={CreateProducts} />
       <Route path='/registro' component={Form} />
       <Route path='/carrito' component={Carrito}></Route>
       <Route path='/' component={Footer}></Route>
-      <Route exact  path='/login' component={LoginPage}></Route>
     </>
   );
 }
