@@ -12,6 +12,17 @@ import { LoginPage } from "./Components/Login/LoginPage";
 
 import WishList from "./Components/WishList/wishList";
 import LayoutUser from "./Components/Layout/LayoutUser";
+import HomeAdmin from "../src/admin/pages/home/Home"
+import Login from "../src/admin/pages/login/Login"
+import List from "../src/admin/pages/list/List"
+import Single from "../src/admin/pages/single/Single"
+import New from "../src/admin/pages/new/New"
+
+import { productInputs, userInputs } from "./formSource";
+import LayoutAdmin from "./Components/Layout/LayoutAdmin";
+
+
+
 
 function App() {
   return (
@@ -28,6 +39,30 @@ function App() {
           <Route path="myWishes" element={<WishList />}/>
           <Route path="perfil" element={<Perfil />}/>
         </Route>
+
+        <Route path="/admin/" element={<LayoutAdmin />}>
+            <Route index element={<HomeAdmin />} />
+            <Route path="login" element={<Login />} />
+            <Route path="users">
+              <Route index element={<List />} />
+              <Route path=":userId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={userInputs} title="Add New User" />}
+              />
+            </Route>
+            <Route path="products">
+              <Route index element={<List />} />
+              <Route path=":productId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={productInputs} title="Add New Product" />}
+              />
+            </Route>
+          </Route>
+
+
+
 
 
 
