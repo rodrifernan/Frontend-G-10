@@ -29,6 +29,11 @@ export const UserDropDown = () => {
               <button className="dropdown-item">Mis Pedidos</button>
             </li>
             <li>
+              <Link to="/myWishes">
+                <button className="dropdown-item">Mi lista de deseos</button>
+              </Link>
+            </li>
+            <li>
               <button className="dropdown-item">Mis Reseñas</button>
             </li>
             <li>
