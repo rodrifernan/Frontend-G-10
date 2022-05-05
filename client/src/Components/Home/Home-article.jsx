@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Paginado from '../Paginado/Paginado'
 import {
   fetchProducts,
   getAllProducts,
@@ -33,19 +34,34 @@ const Home = () => {
 
   let products = useSelector(getAllProducts);
 
+  //*****Para el paginado*****
+    const [currentPage, setCurrentPage] = useState(1)
+    const [prodsPerPage] = useState(8)
+    const indexOfLastProd = currentPage * prodsPerPage
+    const indexOfFirstProd = indexOfLastProd - prodsPerPage
+    const currentProducts = products.slice(indexOfFirstProd, indexOfLastProd)
+    const paginado = (pageNumber)=>{
+      setCurrentPage(pageNumber)
+  }
+
   const handleOnChangeOrder = (e) => {
     if (e.target.value === "sinalterar") {
       dispatch(fetchProducts());
+      setCurrentPage(1)
     } else if (e.target.value === "AaZ") {
       console.log(e.target.value);
       dispatch(sortByName());
+      setCurrentPage(1)
       console.log(products);
     } else if (e.target.value === "ZaA") {
       dispatch(sortByNameInversa());
+      setCurrentPage(1)
     } else if (e.target.value === "lowPrice") {
       dispatch(sortByPrice());
+      setCurrentPage(1)
     } else {
       dispatch(sortByPriceInversa());
+      setCurrentPage(1)
     }
   };
   console.log(products);
@@ -98,10 +114,11 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="justify-content-center  d-flex flex-wrap">
+      <div className="justify-content-center  d-flex flex-wrap">{/*Acá empiezan los productos */}
+        {products.length? <Paginado prodPerPage= {prodsPerPage} allProducts={products.length} paginado = {paginado}/> : <div>no hay products{console.log("hola desde el paginado")}</div>}
         <div className=" text-center d-flex flex-wrap justify-content-center gap-2 p-5">
-          {Array.isArray(products) ? (
-            products.map((pr) => {
+          {Array.isArray(currentProducts) ? (
+            currentProducts.map((pr) => {
               return (
                 <Card
                   key={pr.id}
