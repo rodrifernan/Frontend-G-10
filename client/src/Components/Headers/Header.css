@@ -16,9 +16,24 @@
 }
 .titulo{
   text-decoration: none;
+  
+  text-decoration: #5534A5;
+  text-decoration-thickness:unset;
+}
+.titulo:link{
+  text-decoration: none;
+}
+.titulo:visited{
+  text-decoration: none;
+}
+.titulo:hover{
+  text-decoration: none;
+}
+.titulo:active{
+  text-decoration: none;
 }
 .p{
-  font-weight: 500;
+  font-weight: 550;
   text-decoration: none;
 
 

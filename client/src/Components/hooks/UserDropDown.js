@@ -21,7 +21,7 @@ export const UserDropDown = () => {
           </button>
           <ul className="dropdown-menu " aria-labelledby="dropdownMenuUser">
             <li>
-              <Link to="/perfil">
+              <Link to="/perfil" className="titulo">
                 <button className="dropdown-item">Ver Perfil</button>
               </Link>
             </li>
@@ -29,7 +29,7 @@ export const UserDropDown = () => {
               <button className="dropdown-item">Mis Pedidos</button>
             </li>
             <li>
-              <Link to="/myWishes">
+              <Link to="/myWishes" className="titulo">
                 <button className="dropdown-item">Mi lista de deseos</button>
               </Link>
             </li>
@@ -37,13 +37,17 @@ export const UserDropDown = () => {
               <button className="dropdown-item">Mis Reseñas</button>
             </li>
             <li>
-              <button className="dropdown-item">Vender</button>
+              <Link className="titulo" to="/create">
+                <button className="dropdown-item">Vender</button>
+              </Link>
             </li>
             <div className="dropdown-divider"></div>
             <li>
+              <Link className="titulo" to="/">
               <button className="dropdown-item" onClick={out}>
                 Cerrar sesión
               </button>
+              </Link>
             </li>
           </ul>
         </div>
