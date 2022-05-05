@@ -5,7 +5,7 @@ import './LoginFromGoogle.css';
 import { apiLoginGoogle } from '../../redux/reducer/login';
 
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const GOOGLE_CLIENT_ID =
@@ -14,7 +14,7 @@ const GOOGLE_CLIENT_ID =
 export const LoginFromGoogle = ({ page = false }) => {
   const buttonRef = useRef();
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const LoginFromGoogle = ({ page = false }) => {
         modal.hide();
       } catch (error) {}
 
-      history.push('/');
+      navigate('/');
     }
   }, [localStorage.getItem('userCredentials')]);
 

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getPerfil, getAllInfo } from "../../redux/reducer/perfil";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Perfil = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const getData = localStorage.getItem("userCredentials");
 
@@ -88,7 +88,7 @@ const Perfil = () => {
         </div>
       </div>
       <div className="col-6 mb-3">
-        <button onClick={history.goBack} className="btn text-light btn-danger">
+        <button onClick={()=>navigate(-1)} className="btn text-light btn-danger">
           <i className="fas fa-arrow-left"></i> Regresar
         </button>
       </div>

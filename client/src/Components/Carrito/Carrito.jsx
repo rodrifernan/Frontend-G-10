@@ -1,13 +1,13 @@
 import React from "react";
 import { myKart } from "../../redux/reducer/carrito";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { emptycarrito, eraseAProduct } from "../../redux/reducer/carrito";
 import { useDispatch } from "react-redux";
 import "./Carrito.css";
 const Carrito = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const carrito = useSelector(myKart);
 
   localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -97,7 +97,7 @@ const Carrito = () => {
       <div className="mt-2 d-flex">
         <div className="col-6">
           <button
-            onClick={history.goBack}
+            onClick={()=>navigate(-1)}
             className="btn text-light btn-danger"
           >
             <i className="fas fa-arrow-left"></i> Regresar

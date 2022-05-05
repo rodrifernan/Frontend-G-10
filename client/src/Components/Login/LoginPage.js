@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Login } from './Login';
 import './LoginPage.css';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPage = ({ rute = '/' }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const redirect = () => history.push(rute);
+  const redirect = () => navigate(rute);
 
   return (
     <div className='loginPageContainer'>

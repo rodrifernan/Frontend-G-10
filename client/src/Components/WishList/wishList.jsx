@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { getList, allWishes } from "./../../redux/reducer/getWishilist";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 const WishList = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const token = localStorage.getItem("userCredentials");
   const parseToken = JSON.parse(token);
   console.log(parseToken);
@@ -61,7 +61,7 @@ const WishList = () => {
       <div className="my-2  d-flex">
         <div className="col-6">
           <button
-            onClick={history.goBack}
+            onClick={()=>navigate(-1)}
             className="btn text-light btn-danger"
           >
             <i className="fas fa-arrow-left"></i> Regresar

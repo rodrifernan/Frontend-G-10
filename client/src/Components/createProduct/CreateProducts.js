@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import "./createProduct.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Input } from "./Input";
 
 export const CreateProducts = () => {
-	const history = useHistory();
+	const navigate = useNavigate();
 	// estados de formulario
 	const [name, setName] = useState({ value: "", valid: null });
 	const [description, setDescription] = useState({ value: "", valid: null });
@@ -63,7 +63,7 @@ export const CreateProducts = () => {
 					"success"
 				);
 				// // push to home
-				history.push("/");
+				navigate("/");
 			} else {
 				//set error
 				setFormvalid(false);
