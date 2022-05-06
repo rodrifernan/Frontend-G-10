@@ -46,6 +46,7 @@ const Card = ({
   }
 
   const addAWish = (productId) => {
+    console.log(productId);
     dispatch(postWish(productId));
   };
 

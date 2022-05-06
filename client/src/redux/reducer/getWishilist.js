@@ -16,9 +16,10 @@ export const getList = createAsyncThunk("wish/getList", async (token) => {
 });
 
 export const postWish = createAsyncThunk("wish/postwish", async (payload) => {
+  console.log(payload);
   const response = await axios.post(
     "http://localhost:3001/api/wishlist",
-    [{ productId: payload }],
+    { productId: payload },
     {
       headers: { "auth-token": parseToken.token },
     }
@@ -62,8 +63,9 @@ const wishSlice = createSlice({
     [postWish.pending]: () => {
       console.log("Enviando datos");
     },
-    [postWish.fulfilled]: () => {
+    [postWish.fulfilled]: (payload) => {
       console.log("Listo bro");
+      return payload;
     },
   },
 });
