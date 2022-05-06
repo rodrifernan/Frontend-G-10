@@ -7,6 +7,7 @@ const WishList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("userCredentials");
+
   const parseToken = JSON.parse(token);
   console.log(parseToken);
   useEffect(() => {
@@ -14,7 +15,6 @@ const WishList = () => {
   }, [dispatch]);
   let myWishes = useSelector(allWishes);
 
-  console.log(myWishes);
   return (
     <div>
       <div className="bg-light mt-3 mx-3">
@@ -61,7 +61,7 @@ const WishList = () => {
       <div className="my-2  d-flex">
         <div className="col-6">
           <button
-            onClick={()=>navigate(-1)}
+            onClick={() => navigate(-1)}
             className="btn text-light btn-danger"
           >
             <i className="fas fa-arrow-left"></i> Regresar
