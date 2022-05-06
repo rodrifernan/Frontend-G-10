@@ -2,14 +2,39 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "./datatablesource";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import { fetchProducts } from "../../../../redux/reducer/products";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchProducts,
+  getAllProducts,
+  getByCategories,
+  sortByName,
+  sortByNameInversa,
+  sortByPrice,
+  sortByPriceInversa,
+} from "../../../../redux/reducer/products";
 
 const Datatable = () => {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+    // dispatch(getAllCategories());
+  }, []);
+  let products = useSelector(getAllProducts);
+
+
+
+
+
+
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
+
 
   const actionColumn = [
     {
@@ -43,10 +68,10 @@ const Datatable = () => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
+        rows={products}
         columns={userColumns.concat(actionColumn)}
-        pageSize={5}
-        rowsPerPageOptions={[9]}
+        pageSize={13}
+        rowsPerPageOptions={[15]}
         // checkboxSelection
       />
     </div>
