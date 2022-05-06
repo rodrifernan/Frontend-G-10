@@ -17,7 +17,7 @@ const List = () => {
       date: "1 March",
       amount: 785,
       // method: "Cash on Delivery",
-      status: "Approved",
+      status: "Aprobado",
     },
     {
       id: 2235235,
@@ -47,7 +47,7 @@ const List = () => {
       date: "1 March",
       amount: 920,
       // method: "Online",
-      status: "Approved",
+      status: "Aprobado",
     },
     {
       id: 2342355,
@@ -71,7 +71,7 @@ const List = () => {
             <TableCell className="tableCell">Fecha</TableCell>
             <TableCell className="tableCell">Monto</TableCell>
             {/* <TableCell className="tableCell">Pago </TableCell> */}
-            <TableCell className="tableCell">Estado</TableCell>
+            {/* <TableCell className="tableCell">Estado</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -88,9 +88,9 @@ const List = () => {
               <TableCell className="tableCell">{row.date}</TableCell>
               <TableCell className="tableCell">{row.amount}</TableCell>
               {/* <TableCell className="tableCell">{row.method}</TableCell> */}
-              <TableCell className="tableCell">
+              {/* <TableCell className="tableCell">
                 <span className={`status ${row.status}`}>{row.status}</span>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>

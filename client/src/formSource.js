@@ -7,7 +7,7 @@ export const userInputs = [
     },
     {
       id: 2,
-      label: "Name and surname",
+      label: "Nombre y Apellido",
       type: "text",
       placeholder: "John Doe",
     },
@@ -19,7 +19,7 @@ export const userInputs = [
     },
     {
       id: 4,
-      label: "Phone",
+      label: "Telefono",
       type: "text",
       placeholder: "+1 234 567 89",
     },
@@ -30,13 +30,13 @@ export const userInputs = [
     },
     {
       id: 6,
-      label: "Address",
+      label: "Direccion",
       type: "text",
       placeholder: "Elton St. 216 NewYork",
     },
     {
       id: 7,
-      label: "Country",
+      label: "Pais",
       type: "text",
       placeholder: "USA",
     },

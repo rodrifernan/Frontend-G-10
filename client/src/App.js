@@ -40,7 +40,7 @@ function App() {
           <Route path="perfil" element={<Perfil />}/>
         </Route>
 
-        <Route path="/admin/" element={<LayoutAdmin />}>
+        <Route path="admin" >
             <Route index element={<HomeAdmin />} />
             <Route path="login" element={<Login />} />
             <Route path="users">
@@ -48,7 +48,7 @@ function App() {
               <Route path=":userId" element={<Single />} />
               <Route
                 path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
+                element={<New inputs={userInputs} title="Agregar usuario" />}
               />
             </Route>
             <Route path="products">
@@ -56,7 +56,7 @@ function App() {
               <Route path=":productId" element={<Single />} />
               <Route
                 path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
+                element={<New inputs={productInputs} title="Agregar producto" />}
               />
             </Route>
           </Route>
