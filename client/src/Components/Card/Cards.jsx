@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./card.css";
 import { addPush } from "../../redux/reducer/carrito";
-// import { Link } from "react-router-dom";
+import { postWish } from "../../redux/reducer/getWishilist";
 import { useDispatch } from "react-redux";
-
+import axios from "axios";
 const Card = ({
   description,
   name,
@@ -22,6 +22,7 @@ const Card = ({
     stock: "",
     image: "",
   });
+
   const dispatch = useDispatch();
   const agregarCarrito = (tit, precio, img, stock) => {
     setCarrito({
@@ -32,6 +33,7 @@ const Card = ({
     });
     alert("Agregado al carro");
   };
+
   useEffect(() => {
     dispatch(addPush(carrito));
   }, [carrito]);
@@ -42,6 +44,12 @@ const Card = ({
   } else {
     twarranty = "año";
   }
+
+  const addAWish = (productId) => {
+    console.log(productId);
+    dispatch(postWish(productId));
+  };
+
   return (
     <div className="d-flex flex-wrap">
       <div
@@ -113,7 +121,11 @@ const Card = ({
               >
                 Agregar al carrito
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => addAWish(id)}
+              >
                 Agregar a la lista de deseos
               </button>
             </div>
