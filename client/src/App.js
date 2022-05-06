@@ -19,7 +19,8 @@ import Single from "../src/admin/pages/single/Single"
 import New from "../src/admin/pages/new/New"
 
 import { productInputs, userInputs } from "./formSource";
-import LayoutAdmin from "./Components/Layout/LayoutAdmin";
+// import LayoutAdmin from "./Components/Layout/LayoutAdmin";
+import ListProduct from "../src/admin/pages/products/list/ListProduct"
 
 
 
@@ -52,7 +53,7 @@ function App() {
               />
             </Route>
             <Route path="products">
-              <Route index element={<List />} />
+              <Route index element={<ListProduct />} />
               <Route path=":productId" element={<Single />} />
               <Route
                 path="new"
