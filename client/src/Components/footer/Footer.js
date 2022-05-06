@@ -28,7 +28,7 @@ export const Footer = () => {
 			</div>
 			<div className="foot__copyrigth">
 				<p className="footer__p">
-					2022 Copyrigth: Grupo PF 10 Hootcamp Henry
+					2022 Copyrigth: Grupo PF 10 Bootcamp Henry
 				</p>
 			</div>
 		</footer>
