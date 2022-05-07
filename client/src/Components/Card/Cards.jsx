@@ -3,7 +3,7 @@ import "./card.css";
 import { addPush } from "../../redux/reducer/carrito";
 import { postWish } from "../../redux/reducer/getWishilist";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+
 const Card = ({
   description,
   name,
