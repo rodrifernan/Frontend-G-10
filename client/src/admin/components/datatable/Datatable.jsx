@@ -1,5 +1,5 @@
 import "./datatable.scss";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid,GridToolbar } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -26,7 +26,7 @@ const Datatable = () => {
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
             >
-              Borrar
+              Deshabilitar
             </div>
           </div>
         );
@@ -48,6 +48,19 @@ const Datatable = () => {
         pageSize={5}
         rowsPerPageOptions={[9]}
         // checkboxSelection
+        localeText={{
+          toolbarColumns: "Columnas",
+          toolbarFilters: "Filtros",
+          toolbarDensity: "Densidad",
+          toolbarExport: "Exportar",
+          columnMenuUnsort: "No clasificado",
+          columnMenuSortAsc: "Ascendente ",
+          columnMenuSortDesc: "Descendente",
+          columnMenuFilter: "Filtro",
+          columnMenuHideColumn: "Ocultar",
+          columnMenuShowColumns: "Mostrar columnas"
+        }}
+        components={{ Toolbar: GridToolbar }}
       />
     </div>
   );

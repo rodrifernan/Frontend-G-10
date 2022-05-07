@@ -15,7 +15,7 @@ import {
   sortByPriceInversa,
 } from "../../../../redux/reducer/products";
 
-const Datatable = () => {
+const DatatableOrder = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -40,19 +40,19 @@ const Datatable = () => {
     {
       field: "action",
       headerName: "Acción",
-      width: 200,
+      width: 100,
       renderCell: (params) => {
         return (
           <div className="cellAction">
             <Link to="2" style={{ textDecoration: "none" }}>
               <div className="viewButton">Ver</div>
             </Link>
-            <div
+            {/* <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
             >
               Deshabilitar
-            </div>
+            </div> */}
           </div>
         );
       },
@@ -61,10 +61,10 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Productos
-        <Link to="new" className="link">
+        Ordenes
+        {/* <Link to="new" className="link">
           Agregar producto
-        </Link>
+        </Link> */}
       </div>
       <DataGrid
         className="datagrid"
@@ -91,4 +91,4 @@ const Datatable = () => {
   );
 };
 
-export default Datatable;
+export default DatatableOrder;

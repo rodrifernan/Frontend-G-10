@@ -19,9 +19,9 @@ import Single from "../src/admin/pages/single/Single"
 import New from "../src/admin/pages/new/New"
 
 import { productInputs, userInputs } from "./formSource";
-// import LayoutAdmin from "./Components/Layout/LayoutAdmin";
+import LayoutAdmin from "./Components/Layout/LayoutAdmin";
 import ListProduct from "../src/admin/pages/products/list/ListProduct"
-
+import ListOrder from "../src/admin/pages/orders/listOrder/ListOrder"
 
 
 
@@ -41,7 +41,7 @@ function App() {
           <Route path="perfil" element={<Perfil />}/>
         </Route>
 
-        <Route path="admin" >
+        <Route path="admin" element={<LayoutAdmin/>} >
             <Route index element={<HomeAdmin />} />
             <Route path="login" element={<Login />} />
             <Route path="users">
@@ -59,6 +59,14 @@ function App() {
                 path="new"
                 element={<New inputs={productInputs} title="Agregar producto" />}
               />
+            </Route>
+            <Route path="ordenes">
+              <Route index element={<ListOrder />} />
+              <Route path=":productId" element={<Single />} />
+              {/* <Route
+                path="new"
+                element={<New inputs={productInputs} title="Agregar producto" />}
+              /> */}
             </Route>
           </Route>
 
