@@ -8,11 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProducts,
   getAllProducts,
-  getByCategories,
-  sortByName,
-  sortByNameInversa,
-  sortByPrice,
-  sortByPriceInversa,
+  // getByCategories,
+  // sortByName,
+  // sortByNameInversa,
+  // sortByPrice,
+  // sortByPriceInversa,
 } from "../../../../redux/reducer/products";
 
 const DatatableOrder = () => {

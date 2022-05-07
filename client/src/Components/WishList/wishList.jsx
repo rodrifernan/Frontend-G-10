@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { getList, allWishes } from "./../../redux/reducer/getWishilist";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
 const WishList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

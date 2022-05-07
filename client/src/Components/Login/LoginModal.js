@@ -1,6 +1,6 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useEffect, useState  } from 'react';
 import { Login } from './Login';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 export const LoginModal = ({ buttonClass = '', styles = {} }) => {
   const [band, setBand] = useState(true);

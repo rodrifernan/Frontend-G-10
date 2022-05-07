@@ -36,7 +36,7 @@ const Card = ({
 
   useEffect(() => {
     dispatch(addPush(carrito));
-  }, [carrito]);
+  }, [carrito]);// eslint-disable-line react-hooks/exhaustive-deps
   let idModal = `modal${id}`;
   let twarranty = "";
   if (warranty > 1) {

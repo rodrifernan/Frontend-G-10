@@ -1,5 +1,5 @@
 import "./list.scss"
-import Sidebar from "../../../components/sidebar/Sidebar"
+// import Sidebar from "../../../components/sidebar/Sidebar"
 // import Navbar from "../../components/navbar/Navbar"
 import DatatableOrder from "../../../pages/orders/OrderDataTable/DatatableOrder"
 
