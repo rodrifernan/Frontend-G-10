@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { emptycarrito, eraseAProduct } from "../../redux/reducer/carrito";
 import { useDispatch } from "react-redux";
 import "./Carrito.css";
+import toast, { Toaster } from "react-hot-toast";
+
 const Carrito = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,13 +30,16 @@ const Carrito = () => {
   const handleOnElminarAll = (e) => {
     dispatch(emptycarrito());
     localStorage.clear();
+    toast.error("Carrito vaciado");
   };
   const handleOnEraseProduct = (title) => {
     console.log(title);
     dispatch(eraseAProduct(title));
+    toast.error("Producto eliminado");
   };
   return (
-    <div>
+    <div className="carrito__container">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-light mt-3 mx-3">
         <h4 className="py-3 px-3">Carro de compra</h4>
         <p className="border-bottom text-right py-1 mx-3">Precio</p>
@@ -97,7 +102,7 @@ const Carrito = () => {
       <div className="mt-2 d-flex">
         <div className="col-6">
           <button
-            onClick={()=>navigate(-1)}
+            onClick={() => navigate(-1)}
             className="btn text-light btn-danger"
           >
             <i className="fas fa-arrow-left"></i> Regresar
