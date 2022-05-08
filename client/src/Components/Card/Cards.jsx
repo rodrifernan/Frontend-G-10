@@ -3,6 +3,7 @@ import "./card.css";
 import { addPush } from "../../redux/reducer/carrito";
 import { postWish } from "../../redux/reducer/getWishilist";
 import { useDispatch } from "react-redux";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Card = ({
   description,
@@ -31,7 +32,8 @@ const Card = ({
       stock: stock,
       image: img,
     });
-    alert("Agregado al carro");
+    // alert("Agregado al carro")
+    toast.success('Agregado al carrito');
   };
 
   useEffect(() => {
@@ -52,6 +54,9 @@ const Card = ({
 
   return (
     <div className="d-flex flex-wrap">
+      <Toaster
+      position="top-center"
+      reverseOrder={false} />
       <div
         className="card"
         type="button"

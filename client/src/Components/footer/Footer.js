@@ -6,15 +6,15 @@ export const Footer = () => {
 	return (
 		<footer className="bg-light text-center footer__main ">
 			<div className="footer__section">
-				<div className="footer__col">
+				{/* <div className="footer__col">
 					<span>Registrate gratis</span>
 					<Link to="/registro">
 						<button className="btn btn-primary btn-rounded">
 							INICIAR SESIÓN
 						</button>
 					</Link>
-				</div>
-				<div className="footer__col2">
+				</div> */}
+				<div >
 					<div>
 						<span>Siguenos en nuestras redes sociales</span>
 					</div>
