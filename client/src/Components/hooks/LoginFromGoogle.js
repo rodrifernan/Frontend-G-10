@@ -41,6 +41,7 @@ export const LoginFromGoogle = ({ page = false }) => {
 
   const onSuccess = ({ profileObj }) => {
     dispatch(apiLoginGoogle(profileObj));
+    navigate('/');
   };
 
   const onFailure = res => {

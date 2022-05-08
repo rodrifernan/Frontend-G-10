@@ -2,16 +2,50 @@ import React, { useRef, useEffect } from 'react';
 
 import FacebookLogin from '@greatsumini/react-facebook-login';
 
-export const LoginFromFacebook = () => {
+import { apiLoginFacebook } from '../../redux/reducer/login';
+
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+export const LoginFromFacebook = ({ page = false }) => {
   const buttonRef = useRef();
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const onSuccess = res => {
-    console.log(res);
+    dispatch(apiLoginFacebook(res));
+    navigate('/');
   };
 
   const onFailure = res => {
     console.log(res);
   };
+
+
+  useEffect(() => {
+    if (page && localStorage.getItem('userCredentials')) {
+      Swal.close();
+
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Bienvenido',
+        timer: 1500,
+      });
+      try {
+        const modal = window.bootstrap.Modal.getInstance(
+          document.getElementById('loginModal')
+        );
+
+        modal.hide();
+      } catch (error) {}
+
+      navigate('/');
+    }
+  }, [localStorage.getItem('userCredentials')]);
+
 
   useEffect(() => {
     buttonRef.current.lastChild.innerText = 'Ingresar con Facebook';
@@ -42,11 +76,8 @@ export const LoginFromFacebook = () => {
       ></i>
       <FacebookLogin
         appId='1727626107587181'
-        onSuccess={onSuccess}
         onFail={onFailure}
-        onProfileSuccess={response => {
-          console.log('Get Profile Success!', response);
-        }}
+        onProfileSuccess={onSuccess}
         style={{
           backgroundColor: 'transparent',
           color: '#fff',

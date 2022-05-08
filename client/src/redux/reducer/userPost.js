@@ -1,39 +1,58 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const userPost = createAsyncThunk("user/userPost", async (payload) => {
-	const inputUser = await axios
-		.post("http://localhost:3001/api/user", payload)
-		.catch((err) => {
-			console.log(err);
-		});
-	return inputUser.data;
-});
+export const userRegister = createAsyncThunk(
+  'user/userRegister',
+  async payload => {
+    const response = await axios
+      .post('http://localhost:3001/api/user', payload)
+      .then(response => response.data)
+      .catch(({ response }) => ({ ...response.data, error: true }));
+
+    return response;
+  }
+);
 
 const initialState = {
-	user: [],
+  userResponse: {},
 };
 
 export const userSlice = createSlice({
-	name: "user",
-	initialState,
-	reducers: {
-		pushUser: (state, action) => {
-			state.user = action.payload;
-		},
-	},
-	extraReducers: {
-		[userPost.pending]: () => {
-			console.log("pending");
-		},
-		[userPost.fulfilled]: (state, action) => {
-			return { ...state, user: action.payload };
-		},
-	},
+  name: 'userPost',
+  initialState,
+  reducers: {
+    cleanUserResponse: state => {
+      state.userResponse = {};
+    },
+  },
+  extraReducers: {
+    [userRegister.pending]: () => {
+      return {
+        userResponse: {
+          loading: true,
+        },
+      };
+    },
+    [userRegister.fulfilled]: (state, { payload }) => {
+      if (payload.error) {
+        return {
+          userResponse: {
+            errors: payload.errors.reduce((array, error) => {
+              if (!array.some(item => item.param === error.param))
+                array.push(error);
+
+              return array;
+            }, []),
+            error: true,
+          },
+        };
+      }
+
+      return { userResponse: payload };
+    },
+  },
 });
 
-export const { pushUser } = userSlice.actions;
+export const { cleanUserResponse } = userSlice.actions;
 
 export default userSlice.reducer;
-
-export const getUser = (state) => state.user.user;

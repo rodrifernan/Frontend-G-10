@@ -1,6 +1,5 @@
-import React, { useEffect, useState  } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Login } from './Login';
-// import Swal from 'sweetalert2';
 
 export const LoginModal = ({ buttonClass = '', styles = {} }) => {
   const [band, setBand] = useState(true);
@@ -17,7 +16,6 @@ export const LoginModal = ({ buttonClass = '', styles = {} }) => {
       .addEventListener('show.bs.modal', e => {
         setBand(true);
       });
-
   }, []);
 
   return (
@@ -44,6 +42,7 @@ export const LoginModal = ({ buttonClass = '', styles = {} }) => {
               <h5 className='modal-title' id='loginModalLabel'>
                 Iniciar Sesión
               </h5>
+
               <button
                 type='button'
                 className='btn-close'

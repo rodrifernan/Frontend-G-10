@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { apiLogin } from '../../redux/reducer/login';
-// import {getAllUsers} from '../../redux/reducer/getAllUsers'
+import { apiLogin, cleanLogin } from '../../redux/reducer/login';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 import { LoginFromGoogle } from '../hooks/LoginFromGoogle';
 import { LoginFromFacebook } from '../hooks/LoginFromFacebook';
 import './Login.css';
 
 export const Login = ({ redirect = null, page = false, loginClass = '' }) => {
+  const navigate = useNavigate();
+
   const [input, setInput] = useState({
     userOrEmail: '',
     password: '',
@@ -25,6 +27,10 @@ export const Login = ({ redirect = null, page = false, loginClass = '' }) => {
 
   useEffect(() => {
     localStorage.removeItem('userCredentials');
+
+    return () => {
+      dispatch(cleanLogin());
+    };
   }, []);
 
   useEffect(() => {
@@ -70,9 +76,7 @@ export const Login = ({ redirect = null, page = false, loginClass = '' }) => {
             document.getElementById('loginModal')
           );
 
-
           modal.hide();
-          // dispatch(getAllUsers())
         } catch (error) {}
       });
     }
@@ -83,6 +87,18 @@ export const Login = ({ redirect = null, page = false, loginClass = '' }) => {
       ...input,
       [target.name]: target.value,
     });
+
+  const navRegister = () => {
+    try {
+      const modal = window.bootstrap.Modal.getInstance(
+        document.getElementById('loginModal')
+      );
+
+      modal.hide();
+    } catch (error) {}
+
+    navigate('/userRegister');
+  };
 
   return (
     <div className={'px-4 ' + loginClass} id='loginContainer'>
@@ -121,7 +137,11 @@ export const Login = ({ redirect = null, page = false, loginClass = '' }) => {
         )}
       </div>
 
-      <div className='button-container d-flex flex-column justify-content-center align-items-center pt-4'>
+      <div className='linkRegister' onClick={navRegister}>
+        <span>Registrarse</span>
+      </div>
+
+      <div className='button-container d-flex flex-column justify-content-center align-items-center pt-2'>
         <button
           onClick={init}
           className='btn'
