@@ -85,7 +85,7 @@ const WishList = () => {
             className="btn text-light btn-success"
             disabled={myWishes.length === 0}
           >
-            <i class="fas fa-shopping-cart"></i>Agregar todo al Carrito!
+            <i className="fas fa-shopping-cart"></i>Agregar todo al Carrito!
           </button>
         </div>
       </div>

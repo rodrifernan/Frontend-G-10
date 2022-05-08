@@ -17,6 +17,7 @@ import carritoReducer from "./reducer/carrito";
 import login from "./reducer/login";
 import perfilSlice from "./reducer/perfil";
 import wishSlice from "./reducer/getWishilist";
+import allUserSlice from "./reducer/getAllUsers"
 
 const persistConfig = { key: "root", version: 1, storage };
 const persistedReducer = persistReducer(persistConfig, carritoReducer);
@@ -29,6 +30,7 @@ export const store = configureStore({
     login: login,
     perfil: perfilSlice,
     wish: wishSlice,
+    AllUsers: allUserSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -113,7 +113,7 @@ const Carrito = () => {
             className="btn text-light btn-success"
             disabled={length === 0}
           >
-            <i class="far fa-credit-card pr-1"></i>Comprar!
+            <i className="far fa-credit-card pr-1"></i>Comprar!
           </button>
         </div>
       </div>

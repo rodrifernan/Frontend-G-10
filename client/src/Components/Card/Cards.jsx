@@ -4,6 +4,7 @@ import { addPush } from "../../redux/reducer/carrito";
 import { postWish } from "../../redux/reducer/getWishilist";
 import { useDispatch } from "react-redux";
 import toast, { Toaster } from 'react-hot-toast';
+import {getAllUsers} from '../../redux/reducer/getAllUsers'
 
 const Card = ({
   description,
@@ -38,6 +39,7 @@ const Card = ({
 
   useEffect(() => {
     dispatch(addPush(carrito));
+    dispatch(getAllUsers())
   }, [carrito]);// eslint-disable-line react-hooks/exhaustive-deps
   let idModal = `modal${id}`;
   let twarranty = "";

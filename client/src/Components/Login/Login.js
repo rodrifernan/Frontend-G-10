@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { apiLogin } from '../../redux/reducer/login';
+// import {getAllUsers} from '../../redux/reducer/getAllUsers'
 import Swal from 'sweetalert2';
 
 import { LoginFromGoogle } from '../hooks/LoginFromGoogle';
@@ -69,7 +70,9 @@ export const Login = ({ redirect = null, page = false, loginClass = '' }) => {
             document.getElementById('loginModal')
           );
 
+
           modal.hide();
+          // dispatch(getAllUsers())
         } catch (error) {}
       });
     }
