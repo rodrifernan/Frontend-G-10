@@ -1,31 +1,36 @@
-import React, { useState, useEffect } from "react";
-import "./Header.css";
+import React, { useState, useEffect } from 'react';
+import './Header.css';
 
-import { LoginModal } from "../Login/LoginModal";
-import { UserDropDown } from "../hooks/UserDropDown";
+import { LoginModal } from '../Login/LoginModal';
+import { UserDropDown } from '../hooks/UserDropDown';
 
 //hook que devuelve un state que comprueba si hay alguien logeado
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import { getShoppingCart } from '../../redux/reducer/shoopingCart';
 
 const Enlaces = () => {
+  const dispatch = useDispatch();
+
   const [login, setLogin] = useState(true);
   const userCredentials = useSelector(({ login }) => login.userCredentials);
 
   useEffect(() => {
-    if (userCredentials.userName || localStorage.getItem("userCredentials")) {
+    if (userCredentials.userName || localStorage.getItem('userCredentials')) {
+      dispatch(getShoppingCart());
       setLogin(true);
+
     } else setLogin(false);
   }, [userCredentials]);
 
   return (
-    <div className="enlaces col text-center ">
-      <ul className="nav">
+    <div className='enlaces col text-center '>
+      <ul className='nav'>
         <li>
-          <div className=" isesion ">
+          <div className=' isesion '>
             {login ? (
               <UserDropDown />
             ) : (
-              <LoginModal buttonClass={"registrarse btn text-white"} />
+              <LoginModal buttonClass={'registrarse btn text-white'} />
             )}
           </div>
         </li>
@@ -42,9 +47,9 @@ const Enlaces = () => {
             Mis compras
           </a>
         </li> */}
-        <li className="nav-item">
-          <a className="nav-link btn text-white" href="/carrito">
-            <i className="fas fa-shopping-cart "></i>
+        <li className='nav-item'>
+          <a className='nav-link btn text-white' href='/carrito'>
+            <i className='fas fa-shopping-cart '></i>
             <span> Carrito</span>
           </a>
         </li>

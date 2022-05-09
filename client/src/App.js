@@ -23,6 +23,10 @@ import LayoutAdmin from './Components/Layout/LayoutAdmin';
 import ListProduct from '../src/admin/pages/products/list/ListProduct';
 import ListOrder from '../src/admin/pages/orders/listOrder/ListOrder';
 
+import { Page404 } from './pages/Page404/Page404';
+
+import { Mercado } from './Components/Mercado/Mercado'
+
 function App() {
   return (
     <>
@@ -35,6 +39,7 @@ function App() {
           <Route path='login' element={<LoginPage />} />
           <Route path='myWishes' element={<WishList />} />
           <Route path='perfil' element={<Perfil />} />
+          <Route path='pagar' element={<Mercado />} />
         </Route>
 
         <Route path='admin' element={<LayoutAdmin />}>
@@ -65,6 +70,7 @@ function App() {
               /> */}
           </Route>
         </Route>
+        <Route path='*' element={<Page404 />} />
       </Routes>
     </>
   );
