@@ -19,7 +19,11 @@ import userPost from './reducer/userPost';
 import perfilSlice from './reducer/perfil';
 import wishSlice from './reducer/getWishilist';
 import allUserSlice from './reducer/getAllUsers';
-import paymentPM       from './reducer/getResponseMP'
+
+import checkoutMP from './reducer/checkoutMP';
+//import paymentPM  from './reducer/getResponseMP'
+import paymentOrderPM  from './reducer/getResponseMP'
+
 
 const persistConfig = { key: 'root', version: 1, storage };
 const persistedReducer = persistReducer(persistConfig, carritoReducer);
@@ -34,7 +38,9 @@ export const store = configureStore({
     perfil: perfilSlice,
     wish: wishSlice,
     AllUsers: allUserSlice,
-    paymentId : paymentPM,
+    //paymentId : paymentPM,
+    paymentOrderEG : paymentOrderPM,
+    checkout  : checkoutMP,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
