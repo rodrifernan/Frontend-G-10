@@ -5,7 +5,7 @@ export const getAllCategories = createAsyncThunk(
 	"categories/getAllCategories",
 	async () => {
 		const response = await axios
-			.get("http://localhost:3001/api/categories")
+			.get("/api/categories")
 			.catch((err) => {
 				console.log(err);
 			});

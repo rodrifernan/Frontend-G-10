@@ -9,7 +9,7 @@ export const deleteWish = createAsyncThunk(
     console.log(parseToken);
     console.log(parseToken.token);
     const response = await axios.delete(
-      "http://localhost:3001/api/wishlist",
+      "/api/wishlist",
       { data: { id: payload } },
       {
         headers: { "auth-token": parseToken.token },
@@ -21,7 +21,7 @@ export const deleteWish = createAsyncThunk(
 export const getList = createAsyncThunk("wish/getList", async (token) => {
   console.log(token);
   const response = await axios.get(
-    "http://localhost:3001/api/wishlist",
+    "/api/wishlist",
 
     {
       headers: { "auth-token": parseToken.token },
@@ -32,7 +32,7 @@ export const getList = createAsyncThunk("wish/getList", async (token) => {
 
 export const postWish = createAsyncThunk("wish/postwish", async (payload) => {
   const response = await axios.post(
-    "http://localhost:3001/api/wishlist",
+    "/api/wishlist",
     { productId: payload },
     {
       headers: { "auth-token": parseToken.token },

@@ -6,7 +6,7 @@ export const getPaymentIdMP = createAsyncThunk(
 	async (payload) => {
 		console.log('estoy accion getPaymentIdM->', payload)
 		const response = await axios
-			.get(`http://localhost:3001/api/paymentIdPM?payment_id=${payload}`)
+			.get(`/api/paymentIdPM?payment_id=${payload}`)
 			.catch((err) => {
 			console.log(err);
 		});

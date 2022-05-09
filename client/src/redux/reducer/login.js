@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const apiLogin = createAsyncThunk('login/local', async payload => {
   const response = await axios
-    .post(`http://localhost:3001/api/login`, payload)
+    .post(`/api/login`, payload)
     .then(response => response.data)
     .catch(({ response }) => ({ ...response.data, error: true }));
   return response;
@@ -13,7 +13,7 @@ export const apiLoginGoogle = createAsyncThunk(
   'login/google',
   async payload => {
     const response = await axios
-      .post(`http://localhost:3001/api/login/google`, payload)
+      .post(`/api/login/google`, payload)
       .then(response => response.data)
       .catch(({ response }) => ({ ...response.data, error: true }));
     return response;
@@ -24,7 +24,7 @@ export const apiLoginFacebook = createAsyncThunk(
   'login/facebook',
   async payload => {
     const response = await axios
-      .post(`http://localhost:3001/api/login/facebook`, payload)
+      .post(`/api/login/facebook`, payload)
       .then(response => response.data)
       .catch(({ response }) => ({ ...response.data, error: true }));
     return response;

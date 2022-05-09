@@ -5,7 +5,7 @@ export const userRegister = createAsyncThunk(
   'user/userRegister',
   async payload => {
     const response = await axios
-      .post('http://localhost:3001/api/user', payload)
+      .post('/api/user', payload)
       .then(response => response.data)
       .catch(({ response }) => ({ ...response.data, error: true }));
 

@@ -5,7 +5,7 @@ export const getAllUsers = createAsyncThunk(
 	"users/getAllUsers",
 	async () => {
 		const response = await axios
-			.get("http://localhost:3001/api/user/all",{
+			.get("/api/user/all",{
                 headers:  { "auth-token": JSON.parse(localStorage.getItem("userCredentials")).token } ,
               })
             
