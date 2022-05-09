@@ -23,6 +23,8 @@ import LayoutAdmin from './Components/Layout/LayoutAdmin';
 import ListProduct from '../src/admin/pages/products/list/ListProduct';
 import ListOrder from '../src/admin/pages/orders/listOrder/ListOrder';
 
+import ResponseMP from '../src/Components/ResponseMP/responseMP';
+
 function App() {
   return (
     <>
@@ -35,6 +37,7 @@ function App() {
           <Route path='login' element={<LoginPage />} />
           <Route path='myWishes' element={<WishList />} />
           <Route path='perfil' element={<Perfil />} />
+          <Route path="ResponseMP" element={<ResponseMP />}/>
         </Route>
 
         <Route path='admin' element={<LayoutAdmin />}>
