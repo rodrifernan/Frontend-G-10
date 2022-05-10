@@ -274,7 +274,7 @@ export const Form = () => {
 
           <LoginFromGoogle />
           <LoginFromFacebook />
-          <a href='/iniciar-sesion' className='text-decoration-none'>
+          <a href='/login' className='text-decoration-none'>
             ¿Ya tienes una cuenta? Haz click Aqui!
           </a>
         </div>

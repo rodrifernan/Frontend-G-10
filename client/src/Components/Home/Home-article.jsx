@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Paginado from "../Paginado/Paginado";
+import "./Home.css"
 import {
   fetchProducts,
   getAllProducts,
@@ -36,7 +37,7 @@ const Home = () => {
 
   //*****Para el paginado*****
   const [currentPage, setCurrentPage] = useState(1);
-  const [prodsPerPage] = useState(8);
+  const [prodsPerPage] = useState(4);
   const indexOfLastProd = currentPage * prodsPerPage;
   const indexOfFirstProd = indexOfLastProd - prodsPerPage;
   const currentProducts = products.slice(indexOfFirstProd, indexOfLastProd);
@@ -117,15 +118,15 @@ const Home = () => {
       <div className="justify-content-center  d-flex flex-wrap">
         {/*Acá empiezan los productos */}
         {products.length ? (
-          <Paginado
+          <Paginado className="paginado"
             prodPerPage={prodsPerPage}
             allProducts={products.length}
             paginado={paginado}
           />
         ) : (
-          <div>no hay products{console.log("hola desde el paginado")}</div>
+          <div>no hay productos</div>
         )}
-        <div className=" text-center d-flex flex-wrap justify-content-center gap-2 p-5">
+        <div className="wrapper">
           {Array.isArray(currentProducts) ? (
             currentProducts.map((pr) => {
               return (
