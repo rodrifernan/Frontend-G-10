@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./createProduct.css";
 
 export const Input = ({
@@ -11,7 +12,7 @@ export const Input = ({
 	setstate,
 	validRegex,
 }) => {
-	const handleInputChange = ({ target }) => {
+	const handleInputChange = async ({ target }) => {
 		setstate({
 			...state,
 			value: target.value,
@@ -35,8 +36,9 @@ export const Input = ({
 	return (
 		<div className={size}>
 			<label>{label}</label>
-			<div className="create__grupoInput">
+			<div className="create__grupoInput ">
 				<input
+					id={state.id}
 					className={`create__input ${
 						state.valid === null
 							? null

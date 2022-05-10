@@ -1,32 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import "./createProduct.css";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { fileUpload } from "./helper/fileUpload";
 import axios from "axios";
 import { Input } from "./Input";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getAllCategories } from "../../redux/reducer/getCategorie";
 export const CreateProducts = () => {
+	//dispatch busqueda de las categorias
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getAllCategories());
+	}, [dispatch]);
+	//obtener categorias del store
+	const categories = useSelector((state) => state.categories.categories);
+	// navigate de browser router
 	const navigate = useNavigate();
 	// estados de formulario
 	const [name, setName] = useState({ value: "", valid: null });
 	const [description, setDescription] = useState({ value: "", valid: null });
-	const [price, setPrice] = useState({ value: "", valid: null });
+	const [price, setPrice] = useState({ value: 0, valid: null });
 	const [brand, setBrand] = useState({ value: "", valid: null });
 	const [color, setColor] = useState({ value: "", valid: null });
-	const [warranty, setWarranty] = useState({ value: "", valid: null });
-	const [image, setImage] = useState({ value: "", valid: null });
-	const [discount, setDiscount] = useState({ value: "", valid: null });
+	const [warranty, setWarranty] = useState({ value: 0, valid: null });
+	const [stock, setStock] = useState({ value: 0, valid: null });
+	const [image, setImage] = useState({ value: [], valid: null });
+	const [discount, setDiscount] = useState({ value: 0, valid: null });
+	const [category, setCategory] = useState({ value: "", valid: null });
+
 	const [formValid, setFormvalid] = useState(null);
 	// regex del formulario
 	const regex = {
 		name: /^.{1,20}$/,
-		description: /^.{1,200}$/,
-		price: /^.{1,20}$/,
+		description: /^.{1,2000}$/,
+		price: /[1-9]/,
 		brand: /^.{1,20}$/,
 		color: /^.{1,20}$/,
-		warranty: /^.{1,20}$/,
-		image: /^.{1,100}$/,
-		discount: /^.{1,20}$/,
+		warranty: /[1-9]/,
+		discount: /[1-9]/,
+		stock: /[1-9]/,
 	};
 	//submit del fomr
 	const handleSubmit = async (e) => {
@@ -38,8 +52,10 @@ export const CreateProducts = () => {
 				brand.valid === true &&
 				color.valid === true &&
 				warranty.valid === true &&
-				image.valid === true &&
-				discount.valid === true
+				image.value.length > 0 &&
+				discount.valid === true &&
+				description.value !== "" &&
+				stock.valid === true
 			) {
 				//no mostrar error
 				setFormvalid(true);
@@ -53,13 +69,16 @@ export const CreateProducts = () => {
 					warranty: warranty.value,
 					image: image.value,
 					discount: discount.value,
+					stock: stock.value,
+					categoryId: category.value,
 				};
+				console.log(formData);
 				//enviar post para la creacion en db
 				await axios.post("http://127.0.0.1:3001/api/product", formData);
 				// //alert de exito
 				swal(
 					"Exito!",
-					`Producto ${name} cargado correctamente`,
+					`Producto ${name.value} cargado correctamente`,
 					"success"
 				);
 				// // push to home
@@ -76,6 +95,57 @@ export const CreateProducts = () => {
 				"warning"
 			);
 		}
+	};
+
+	// handle upload img
+	const handleFileClick = () => {
+		document.querySelector("#inputFile").click();
+	};
+	const handleUploadFile = async ({ target }) => {
+		const file = target.files[0];
+		Swal.fire({
+			title: "Cargando Imagen",
+			text: "por favor espere",
+			allowOutsideClick: false,
+			didOpen: () => {
+				Swal.showLoading();
+			},
+		});
+		try {
+			const fileUrl = await fileUpload(file);
+			console.log(fileUrl);
+			setImage({ ...image, value: [...image.value, fileUrl] });
+			// state.value = fileUrl;
+			Swal.close();
+			Swal.fire({
+				icon: "success",
+				title: "Exito",
+				text: "la imagen ha sido cargada con exito",
+			});
+		} catch (error) {
+			console.log(error);
+			Swal.close();
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Something went wrong!",
+			});
+		}
+	};
+
+	// handle description
+	const handleInputDescription = ({ target }) => {
+		setDescription({
+			...description,
+			value: target.value,
+		});
+	};
+	// handle category
+	const handleCategory = ({ target }) => {
+		setCategory({
+			...category,
+			value: target.value,
+		});
 	};
 	return (
 		<div>
@@ -105,7 +175,7 @@ export const CreateProducts = () => {
 					</div>
 					<div className="row">
 						<Input
-							type="text"
+							type="number"
 							label="Garantia"
 							placeholder="1 año"
 							state={warranty}
@@ -115,7 +185,7 @@ export const CreateProducts = () => {
 							validRegex={regex.warranty}
 						/>
 						<Input
-							type="text"
+							type="number"
 							label="Descuento"
 							placeholder="si no desea descuento coloque 0%"
 							state={discount}
@@ -124,6 +194,23 @@ export const CreateProducts = () => {
 							size="col"
 							validRegex={regex.discount}
 						/>
+						<div className="col">
+							<label>Categoria</label>
+							<select
+								className=" create__input"
+								onChange={handleCategory}
+							>
+								<option>Seleccione</option>
+								{categories?.map((category) => (
+									<option
+										key={category.id}
+										value={category.id}
+									>
+										{category.name}
+									</option>
+								))}
+							</select>
+						</div>
 					</div>
 					<div className="row">
 						<Input
@@ -134,39 +221,64 @@ export const CreateProducts = () => {
 							size="col-2"
 							validRegex={regex.color}
 						/>
-						<Input
-							type="text"
-							label="Url de Imagen"
-							placeholder="https://picsum.photos/300"
-							state={image}
-							setstate={setImage}
-							msgError="Seleccione por lo menos una imagen"
-							size="col"
-							validRegex={regex.image}
-						/>
-					</div>
-					<div className="row">
+
 						<Input
 							type="number"
 							label="Precio"
-							placeholder="1.200"
+							placeholder="200"
 							state={price}
 							setstate={setPrice}
 							msgError="por favor coloque un costo al producto"
 							size="col"
 							validRegex={regex.price}
 						/>
+						<Input
+							type="number"
+							label="Stock del prodcuto"
+							placeholder="10"
+							state={stock}
+							setstate={setStock}
+							msgError="por favor coloque un stock valido"
+							size="col"
+							validRegex={regex.stock}
+						/>
 					</div>
+
 					<div className="create__grupoInput">
 						<label>Descripcion del producto</label>
 						<textarea
-							className="create__input"
-							id="exampleFormControlTextarea1"
+							className="create__TextArea"
 							rows="3"
 							value={description.value}
-							onChange={setDescription}
+							onChange={handleInputDescription}
 						></textarea>
 					</div>
+					<div className="row">
+						<div
+							className="btn btn-warning col"
+							onClick={handleFileClick}
+						>
+							Agregar imagen del producto
+						</div>
+						<input
+							style={{ display: "none" }}
+							type="file"
+							id="inputFile"
+							onChange={handleUploadFile}
+						/>
+					</div>
+					{image.value.length > 0 && (
+						<div className="create__imgPreviewContaniner">
+							{image.value.map((img) => (
+								<img
+									className="create__imgPreview"
+									key={img}
+									src={img}
+									alt={img}
+								/>
+							))}
+						</div>
+					)}
 
 					{formValid === false && (
 						<div className="create__msgError">
