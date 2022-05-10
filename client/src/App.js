@@ -23,6 +23,7 @@ import LayoutAdmin from './Components/Layout/LayoutAdmin';
 import ListProduct from '../src/admin/pages/products/list/ListProduct';
 import ListOrder from '../src/admin/pages/orders/listOrder/ListOrder';
 import { FormRegister } from './Components/userForm/FormRegister';
+import { Page404 } from './pages/Page404/Page404';
 
 function App() {
   return (
@@ -67,6 +68,8 @@ function App() {
               /> */}
           </Route>
         </Route>
+
+        <Route path='*' element={<Page404 />} />
       </Routes>
     </>
   );
