@@ -107,7 +107,7 @@ const Perfil = () => {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleAccept} className="mt-2 mx-4 row g-3">
+            <form onSubmit={handleAccept} className="mt-2 mx-4 g-3">
               <p>Deja en blanco aquello que quieres mantener</p>
               <div className="mb-3 row">
                 <label for="inputPassword" className="col-sm-2 col-form-label">
