@@ -2,19 +2,29 @@ import React, { useEffect } from "react";
 import { getList, allWishes } from "./../../redux/reducer/getWishilist";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+// import axios from "axios";
 const WishList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("userCredentials");
-
+  function deleteWish(id) {
+    console.log(parseToken.token);
+    fetch(
+      "http://localhost:3001/api/wishlist",
+      { method: "delete" },
+      { data: { id: id } },
+      { headers: { "auth-token": parseToken.token } }
+    );
+  }
   const parseToken = JSON.parse(token);
   console.log(parseToken);
   useEffect(() => {
     dispatch(getList(parseToken.token));
   }, [dispatch]);
   let myWishes = useSelector(allWishes);
-
+  const handlerDelete = (id) => {
+    deleteWish(id);
+  };
   return (
     <div>
       <div className="bg-light mt-3 mx-3">
@@ -41,7 +51,10 @@ const WishList = () => {
                         ? "Unidades en Stock!"
                         : "Sin disponibilidad"}
                     </p>
-                    <button className="btn-text-light btn-dark">
+                    <button
+                      className="btn-text-light btn-dark"
+                      onClick={() => handlerDelete(wh.id)}
+                    >
                       Eliminar
                     </button>
                   </div>
@@ -72,7 +85,7 @@ const WishList = () => {
             className="btn text-light btn-success"
             disabled={myWishes.length === 0}
           >
-            <i class="fas fa-shopping-cart"></i>Agregar todo al Carrito!
+            <i className="fas fa-shopping-cart"></i>Agregar todo al Carrito!
           </button>
         </div>
       </div>

@@ -3,7 +3,9 @@ import "./card.css";
 import { addPush } from "../../redux/reducer/carrito";
 import { postWish } from "../../redux/reducer/getWishilist";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+import {getAllUsers} from '../../redux/reducer/getAllUsers'
+
 const Card = ({
   description,
   name,
@@ -31,12 +33,14 @@ const Card = ({
       stock: stock,
       image: img,
     });
-    alert("Agregado al carro");
+    // alert("Agregado al carro")
+    toast.success('Agregado al carrito');
   };
 
   useEffect(() => {
     dispatch(addPush(carrito));
-  }, [carrito]);
+    dispatch(getAllUsers())
+  }, [carrito]);// eslint-disable-line react-hooks/exhaustive-deps
   let idModal = `modal${id}`;
   let twarranty = "";
   if (warranty > 1) {
@@ -52,6 +56,9 @@ const Card = ({
 
   return (
     <div className="d-flex flex-wrap">
+      <Toaster
+      position="top-center"
+      reverseOrder={false} />
       <div
         className="card"
         type="button"

@@ -1,3 +1,4 @@
+import axios from "axios";
 import ReactDOM from "react-dom";
 import React from "react";
 import "./index.css";
@@ -8,7 +9,13 @@ import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux//store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import dotenv from "dotenv";
 let persistor = persistStore(store);
+
+
+dotenv.config();
+
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 ReactDOM.render(
   <Provider store={store}>

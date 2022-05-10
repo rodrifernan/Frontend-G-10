@@ -5,7 +5,7 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const response = await axios
-      .get("http://localhost:3001/api/products")
+      .get("/api/products")
       .catch((err) => {
         console.log(err);
       });
@@ -16,7 +16,7 @@ export const getByCategories = createAsyncThunk(
   "products/getByCategories",
   async (payload) => {
     const response = await axios
-      .get(`http://localhost:3001/api/filterCategory?name=${payload}`)
+      .get(`/api/filterCategory?name=${payload}`)
       .catch((err) => {
         console.log(err);
       });
@@ -27,7 +27,7 @@ export const getByName = createAsyncThunk(
   "search/getByName",
   async (payload) => {
     const response = await axios
-      .get(`http://localhost:3001/api/products?name=${payload}`)
+      .get(`/api/products?name=${payload}`)
       .catch((err) => {
         console.log(err);
       });

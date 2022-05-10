@@ -3,23 +3,26 @@ import axios from "axios";
 
 const token = localStorage.getItem("userCredentials");
 const parseToken = JSON.parse(token);
+export const deleteWish = createAsyncThunk(
+  "wish/deleteWish",
+  async (payload) => {
+    console.log(parseToken);
+    console.log(parseToken.token);
+    const response = await axios.delete(
+      "/api/wishlist",
+      { data: { id: payload } },
+      {
+        headers: { "auth-token": parseToken.token },
+      }
+    );
+    return response.data;
+  }
+);
 export const getList = createAsyncThunk("wish/getList", async (token) => {
   console.log(token);
   const response = await axios.get(
-    "http://localhost:3001/api/wishlist",
+    "/api/wishlist",
 
-    {
-      headers: { "auth-token": token },
-    }
-  );
-  return response.data;
-});
-
-export const postWish = createAsyncThunk("wish/postwish", async (payload) => {
-  console.log(payload);
-  const response = await axios.post(
-    "http://localhost:3001/api/wishlist",
-    { productId: payload },
     {
       headers: { "auth-token": parseToken.token },
     }
@@ -27,23 +30,16 @@ export const postWish = createAsyncThunk("wish/postwish", async (payload) => {
   return response.data;
 });
 
-export const makeAWish = createAsyncThunk(
-  "wish/makeAWish",
-  async (payload, token) => {
-    const response = await axios
-      .post(
-        `http://localhost:3001/api/wishlist`,
-        {
-          headers: { "auth-token": token },
-        },
-        payload
-      )
-      .catch((err) => {
-        console.log(err);
-      });
-    return response.data;
-  }
-);
+export const postWish = createAsyncThunk("wish/postwish", async (payload) => {
+  const response = await axios.post(
+    "/api/wishlist",
+    { productId: payload },
+    {
+      headers: { "auth-token": parseToken.token },
+    }
+  );
+  return response.data;
+});
 
 const initialState = {
   wish: [],
@@ -65,7 +61,12 @@ const wishSlice = createSlice({
     },
     [postWish.fulfilled]: (payload) => {
       console.log("Listo bro");
-      return payload;
+    },
+    [deleteWish.pending]: () => {
+      console.log("verificando datos");
+    },
+    [deleteWish.fulfilled]: (payload) => {
+      console.log("deleteado bro");
     },
   },
 });

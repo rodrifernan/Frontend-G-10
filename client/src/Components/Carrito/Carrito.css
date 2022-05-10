@@ -2,3 +2,8 @@
   width: 200;
   height: 400px;
 }
+.carrito__container{
+  /* width: 50%; */
+  display: flex;
+  justify-content: center;
+}
