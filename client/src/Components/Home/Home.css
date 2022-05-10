@@ -1,0 +1,18 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* 3 columns */
+    grid-template-rows: repeat(3, 1fr); /* 3 rows  */
+    grid-gap:50px 30px;
+}
+@media (min-width: 850px){
+    .wrapper{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);  /* 3 columns */
+        grid-template-rows: repeat(2, 1fr); /* 3 rows  */
+        grid-gap:50px 30px;
+}}
+
+.paginado{
+    align-self: center;
+    height: fit-content;
+}

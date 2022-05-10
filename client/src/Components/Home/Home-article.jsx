@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Paginado from "../Paginado/Paginado";
+import "./Home.css"
 import {
 	fetchProducts,
 	getAllProducts,
@@ -35,6 +36,7 @@ const Home = () => {
 	let products = useSelector(getAllProducts);
 	console.log(products);
 
+<<<<<<< HEAD
 	//*****Para el paginado*****
 	const [currentPage, setCurrentPage] = useState(1);
 	const [prodsPerPage] = useState(8);
@@ -44,6 +46,17 @@ const Home = () => {
 	const paginado = (pageNumber) => {
 		setCurrentPage(pageNumber);
 	};
+=======
+  //*****Para el paginado*****
+  const [currentPage, setCurrentPage] = useState(1);
+  const [prodsPerPage] = useState(4);
+  const indexOfLastProd = currentPage * prodsPerPage;
+  const indexOfFirstProd = indexOfLastProd - prodsPerPage;
+  const currentProducts = products.slice(indexOfFirstProd, indexOfLastProd);
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+>>>>>>> 6583a9a2b428998efbe914e185a08d6f50d1bdf5
 
 	const handleOnChangeOrder = (e) => {
 		if (e.target.value === "sinalterar") {
@@ -70,6 +83,7 @@ const Home = () => {
 		products = "No hay resultados que mostrar";
 	}
 
+<<<<<<< HEAD
 	return (
 		<>
 			<Banner />
@@ -162,5 +176,91 @@ const Home = () => {
 			</div>
 		</>
 	);
+=======
+  return (
+    <>
+      <Banner />
+      <div className="col-12 d-flex mt-4  ">
+        <div className="col-6 "></div>
+        <div className="col-6 filtrado d-flex justify-content-end">
+          <div className="col-6">
+            <select
+              className="form-select form-select-lg mb-1"
+              aria-label=".form-select-lg example"
+              onChange={handleOnChange}
+            >
+              <option value={"All"} defaultValue>
+                Todos
+              </option>
+              {Array.isArray(categories) ? (
+                categories.map((cat, i) => {
+                  return (
+                    <option key={i} value={cat.name}>
+                      {cat.name}
+                    </option>
+                  );
+                })
+              ) : (
+                <div>{categories}</div>
+              )}
+            </select>
+          </div>
+          <div className="col-6 mr-2">
+            <select
+              className="form-select form-select-lg mb-1"
+              aria-label=".form-select-lg example"
+              onChange={handleOnChangeOrder}
+            >
+              <option value={"sinalterar"} defaultValue>
+                Ordenamiento
+              </option>
+              <option value={"AaZ"}>Alfabeticamente de A-Z</option>
+              <option value={"ZaA"}>Inversamente de Z-A</option>
+              <option value={"lowPrice"}>Precio: menor a mayor</option>
+              <option value={"Highrice"}>Precio: mayor a menor</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div className="justify-content-center  d-flex flex-wrap">
+        {/*Acá empiezan los productos */}
+        {products.length ? (
+          <Paginado className="paginado"
+            prodPerPage={prodsPerPage}
+            allProducts={products.length}
+            paginado={paginado}
+          />
+        ) : (
+          <div>no hay productos</div>
+        )}
+        <div className="wrapper">
+          {Array.isArray(currentProducts) ? (
+            currentProducts.map((pr) => {
+              return (
+                <Card
+                  key={pr.id}
+                  description={pr.description}
+                  name={pr.name}
+                  image={pr.image}
+                  price={pr.price}
+                  id={pr.id}
+                  color={pr.color}
+                  brand={pr.brand}
+                  stock={pr.stock}
+                  warranty={pr.warranty}
+                  category={pr.category}
+                />
+              );
+            })
+          ) : (
+            <div className="text-light text-center">
+              <h3>{products}</h3>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+>>>>>>> 6583a9a2b428998efbe914e185a08d6f50d1bdf5
 };
 export default Home;

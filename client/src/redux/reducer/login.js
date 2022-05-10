@@ -46,6 +46,7 @@ const loginSlice = createSlice({
     },
     logOut: state => {
       localStorage.removeItem('userCredentials');
+      localStorage.removeItem('carrito')
       state.userCredentials = {};
     },
   },
