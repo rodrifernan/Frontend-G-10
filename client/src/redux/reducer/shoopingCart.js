@@ -5,26 +5,28 @@ export const getShoppingCart = createAsyncThunk(
   'shoppingCart/get',
   async () => {
     const token = JSON.parse(localStorage.getItem('userCredentials')).token;
-    console.log(token);
     const response = await axios
       .get(`http://localhost:3001/api/shoppingCart`, {
         headers: { 'auth-token': token },
       })
-      .then(response => response.data)
-      .catch(({ response }) => ({ ...response.data, error: true }));
+      .then(response => response.data);
     return response;
   }
 );
 
 export const postShoppingCart = createAsyncThunk(
   'shoppingCart/post',
-  async payload => {
+  async productId => {
     const token = JSON.parse(localStorage.getItem('userCredentials')).token;
 
     const response = await axios
-      .post(`http://localhost:3001/api/shoppingCart`, payload, {
-        headers: { 'auth-token': token },
-      })
+      .post(
+        `http://localhost:3001/api/shoppingCart`,
+        { productId },
+        {
+          headers: { 'auth-token': token },
+        }
+      )
       .then(response => response.data)
       .catch(({ response }) => ({ ...response.data, error: true }));
     return response;
@@ -41,12 +43,13 @@ const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    addShoppingList: ({ shoppingList }, { payload }, a, b) => {
-      debugger;
+    addShoppingList: ({ shoppingList }, { payload }) => {
       const product = shoppingList.find(item => item.productId === payload);
       product
         ? (product.quantity = product.quantity + 1)
         : shoppingList.push({ productId: payload, quantity: 1 });
+
+      localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
     },
 
     deleteShoppingList: ({ shoppingList }, { payload }) => {
@@ -60,9 +63,12 @@ const loginSlice = createSlice({
       return { shoppingList: action.payload };
     },
 
-    [postShoppingCart.fulfilled]: (state, action) => {
-      console.log('asd');
+    [getShoppingCart.rejected]: (state, action) => {
+      localStorage.removeItem('shoppingCart');
+      return { shoppingList: [] };
     },
+
+    [postShoppingCart.fulfilled]: (state, action) => {},
   },
 });
 
