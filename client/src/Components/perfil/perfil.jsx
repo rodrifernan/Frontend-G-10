@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPerfil, getAllInfo } from "../../redux/reducer/perfil";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { getAllUsers } from "../../redux/reducer/getAllUsers";
+import { allUserRegisters } from "../../redux/reducer/getAllUsers";
 const Perfil = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -11,7 +13,8 @@ const Perfil = () => {
   let myPerfil = useSelector(getAllInfo);
   let parseGetData = JSON.parse(getData);
   const [editar, setEditar] = useState(false);
-
+  let allUser = useSelector(allUserRegisters);
+  console.log(allUser);
   const [form, setForm] = useState({
     userName: "",
     email: "",
@@ -19,13 +22,33 @@ const Perfil = () => {
     phone: "",
     firstName: "",
     lastName: "",
+    idPersonal: "",
   });
+  const [errores, setErrores] = useState({});
+  const [validate, setValidate] = useState(true);
+  const handleOnChangeName = (e) => {
+    let validationName = {};
+    setForm({ ...form, [e.target.name]: e.target.value });
+    let userNombreVerif = allUser.filter(
+      (un) => un.userName === e.target.value
+    );
+    console.log(userNombreVerif);
+    if (userNombreVerif.length > 0) {
+      setErrores({ name: "Hay un usuario con este nombre" });
+      setValidate(false);
+    } else {
+      setErrores({ name: "" });
+      setValidate(true);
+    }
+  };
+
   const handleOnChange = (e) => {
     console.log(e.target.value);
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   useEffect(() => {
     dispatch(getPerfil(parseGetData.token));
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   const handleEdit = () => {
@@ -33,36 +56,44 @@ const Perfil = () => {
     console.log(editar);
   };
   const handleAccept = () => {
-    if (form.userName === "") {
-      form.userName = myPerfil.userName;
+    if (validate === true) {
+      if (form.userName === "") {
+        form.userName = myPerfil.userName;
+      }
+      if (form.email === "") {
+        form.email = myPerfil.email;
+      }
+      if (form.address === "") {
+        form.address = myPerfil.address;
+      }
+      if (form.phone === "") {
+        form.phone = myPerfil.phone;
+      }
+      form.firstName = myPerfil.firstName;
+      form.lastName = myPerfil.lastName;
+      form.idPersonal = myPerfil.idPersonal;
+      console.log(form);
+      dispatch(UpdatePerfil(form));
+      swal({
+        title: "Los cambios han sido efectuados!",
+        text: "Recarga la pagina para visualizar los cambios",
+        icon: "success",
+        button: "Aceptar",
+      });
+      setEditar(false);
+      parseGetData.userName = form.userName;
+      localStorage.setItem("userCredentials", JSON.stringify(parseGetData));
+      console.log(parseGetData);
+
+      setForm({
+        userName: "",
+        email: "",
+        address: "",
+        phone: "",
+        firstName: "",
+        lastName: "",
+      });
     }
-    if (form.email === "") {
-      form.email = myPerfil.email;
-    }
-    if (form.address === "") {
-      form.address = myPerfil.address;
-    }
-    if (form.phone === "") {
-      form.phone = myPerfil.phone;
-    }
-    form.firstName = myPerfil.firstName;
-    form.lastName = myPerfil.lastName;
-    console.log(form);
-    dispatch(UpdatePerfil(form));
-    swal({
-      title: "Los cambios han sido efectuados!",
-      icon: "success",
-      button: "Aceptar",
-    });
-    setEditar(false);
-    setForm({
-      userName: "",
-      email: "",
-      address: "",
-      phone: "",
-      firstName: "",
-      lastName: "",
-    });
   };
 
   return (
@@ -109,6 +140,7 @@ const Perfil = () => {
           ) : (
             <form onSubmit={handleAccept} className="mt-2 mx-4 g-3">
               <p>Deja en blanco aquello que quieres mantener</p>
+              <p className="py-1 text-danger">{errores.name}</p>
               <div className="mb-3 row">
                 <label for="inputPassword" className="col-sm-2 col-form-label">
                   Nombre de usuario
@@ -120,7 +152,7 @@ const Perfil = () => {
                     id="inputPassword"
                     name={"userName"}
                     value={form.userName}
-                    onChange={handleOnChange}
+                    onChange={handleOnChangeName}
                   />
                 </div>
               </div>
@@ -172,6 +204,7 @@ const Perfil = () => {
               <div className=" my-3 col-12 text-center">
                 <button
                   type="submit"
+                  disabled={!validate}
                   className=" col-2 btn btn-success text-light"
                 >
                   Aceptar
