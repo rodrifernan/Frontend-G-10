@@ -3,18 +3,21 @@ import axios from "axios";
 
 const token = localStorage.getItem("userCredentials");
 const parseToken = JSON.parse(token);
+
+export const deleteAll = createAsyncThunk("wish/deleteAll", async () => {
+  const response = await axios.delete("/api/wishlist/clean", {
+    headers: { "auth-token": parseToken.token },
+  });
+});
 export const deleteWish = createAsyncThunk(
   "wish/deleteWish",
   async (payload) => {
-    console.log(parseToken);
-    console.log(parseToken.token);
-    const response = await axios.delete(
-      "/api/wishlist",
-      { data: { id: payload } },
-      {
-        headers: { "auth-token": parseToken.token },
-      }
-    );
+    const response = await axios.delete("/api/wishlist", {
+      headers: { "auth-token": parseToken.token },
+      data: { id: payload },
+    });
+
+    console.log(response.data);
     return response.data;
   }
 );
@@ -48,7 +51,17 @@ const initialState = {
 const wishSlice = createSlice({
   name: "wish",
   initialState,
-  reducers: {},
+  reducers: {
+    deleteWh: (state, action) => {
+      console.log(action.payload);
+      let erase = state.wish.filter((wh) => wh.id !== action.payload);
+      console.log(erase);
+      state.wish = erase;
+    },
+    deleteAllState: (state) => {
+      state.wish = initialState;
+    },
+  },
   extraReducers: {
     [getList.pending]: () => {
       console.log("Trayendo wishes");
@@ -59,16 +72,20 @@ const wishSlice = createSlice({
     [postWish.pending]: () => {
       console.log("Enviando datos");
     },
-    [postWish.fulfilled]: (payload) => {
-      console.log("Listo bro");
+    [postWish.fulfilled]: (payload, state) => {
+      return { ...state, wish: payload };
     },
     [deleteWish.pending]: () => {
       console.log("verificando datos");
     },
-    [deleteWish.fulfilled]: (payload) => {
-      console.log("deleteado bro");
+    [deleteWish.fulfilled]: (state, payload) => {
+      console.log("Deletado");
+    },
+    [deleteAll.fulfilled]: (state, payload) => {
+      console.log("todo deleteado");
     },
   },
 });
 export default wishSlice.reducer;
+export const { deleteWh, deleteAllState } = wishSlice.actions;
 export const allWishes = (state) => state.wish.wish;
