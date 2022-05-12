@@ -21,19 +21,22 @@
   max-height: 200px;
   overflow-y: auto;
 }
-.Pets {
+.Mascosta {
   background-color: blueviolet;
 }
-.Beauty {
+.Belleza {
   background-color: pink;
 }
-.Sports {
+.Deporte {
   background-color: green;
 }
-.Electronic {
+.Electronica {
   background-color: orange;
 }
-
+.badge{
+  width: 100%;
+  text-align: center;
+}
 .card__precio {
   background-color: #a85cf9;
   border-radius: 15px;
