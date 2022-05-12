@@ -1,38 +1,39 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
-	const response = await axios
-		.get("/api/user/all", {
-			headers: {
-				"auth-token": JSON.parse(
-					localStorage.getItem("userCredentials")
-				).token,
-			},
-		})
+const token = localStorage.getItem("userCredentials"); //No tocar, funciona solo con esta estructura
+const parseToken = JSON.parse(token);
 
-		.catch((err) => {
-			console.log(err);
-		});
-	return response.data;
+export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
+  const response = await axios
+    .get("/api/user/all", {
+      headers: {
+        "auth-token": parseToken.token,
+      },
+    })
+
+    .catch((err) => {
+      console.log(err);
+    });
+  return response.data;
 });
 
 const initialState = {
-	getAllUsers: [],
+  getAllUsers: [],
 };
 
 const allUserSlice = createSlice({
-	name: "getAllUsers",
-	initialState,
-	reducers: {},
-	extraReducers: {
-		[getAllUsers.pending]: () => {
-			console.log("Trayendo usuarios");
-		},
-		[getAllUsers.fulfilled]: (state, action) => {
-			return { ...state, getAllUsers: action.payload };
-		},
-	},
+  name: "getAllUsers",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [getAllUsers.pending]: () => {
+      console.log("Trayendo usuarios");
+    },
+    [getAllUsers.fulfilled]: (state, action) => {
+      return { ...state, getAllUsers: action.payload };
+    },
+  },
 });
 
 export default allUserSlice.reducer;
