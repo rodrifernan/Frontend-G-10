@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
+export const getAllUsers = createAsyncThunk("userAll/getAllUsers", async () => {
   const response = await axios
     .get("/api/user/all", {
       headers: {
@@ -16,22 +16,25 @@ export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
 });
 
 const initialState = {
-  getAllUsers: [],
+  userAll: [],
 };
 
 const allUserSlice = createSlice({
-  name: "getAllUsers",
+  name: "userAll",
   initialState,
-  reducers: {},
+  reducers: {
+    
+  },
   extraReducers: {
-    [getAllUsers.pending]: () => {
-      console.log("Trayendo usuarios");
-    },
+    // [getAllUsers.pending]: () => {
+    //   console.log("Trayendo usuarios");
+    // },
     [getAllUsers.fulfilled]: (state, action) => {
-      return { ...state, getAllUsers: action.payload };
+      return { ...state, userAll: action.payload };
     },
+    
   },
 });
 
 export default allUserSlice.reducer;
-export const allUserRegisters = (state) => state.getAllUsers.getAllUsers;
+export const allUserRegisters = (state) => state.userAll.userAll;

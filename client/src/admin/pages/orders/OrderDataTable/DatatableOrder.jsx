@@ -8,16 +8,17 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProducts,
   getAllProducts,
-  // getByCategories,
-  // sortByName,
-  // sortByNameInversa,
-  // sortByPrice,
-  // sortByPriceInversa,
+
 } from "../../../../redux/reducer/products";
+import { allOrdersRegisters } from "../../../../redux/reducer/getAllOrders";
 
 const DatatableOrder = () => {
 
+
+  let orderAll = useSelector(allOrdersRegisters);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchProducts());
     // dispatch(getAllCategories());
@@ -29,7 +30,7 @@ const DatatableOrder = () => {
 
 
 
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState(orderAll);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
@@ -68,7 +69,7 @@ const DatatableOrder = () => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={products}
+        rows={data}
         columns={userColumns.concat(actionColumn)}
         pageSize={13}
         rowsPerPageOptions={[15]}

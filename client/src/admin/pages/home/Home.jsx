@@ -5,8 +5,21 @@ import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+// import { getAllCategories } from "../../../redux/reducer/getCategorie";
+import {getAllUsers} from "../../../redux/reducer/getAllUsers";
+import {getAllOrders} from "../../../redux/reducer/getAllOrders";
 
 const Home = () => {
+
+const dispatch = useDispatch()
+
+useEffect(() => {
+  dispatch(getAllOrders());
+  dispatch(getAllUsers())
+}, []);
+
   return (
     <div className="home">
       {/* <Sidebar /> */}
