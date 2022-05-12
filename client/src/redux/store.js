@@ -19,8 +19,12 @@ import userPost from "./reducer/userPost";
 import perfilSlice from "./reducer/perfil";
 import wishSlice from "./reducer/getWishilist";
 import allUserSlice from "./reducer/getAllUsers";
+
+import allOrderSlice from "./reducer/getAllOrders";
+
 import genresSlice from "./reducer/getGenre";
 import newPassSlice from "./reducer/newPassword";
+
 import checkoutMP from "./reducer/checkoutMP";
 //import paymentPM  from './reducer/getResponseMP'
 import paymentOrderPM from "./reducer/getResponseMP";
@@ -38,7 +42,10 @@ export const store = configureStore({
     userPost,
     perfil: perfilSlice,
     wish: wishSlice,
-    AllUsers: allUserSlice,
+
+    userAll: allUserSlice,
+    orderAll: allOrderSlice,
+
     //paymentId : paymentPM,
     paymentOrderEG: paymentOrderPM,
     checkout: checkoutMP,
