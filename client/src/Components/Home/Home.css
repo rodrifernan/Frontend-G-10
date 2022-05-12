@@ -3,6 +3,7 @@
     grid-template-columns: repeat(2, 1fr);  /* 3 columns */
     grid-template-rows: repeat(3, 1fr); /* 3 rows  */
     grid-gap:50px 30px;
+    padding-bottom: 2em;
 }
 @media (min-width: 850px){
     .wrapper{
