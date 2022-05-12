@@ -16,8 +16,10 @@ export const ProductsByUser = () => {
 	return (
 		<div className="productsByUSer__container">
 			<hr />
-			<p>Mis Productos</p>
-			{data ? (
+			<div className="col ">
+				<h4 className=" ">Mis Productos</h4>
+			</div>
+			{data.length > 0 ? (
 				<div className="productsByUSer__cardContainer">
 					{data.map((pr) => (
 						<Card
@@ -36,7 +38,9 @@ export const ProductsByUser = () => {
 					))}
 				</div>
 			) : (
-				<p>no tiene productos en venta</p>
+				<div className="productsByUSer__noProducts">
+					<p>No tiene productos en venta</p>
+				</div>
 			)}
 			<hr />
 		</div>
