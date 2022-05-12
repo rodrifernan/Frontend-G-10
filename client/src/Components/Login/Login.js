@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { LoginFromGoogle } from '../hooks/LoginFromGoogle';
 import { LoginFromFacebook } from '../hooks/LoginFromFacebook';
+import {
+  addGuestShoppingCart,
+  getShoppingCart,
+} from '../../redux/reducer/shoppingCart';
 import './Login.css';
 
 export const Login = ({ redirect = null, page = false, loginClass = '' }) => {
@@ -20,6 +24,9 @@ export const Login = ({ redirect = null, page = false, loginClass = '' }) => {
 
   const dispatch = useDispatch();
   const userCredentials = useSelector(({ login }) => login.userCredentials);
+  const shoppingList = useSelector(
+    ({ shoppingCart }) => shoppingCart.shoppingList
+  );
 
   const init = () => {
     dispatch(apiLogin(input));
@@ -68,7 +75,11 @@ export const Login = ({ redirect = null, page = false, loginClass = '' }) => {
         title: 'Bienvenido ' + userCredentials.userName,
         showConfirmButton: false,
         timer: 1500,
-      }).then(() => {
+      }).then(async () => {
+        dispatch(addGuestShoppingCart([...shoppingList])).then(() => {
+          dispatch(getShoppingCart());
+        });
+
         if (redirect) redirect();
 
         try {

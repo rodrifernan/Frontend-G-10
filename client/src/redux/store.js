@@ -19,15 +19,14 @@ import userPost from "./reducer/userPost";
 import perfilSlice from "./reducer/perfil";
 import wishSlice from "./reducer/getWishilist";
 import allUserSlice from "./reducer/getAllUsers";
-import productsByUserSlice from "./reducer/getProductsByUser";
 import allOrderSlice from "./reducer/getAllOrders";
-
 import genresSlice from "./reducer/getGenre";
 import newPassSlice from "./reducer/newPassword";
-
 import checkoutMP from "./reducer/checkoutMP";
+import productsByUserSlice from "./reducer/getProductsByUser";
 //import paymentPM  from './reducer/getResponseMP'
 import paymentOrderPM from "./reducer/getResponseMP";
+import shoppingCart from "./reducer/shoppingCart";
 
 const persistConfig = { key: "root", version: 1, storage };
 const persistedReducer = persistReducer(persistConfig, carritoReducer);
@@ -40,6 +39,7 @@ export const store = configureStore({
 		carrito: persistedReducer,
 		login,
 		userPost,
+		shoppingCart,
 		perfil: perfilSlice,
 		wish: wishSlice,
 		productsByUser: productsByUserSlice,
