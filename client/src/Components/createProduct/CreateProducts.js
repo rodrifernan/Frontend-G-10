@@ -8,13 +8,17 @@ import axios from "axios";
 import { Input } from "./Input";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../redux/reducer/getCategorie";
+import { getAllGenres } from "../../redux/reducer/getGenre";
+
 export const CreateProducts = () => {
 	//dispatch busqueda de las categorias
 	const dispatch = useDispatch();
 	useEffect(() => {
+		dispatch(getAllGenres());
 		dispatch(getAllCategories());
 	}, [dispatch]);
 	//obtener categorias del store
+	const genres = useSelector((state) => state.genres.genres);
 	const categories = useSelector((state) => state.categories.categories);
 	// navigate de browser router
 	const navigate = useNavigate();
@@ -29,6 +33,7 @@ export const CreateProducts = () => {
 	const [image, setImage] = useState({ value: [], valid: null });
 	const [discount, setDiscount] = useState({ value: 0, valid: null });
 	const [category, setCategory] = useState({ value: "", valid: null });
+	const [genre, setGenre] = useState({ value: "", valid: null });
 
 	const [formValid, setFormvalid] = useState(null);
 	// regex del formulario
@@ -71,11 +76,23 @@ export const CreateProducts = () => {
 					discount: discount.value,
 					stock: stock.value,
 					categoryId: category.value,
+					genreId: genre.value,
 				};
 				console.log(formData);
-				//enviar post para la creacion en db
-				await axios.post("http://127.0.0.1:3001/api/product", formData);
-				// //alert de exito
+				// enviar post para la creacion en db
+				const user = {
+					headers: {
+						"auth-token": JSON.parse(
+							localStorage.getItem("userCredentials")
+						).token,
+					},
+				};
+				await axios.post(
+					"http://127.0.0.1:3001/api/product",
+					formData,
+					user
+				);
+				//alert de exito
 				swal(
 					"Exito!",
 					`Producto ${name.value} cargado correctamente`,
@@ -96,7 +113,7 @@ export const CreateProducts = () => {
 			);
 		}
 	};
-
+	//------------------------------------------>>>
 	// handle upload img
 	const handleFileClick = () => {
 		document.querySelector("#inputFile").click();
@@ -132,7 +149,7 @@ export const CreateProducts = () => {
 			});
 		}
 	};
-
+	//-------------------------------------------->>>
 	// handle description
 	const handleInputDescription = ({ target }) => {
 		setDescription({
@@ -144,6 +161,13 @@ export const CreateProducts = () => {
 	const handleCategory = ({ target }) => {
 		setCategory({
 			...category,
+			value: target.value,
+		});
+	};
+	// handle genre
+	const handleGenre = ({ target }) => {
+		setGenre({
+			...genre,
 			value: target.value,
 		});
 	};
@@ -172,6 +196,20 @@ export const CreateProducts = () => {
 							size="col"
 							validRegex={regex.brand}
 						/>
+						<div className="col">
+							<label>Publico de interes</label>
+							<select
+								className=" create__input"
+								onChange={handleGenre}
+							>
+								<option value="select">Seleccione</option>
+								{genres?.map((genre) => (
+									<option key={genre.id} value={genre.id}>
+										{genre.name}
+									</option>
+								))}
+							</select>
+						</div>
 					</div>
 					<div className="row">
 						<Input
