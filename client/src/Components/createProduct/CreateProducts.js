@@ -46,6 +46,7 @@ export const CreateProducts = () => {
 		warranty: /[1-9]/,
 		discount: /[1-9]/,
 		stock: /[1-9]/,
+		genre: /^.{20,200}$/,
 	};
 	//submit del fomr
 	const handleSubmit = async (e) => {
@@ -59,8 +60,9 @@ export const CreateProducts = () => {
 				warranty.valid === true &&
 				image.value.length > 0 &&
 				discount.valid === true &&
-				description.value !== "" &&
-				stock.valid === true
+				description.valid === true &&
+				stock.valid === true &&
+				genre.valid === true
 			) {
 				//no mostrar error
 				setFormvalid(true);
@@ -157,19 +159,63 @@ export const CreateProducts = () => {
 			value: target.value,
 		});
 	};
-	// handle category
+	// validation select category
+	const handleValidateDescription = ({ target }) => {
+		if (regex.description.test(target.value)) {
+			setDescription({
+				...description,
+				valid: true,
+			});
+		} else {
+			setDescription({
+				...description,
+				valid: false,
+			});
+		}
+	};
+	// handle category   ---------------------------->>
 	const handleCategory = ({ target }) => {
 		setCategory({
 			...category,
 			value: target.value,
 		});
 	};
-	// handle genre
+	// validation select category
+	const handleValidateCategory = ({ target }) => {
+		if (regex.genre.test(target.value)) {
+			setCategory({
+				...category,
+				valid: true,
+			});
+		} else {
+			setCategory({
+				...category,
+				valid: false,
+			});
+		}
+	};
+	// handle genre ----------------------------->>
 	const handleGenre = ({ target }) => {
 		setGenre({
 			...genre,
 			value: target.value,
 		});
+	};
+	// validation select genre
+	const handleValidateGenre = ({ target }) => {
+		if (regex.genre.test(target.value)) {
+			setGenre({
+				...genre,
+				valid: true,
+			});
+			console.log("validtrue");
+		} else {
+			setGenre({
+				...genre,
+				valid: false,
+			});
+			console.log("validfalse");
+		}
 	};
 	return (
 		<div>
@@ -199,8 +245,15 @@ export const CreateProducts = () => {
 						<div className="col">
 							<label>Publico de interes</label>
 							<select
-								className=" create__input"
+								className={`create__input ${
+									genre.valid === null
+										? null
+										: genre.valid === true
+										? "valid"
+										: "invalid"
+								}`}
 								onChange={handleGenre}
+								onBlur={handleValidateGenre}
 							>
 								<option value="select">Seleccione</option>
 								{genres?.map((genre) => (
@@ -235,8 +288,15 @@ export const CreateProducts = () => {
 						<div className="col">
 							<label>Categoria</label>
 							<select
-								className=" create__input"
+								className={`create__input ${
+									category.valid === null
+										? null
+										: category.valid === true
+										? "valid"
+										: "invalid"
+								}`}
 								onChange={handleCategory}
+								onBlur={handleValidateCategory}
 							>
 								<option>Seleccione</option>
 								{categories?.map((category) => (
@@ -285,10 +345,17 @@ export const CreateProducts = () => {
 					<div className="create__grupoInput">
 						<label>Descripcion del producto</label>
 						<textarea
-							className="create__TextArea"
+							className={`create__TextArea ${
+								description.valid === null
+									? null
+									: description.valid === true
+									? "valid"
+									: "invalid"
+							}`}
 							rows="3"
 							value={description.value}
 							onChange={handleInputDescription}
+							onBlur={handleValidateDescription}
 						></textarea>
 					</div>
 					<div className="row">
