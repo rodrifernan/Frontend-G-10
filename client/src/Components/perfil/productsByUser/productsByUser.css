@@ -1,0 +1,14 @@
+.productsByUSer__container{
+    width: 100%;
+    display: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+}
+.productsByUSer__cardContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+}
