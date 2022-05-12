@@ -1,9 +1,9 @@
 export const userColumns = [
-  { field: "orderNumber", headerName: "Numero de orden", width: 150 },
+  { field: "orderNumber", headerName: "Numero de orden", width: 70 },
   {
     field: "orderDate",
     headerName: "Fecha",
-    width: 100,
+    width: 150,
     // renderCell: (params) => {
     //   return (
     //     <div className="cellWithImg">
@@ -16,12 +16,17 @@ export const userColumns = [
   {
     field: "status",
     headerName: "Estado",
-    width: 230,
+    width: 150,
   },
 
   {
     field: "purchased",
     headerName: "Facturado",
+    width: 100,
+  },
+  {
+    field: "total",
+    headerName: "Monto Total",
     width: 100,
   },
 

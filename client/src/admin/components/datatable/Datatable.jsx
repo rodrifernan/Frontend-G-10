@@ -4,12 +4,21 @@ import { userColumns, userRows } from "../../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+import { useSelector } from "react-redux";
+// import { categoriesAll } from "../../../redux/reducer/getCategorie";
+import { allUserRegisters } from "../../../redux/reducer/getAllUsers";
+
 const Datatable = () => {
-  const [data, setData] = useState(userRows);
+  let allUser = useSelector(allUserRegisters);
+  const [data, setData] = useState(allUser);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
+
+  // let allUser = useSelector(allUserRegisters);
+  // console.log(allUser);
+  
 
   const actionColumn = [
     {
