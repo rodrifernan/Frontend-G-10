@@ -7,6 +7,7 @@ import {
 	addShoppingList,
 	postShoppingCart,
 } from "../../redux/reducer/shoppingCart";
+import { useLocation } from "react-router-dom";
 
 const Card = ({
 	description,
@@ -20,6 +21,7 @@ const Card = ({
 	warranty,
 	category,
 }) => {
+	const navigate = useLocation();
 	const dispatch = useDispatch();
 	const addShopping = ({ target }) => {
 		dispatch(addShoppingList(id));
@@ -183,20 +185,28 @@ const Card = ({
 							</div>
 						</div>
 						<div className="modal-footer">
-							<button
-								type="button"
-								className="btn btn-success"
-								onClick={addShopping}
-							>
-								Agregar al carrito
-							</button>
-							<button
-								type="button"
-								className="btn btn-primary"
-								onClick={() => addAWish(id)}
-							>
-								Agregar a la lista de deseos
-							</button>
+							{navigate.pathname === "/perfil" ? (
+								<button className="btn btn-warning">
+									Editar
+								</button>
+							) : (
+								<>
+									<button
+										type="button"
+										className="btn btn-success"
+										onClick={addShopping}
+									>
+										Agregar al carrito
+									</button>
+									<button
+										type="button"
+										className="btn btn-primary"
+										onClick={() => addAWish(id)}
+									>
+										Agregar a la lista de deseos
+									</button>
+								</>
+							)}
 						</div>
 					</div>
 				</div>
