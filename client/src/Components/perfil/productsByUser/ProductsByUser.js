@@ -33,7 +33,9 @@ export const ProductsByUser = () => {
 							brand={pr.brand}
 							stock={pr.stock}
 							warranty={pr.warranty}
-							category={pr.category}
+							category={pr.categoryId}
+							genre={pr.genreId}
+							discount={pr.discount}
 						/>
 					))}
 				</div>

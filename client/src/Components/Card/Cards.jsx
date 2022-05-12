@@ -21,12 +21,14 @@ const Card = ({
 	stock,
 	warranty,
 	category,
+	genre,
+	discount,
 }) => {
 	const navigate = useLocation();
 	const dispatch = useDispatch();
 	const [edit, setEdit] = useState(false);
 	const handleEdit = () => {
-		setEdit(true);
+		setEdit(!edit);
 	};
 	console.log("edit", edit);
 	const addShopping = ({ target }) => {
@@ -242,10 +244,24 @@ const Card = ({
 									className="btn-close"
 									data-bs-dismiss="modal"
 									aria-label="Close"
+									onClick={handleEdit}
 								></button>
 							</div>
 							<div className="modal-body">
-								<CreateProducts />
+								<CreateProducts
+									editDescription={description}
+									editName={name}
+									editPrice={price}
+									editImage={image}
+									editId={id}
+									editColor={color}
+									editBrand={brand}
+									editStock={stock}
+									editWarranty={warranty}
+									editCategory={category}
+									editGenre={genre}
+									editDiscount={discount}
+								/>
 							</div>
 							<div className="modal-footer"></div>
 						</div>
