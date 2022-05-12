@@ -32,17 +32,17 @@ export const getOrderMP = createAsyncThunk(
 );
 
 export const postOrderMP = createAsyncThunk(
-	"postResponseMp/postOrderMP",
-	async (payload) => {
+	"getResponseMp/postOrderMP",
+	async () => {
 		
 		const response = await axios
 			.post(`http://localhost:3001/api/invoice`,{},{
-                headers:  { "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FjYjNjLTRlZjMtNGQ3Mi1iYmYzLWQ2NjE4ZTQ1YTQ1YyIsImlhdCI6MTY1MjIyNDExNywiZXhwIjoxNjUyMzEwNTE3fQ.9Rk3vKbe04M-KDbCpTwcl8Bv2vgCj4jg6Xjju3XHE10" } ,
+                headers:  { "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2FjYjNjLTRlZjMtNGQ3Mi1iYmYzLWQ2NjE4ZTQ1YTQ1ZCIsImlhdCI6MTY1MjMxMjYwNSwiZXhwIjoxNjUyMzk5MDA1fQ.BxDAs2VCRMoOARBQvO9qbzQq22m_6qY7uQDRcwHls98" },
             })
 			.catch((err) => {
 			console.log(err);
 		});
-		console.log('estoy accion postOrderMP->', payload)
+		console.log('estoy accion postOrderMP->',response.data)
 		return response.data;
 
 	}
@@ -50,8 +50,8 @@ export const postOrderMP = createAsyncThunk(
 
 const initialState = {
 	paymentId: [],
-	paymentOrder: [],
-	paymentPostOrder: [],
+	paymentOrder : [],
+	nroOdenCompra: {},
 };
 
 const paymentIdSlice = createSlice({
@@ -80,7 +80,7 @@ const paymentIdSlice = createSlice({
 		},
 		[postOrderMP.fulfilled]: (state, action) => {
             //console.log("Trayendo Datos MercadoPago Compra", action.payload)
-			return {...state,  paymentPostOrder: action.payload};
+			return {...state, nroOrdenCompra: action.payload };
 		},		
 	},
 });

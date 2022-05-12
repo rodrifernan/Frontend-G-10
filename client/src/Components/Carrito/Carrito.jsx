@@ -53,12 +53,6 @@ const Carrito = () => {
 
   const handleOnCheckMP = (e) => {
       console.log('ckequear mercado pago')
-      //Mercado()
-      //dispatch(checkoutMP())
-      //getCheckoutMP()
-     //navigate('http://localhost:3001/api/checkout')
-     //swindow.open(`http://localhost:3001/api/checkout/${userToken}`)
-//      
   }
 
   return (
@@ -91,11 +85,13 @@ const Carrito = () => {
         <p className="border-bottom text-right py-1 mx-3">Precio</p>
         {Array.isArray(Parse) ? (
           Parse.map((pr) => {
+            
             return (
-              <div className=" border-bottom d-flex mx-3 py-3 ">
+              <div key={pr.id} className=" border-bottom d-flex mx-3 py-3 ">
                 <div className="px-3">
-                  <img
+                  <img 
                     className=" img-thumbnail"
+                    
                     src={pr.image}
                     alt={pr.title}
                     width={200}
