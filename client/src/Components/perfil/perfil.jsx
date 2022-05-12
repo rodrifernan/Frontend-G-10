@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { UpdatePerfil } from "../../redux/reducer/perfil";
 import { useSelector, useDispatch } from "react-redux";
+import { getResults, results } from "../../redux/reducer/newPassword";
 import { getPerfil, getAllInfo } from "../../redux/reducer/perfil";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { getAllUsers } from "../../redux/reducer/getAllUsers";
 import { allUserRegisters } from "../../redux/reducer/getAllUsers";
+
 const Perfil = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const getData = localStorage.getItem("userCredentials");
   let myPerfil = useSelector(getAllInfo);
+  let resultados = useSelector(results);
+  console.log(resultados);
   let parseGetData = JSON.parse(getData);
   const [editar, setEditar] = useState(false);
+  const [pw, setPw] = useState({});
+  const [pwErrors, setPwErrors] = useState({});
+  const [pwValid, setPwValid] = useState(true);
   let allUser = useSelector(allUserRegisters);
   console.log(allUser);
   const [form, setForm] = useState({
@@ -26,13 +33,49 @@ const Perfil = () => {
   });
   const [errores, setErrores] = useState({});
   const [validate, setValidate] = useState(true);
+  const handleChangeOnPassW = (e) => {
+    setPw({ ...pw, [e.target.name]: e.target.value });
+  };
+  const handleVerifEqualPass = (e) => {
+    let passIniti = document.getElementById("password");
+    setPw({ ...pw, [e.target.name]: e.target.value });
+    if (e.target.value !== passIniti.value) {
+      setPwValid(false);
+      setPwErrors({ errors: "No coinciden las contraseñas" });
+    } else {
+      setPwValid(true);
+      setPwErrors({ errors: "" });
+    }
+  };
+  const lengthNewPass = (e) => {
+    setPw({ ...pw, [e.target.name]: e.target.value });
+    if (e.target.value.length < 5) {
+      setPwValid(false);
+      setPwErrors({
+        errLength: "La contraseña debe ser mas de 5 caracteres o mas",
+      });
+    } else {
+      setPwValid(true);
+      setPwErrors({
+        errLength: "",
+      });
+    }
+  };
+  const handleChagePassword = (e) => {
+    e.preventDefault();
+    try {
+      dispatch(getResults(pw));
+    } catch {
+      console.log("no se pudo");
+    }
+  };
+  console.log(pw);
   const handleOnChangeName = (e) => {
-    let validationName = {};
     setForm({ ...form, [e.target.name]: e.target.value });
     let userNombreVerif = allUser.filter(
       (un) => un.userName === e.target.value
     );
-    console.log(userNombreVerif);
+
     if (userNombreVerif.length > 0) {
       setErrores({ name: "Hay un usuario con este nombre" });
       setValidate(false);
@@ -50,7 +93,7 @@ const Perfil = () => {
     dispatch(getPerfil(parseGetData.token));
     dispatch(getAllUsers());
   }, [dispatch]);
-
+  console.log(pwErrors);
   const handleEdit = () => {
     setEditar(true);
     console.log(editar);
@@ -73,7 +116,8 @@ const Perfil = () => {
       form.lastName = myPerfil.lastName;
       form.idPersonal = myPerfil.idPersonal;
       console.log(form);
-      dispatch(UpdatePerfil(form));
+      let kiko = dispatch(UpdatePerfil(form));
+      console.log(kiko);
       swal({
         title: "Los cambios han sido efectuados!",
         text: "Recarga la pagina para visualizar los cambios",
@@ -95,7 +139,6 @@ const Perfil = () => {
       });
     }
   };
-
   return (
     <div>
       <div className="bg-light my-3">
@@ -212,6 +255,102 @@ const Perfil = () => {
               </div>
             </form>
           )}
+        </div>
+      </div>
+      <div className="container px-3 ">
+        <h6 className="mx-4">
+          Si quieres cambiar tu contraseña{" "}
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            Haz click aquí
+          </button>
+        </h6>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Cambio de contraseñas
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form onSubmit={handleChagePassword}>
+                  <p className="text-danger">
+                    {resultados.errors ? "Contraseña incorrecta" : ""}
+                  </p>
+                  <div className="mb-3 row">
+                    <div className="col-sm-10">
+                      <input
+                        type="text"
+                        id="password"
+                        className="form-control"
+                        placeholder="Introduzca su contraseña actual"
+                        name="password"
+                        onChange={handleChangeOnPassW}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-danger">{pwErrors.errors}</p>
+                  <div className="mb-3 row">
+                    <div className="col-sm-10">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Reintroduzca su  contraseña actual"
+                        name="passwordConfirmation"
+                        onChange={handleVerifEqualPass}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-danger">{pwErrors.errLength}</p>
+                  <div className="mb-3 row">
+                    <div className="col-sm-10">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Introduzca su nueva contraseña"
+                        name="newPassword"
+                        onChange={lengthNewPass}
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="btn btn-success"
+                    disabled={!pwValid}
+                  >
+                    Cambiar contraseña
+                  </button>
+                  <button className="btn btn-danger ml-3" data-dismiss="modal">
+                    Cerrar
+                  </button>
+                  <p className="text-success my-3 ">
+                    {resultados.msg ? "Contraseña cambiada!" : ""}
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="col-6 mb-3">
