@@ -36,4 +36,4 @@ const allUserSlice = createSlice({
 });
 
 export default allUserSlice.reducer;
-export const allUserRegisters = (state) => state.AllUsers.getAllUsers;
+export const allUserRegisters = (state) => state.userAll.getAllUsers;
