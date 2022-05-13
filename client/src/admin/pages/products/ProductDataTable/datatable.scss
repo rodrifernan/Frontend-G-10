@@ -13,13 +13,16 @@
 
     .link{
       text-decoration: none;
-      color: green;
-      font-size: 16px;
-      font-weight: 400;
-      border: 1px solid green;
+      color: #bf8df3;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: 1px solid #bf8df3;
       padding: 5px;
       border-radius: 5px;
       cursor: pointer;
+      min-width: 250px;
+      text-align: center;
+      margin: 0 1rem 0 1rem;
     }
   }
 

@@ -14,7 +14,7 @@ import LayoutUser from './Components/Layout/LayoutUser';
 import HomeAdmin from '../src/admin/pages/home/Home';
 // import Login from '../src/admin/pages/login/Login';
 import List from '../src/admin/pages/list/List';
-import Single from '../src/admin/pages/single/Single';
+// import Single from '../src/admin/pages/single/Single';
 import New from '../src/admin/pages/new/New';
 import ResponseMP from '../src/Components/ResponseMP/responseMP';
 
@@ -24,6 +24,9 @@ import ListProduct from '../src/admin/pages/products/list/ListProduct';
 import ListOrder from '../src/admin/pages/orders/listOrder/ListOrder';
 import { FormRegister } from './Components/userForm/FormRegister';
 import { Page404 } from './pages/Page404/Page404';
+import {OrderDetails} from "../src/admin/pages/orders/OrderDetails/OrderDetails"
+import { ProductDetails } from './admin/pages/products/ProductDetails/ProductDetails';
+import { UserDetails } from './admin/pages/Users/UserDetails';
 
 function App() {
   return (
@@ -45,7 +48,7 @@ function App() {
           {/* <Route path='login' element={<Login />} /> */}
           <Route path='users'>
             <Route index element={<List />} />
-            <Route path=':userId' element={<Single />} />
+            <Route path=':userId' element={<UserDetails />} />
             <Route
               path='new'
               element={<New inputs={userInputs} title='Agregar usuario' />}
@@ -53,7 +56,7 @@ function App() {
           </Route>
           <Route path='products'>
             <Route index element={<ListProduct />} />
-            <Route path=':productId' element={<Single />} />
+            <Route path=':productId' element={<ProductDetails />} />
             <Route
               path='new'
               element={<CreateProducts />}
@@ -62,7 +65,7 @@ function App() {
           </Route>
           <Route path='ordenes'>
             <Route index element={<ListOrder />} />
-            <Route path=':productId' element={<Single />} />
+            <Route path=':productId' element={<OrderDetails />} />
             {/* <Route
                 path="new"
                 element={<New inputs={productInputs} title="Agregar producto" />}

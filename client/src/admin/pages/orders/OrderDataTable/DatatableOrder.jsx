@@ -1,15 +1,11 @@
 import "./datatable.scss";
 import { DataGrid,GridToolbar } from "@mui/x-data-grid";
-import { userColumns, userRows } from "./datatablesource";
+import { userColumns } from "./datatablesource";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-// import { fetchProducts } from "../../../../redux/reducer/products";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProducts,
-  getAllProducts,
+import {   useState } from "react";
 
-} from "../../../../redux/reducer/products";
+import {  useSelector } from "react-redux";
+
 import { allOrdersRegisters } from "../../../../redux/reducer/getAllOrders";
 
 const DatatableOrder = () => {
@@ -17,63 +13,54 @@ const DatatableOrder = () => {
 
   let orderAll = useSelector(allOrdersRegisters);
 
-  const dispatch = useDispatch();
+ 
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-    // dispatch(getAllCategories());
-  }, []);
-  let products = useSelector(getAllProducts);
+// ***********************************
 
-
-
-
+const [select, setSelection] = useState(0);
 
 
   const [data, setData] = useState(orderAll);
+  console.log(data);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+ 
+
+ const handleRowSelection = (ids) => {
+  const selectedIDs = new Set(ids);
+  const selectedRowData = data.filter((row) =>
+    selectedIDs.has(row.id.toString())
+  );
+  const validator = selectedRowData[0]? selectedRowData[0].orderNumber : 0
+  setSelection( validator )
+  
+}
 
 
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Acción",
-      width: 100,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link to="2" style={{ textDecoration: "none" }}>
-              <div className="viewButton">Ver</div>
-            </Link>
-            {/* <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Deshabilitar
-            </div> */}
-          </div>
-        );
-      },
-    },
-  ];
+
   return (
     <div className="datatable">
+      
       <div className="datatableTitle">
         Ordenes
-        {/* <Link to="new" className="link">
-          Agregar producto
-        </Link> */}
+        {select !== 0 ?
+          <Link to={select.toString()} className="link">
+          Ver
+        </Link>:null}
       </div>
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={userColumns.concat(actionColumn)}
+        
+        columns={userColumns}
         pageSize={13}
         rowsPerPageOptions={[15]}
-        // checkboxSelection
+        checkboxSelection
+        autoPageSize
+        autoHeight
+        onSelectionModelChange= {handleRowSelection}
+       
+
+
         localeText={{
           toolbarColumns: "Columnas",
           toolbarFilters: "Filtros",
@@ -88,6 +75,7 @@ const DatatableOrder = () => {
         }}
         components={{ Toolbar: GridToolbar }}
       />
+      
     </div>
   );
 };
