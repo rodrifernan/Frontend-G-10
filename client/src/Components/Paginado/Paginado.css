@@ -1,6 +1,7 @@
 .navTotal{
   height: fit-content;
   width: 100%;
+  margin-top: 1.5rem;
 }
 .navTotal>ul{
   display: flex;

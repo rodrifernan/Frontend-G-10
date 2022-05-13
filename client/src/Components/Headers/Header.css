@@ -1,6 +1,10 @@
 .registrarse:hover {
   background-color: black;
 }
+.registrarse{
+  margin-right: 0.5rem;
+  background-color: #5534A5;
+}
 .header{
   height: 60px;
   width: 100%;

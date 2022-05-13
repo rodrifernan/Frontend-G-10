@@ -6,6 +6,7 @@ import { UserDropDown } from "../hooks/UserDropDown";
 
 //hook que devuelve un state que comprueba si hay alguien logeado
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Enlaces = () => {
   const [login, setLogin] = useState(true);
@@ -20,6 +21,12 @@ const Enlaces = () => {
   return (
     <div className="enlaces col text-center ">
       <ul className="nav">
+        {
+          localStorage && localStorage.userCredentials && <li>
+            <Link to="/create"><button className={"registrarse btn text-white"}>Vender</button></Link>
+          </li>
+        }
+        
         <li>
           <div className=" isesion ">
             {login ? (

@@ -16,6 +16,7 @@ import {
 } from "../../redux/reducer/getCategorie";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card/Cards";
+import { Link } from "react-router-dom";
 
 import Banner from "../Banner/Banner";
 
@@ -26,15 +27,15 @@ const Home = () => {
 		dispatch(getAllCategories());
 	}, [dispatch]);
 	const handleOnChange = (e) => {
-		dispatch(getByCategories(e.target.value));
 		if (e.target.value === "All") {
 			dispatch(fetchProducts());
-		}
+		}else{dispatch(getByCategories(e.target.value));}
 	};
 	let categories = useSelector(categoriesAll);
 
 	let products = useSelector(getAllProducts);
 	console.log(products);
+	const login = useSelector((state)=> state.login.userCredentials.length)
 
 	//*****Para el paginado*****
 	const [currentPage, setCurrentPage] = useState(1);
@@ -75,7 +76,13 @@ const Home = () => {
 		<>
 			<Banner />
 			<div className="col-12 d-flex mt-4  ">
-				<div className="col-6 "></div>
+				<div className="col-6 ">
+				{
+				localStorage.userCredentials && <div>
+					<Link to="/admin"><button className={"registrarse btn text-white"}>Panel-Admin</button></Link>
+				</div>
+				}
+				</div>
 				<div className="col-6 filtrado d-flex justify-content-end">
 					<div className="col-6">
 						<select
