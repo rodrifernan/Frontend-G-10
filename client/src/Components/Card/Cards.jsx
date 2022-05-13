@@ -261,6 +261,7 @@ const Card = ({
 									editCategory={category}
 									editGenre={genre}
 									editDiscount={discount}
+									isEdit={true}
 								/>
 							</div>
 							<div className="modal-footer"></div>
