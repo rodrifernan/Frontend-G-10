@@ -1,36 +1,47 @@
 import React, { useEffect } from "react";
-import { getList, allWishes } from "./../../redux/reducer/getWishilist";
+import {
+  getList,
+  allWishes,
+  deleteWish,
+  deleteWh,
+  deleteAll,
+  deleteAllState,
+} from "./../../redux/reducer/getWishilist";
 import { useNavigate } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 // import axios from "axios";
 const WishList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("userCredentials");
-  function deleteWish(id) {
-    console.log(parseToken.token);
-    fetch(
-      "http://localhost:3001/api/wishlist",
-      { method: "delete" },
-      { data: { id: id } },
-      { headers: { "auth-token": parseToken.token } }
-    );
-  }
+
   const parseToken = JSON.parse(token);
   console.log(parseToken);
   useEffect(() => {
     dispatch(getList(parseToken.token));
   }, [dispatch]);
   let myWishes = useSelector(allWishes);
+  console.log(myWishes);
   const handlerDelete = (id) => {
-    deleteWish(id);
+    console.log(id);
+    dispatch(deleteWish(id));
+    dispatch(deleteWh(id));
+  };
+  const handlerDeleteaAll = () => {
+    dispatch(deleteAll());
+    dispatch(deleteAllState());
   };
   return (
     <div>
       <div className="bg-light mt-3 mx-3">
         <h4 className="py-3 px-4">Mi lista de deseos</h4>
-        <p className="border-bottom text-right py-1 mx-4">Precio</p>
-        {Array.isArray(myWishes) ? (
+        {Array.isArray(myWishes) && myWishes.length !== 0 ? (
+          <p className="border-bottom text-right py-1 mx-4">Precio</p>
+        ) : (
+          ""
+        )}
+        {Array.isArray(myWishes) && myWishes.length !== 0 ? (
           myWishes.map((wh) => {
             return (
               <div className="border-bottom d-flex mx-3 py-3">
@@ -69,6 +80,16 @@ const WishList = () => {
           <div className="text-center">
             <h3>Su Lista de deseo esa vacio. Agregue algunos productos!</h3>
           </div>
+        )}
+        {Array.isArray(myWishes) && myWishes.length > 1 ? (
+          <button
+            className="my-3 mx-3 btn btn-warning text-light"
+            onClick={handlerDeleteaAll}
+          >
+            Eliminar todo
+          </button>
+        ) : (
+          ""
         )}
       </div>
       <div className="my-2  d-flex">

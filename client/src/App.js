@@ -6,7 +6,7 @@ import Perfil from './Components/perfil/perfil';
 // import { Footer } from "./Components/footer/Footer";
 import { CreateProducts } from './Components/createProduct/CreateProducts';
 import Home from './Components/Home/Home-article';
-import Carrito from './Components/Carrito/Carrito';
+
 import { LoginPage } from './Components/Login/LoginPage';
 
 import WishList from './Components/WishList/wishList';
@@ -24,9 +24,13 @@ import ListProduct from '../src/admin/pages/products/list/ListProduct';
 import ListOrder from '../src/admin/pages/orders/listOrder/ListOrder';
 import { FormRegister } from './Components/userForm/FormRegister';
 import { Page404 } from './pages/Page404/Page404';
+
 import {OrderDetails} from "../src/admin/pages/orders/OrderDetails/OrderDetails"
 import { ProductDetails } from './admin/pages/products/ProductDetails/ProductDetails';
 import { UserDetails } from './admin/pages/Users/UserDetails';
+
+import { ShoppingCart } from './Components/ShoppingCart/ShoppingCart';
+
 
 function App() {
   return (
@@ -36,7 +40,7 @@ function App() {
           <Route index element={<Home />}></Route>
           <Route path='create' element={<CreateProducts />} />
           <Route path='userRegister' element={<FormRegister />} />
-          <Route path='carrito' element={<Carrito />} />
+          <Route path='cart' element={<ShoppingCart />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='myWishes' element={<WishList />} />
           <Route path='perfil' element={<Perfil />} />

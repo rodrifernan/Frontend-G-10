@@ -38,7 +38,7 @@ const Home = () => {
 
 	//*****Para el paginado*****
 	const [currentPage, setCurrentPage] = useState(1);
-	const [prodsPerPage] = useState(4);
+	const [prodsPerPage] = useState(6);
 	const indexOfLastProd = currentPage * prodsPerPage;
 	const indexOfFirstProd = indexOfLastProd - prodsPerPage;
 	const currentProducts = products.slice(indexOfFirstProd, indexOfLastProd);

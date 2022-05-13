@@ -10,7 +10,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../redux/reducer/getCategorie";
 import { getAllGenres } from "../../redux/reducer/getGenre";
 
-export const CreateProducts = () => {
+export const CreateProducts = ({
+	editDescription,
+	editName,
+	editPrice,
+	editImage,
+	editId,
+	editColor,
+	editBrand,
+	editStock,
+	editWarranty,
+	editDiscount,
+}) => {
 	//dispatch busqueda de las categorias
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -23,16 +34,28 @@ export const CreateProducts = () => {
 	// navigate de browser router
 	const navigate = useNavigate();
 	// estados de formulario
-	const [name, setName] = useState({ value: "", valid: null });
-	const [description, setDescription] = useState({ value: "", valid: null });
-	const [price, setPrice] = useState({ value: 0, valid: null });
-	const [brand, setBrand] = useState({ value: "", valid: null });
-	const [color, setColor] = useState({ value: "", valid: null });
-	const [warranty, setWarranty] = useState({ value: 0, valid: null });
-	const [stock, setStock] = useState({ value: 0, valid: null });
-	const [image, setImage] = useState({ value: [], valid: null });
-	const [discount, setDiscount] = useState({ value: 0, valid: null });
-	const [category, setCategory] = useState({ value: "", valid: null });
+	const [name, setName] = useState({ value: editName || "", valid: null });
+	const [description, setDescription] = useState({
+		value: editDescription || "",
+		valid: null,
+	});
+	const [price, setPrice] = useState({ value: editPrice || 0, valid: null });
+	const [brand, setBrand] = useState({ value: editBrand || "", valid: null });
+	const [color, setColor] = useState({ value: editColor || "", valid: null });
+	const [warranty, setWarranty] = useState({
+		value: editWarranty || 0,
+		valid: null,
+	});
+	const [stock, setStock] = useState({ value: editStock || 0, valid: null });
+	const [image, setImage] = useState({ value: editImage || [], valid: null });
+	const [discount, setDiscount] = useState({
+		value: editDiscount || 0,
+		valid: null,
+	});
+	const [category, setCategory] = useState({
+		value: "",
+		valid: null,
+	});
 	const [genre, setGenre] = useState({ value: "", valid: null });
 
 	const [formValid, setFormvalid] = useState(null);
