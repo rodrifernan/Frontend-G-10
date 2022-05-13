@@ -43,7 +43,7 @@ export const UserDropDown = () => {
             </li>
 
             <li>
-              <Link to='/userInvoices' className='titulo'>
+              <Link to='/userSales' className='titulo'>
                 <button className='dropdown-item'>Ventas</button>
               </Link>
             </li>

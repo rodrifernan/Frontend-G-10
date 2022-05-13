@@ -20,6 +20,7 @@ export const UserSales = () => {
       align: 'center',
     },
     {
+      field: 'product',
       headerName: 'Nombre',
       width: 200,
       headerAlign: 'center',
@@ -49,6 +50,7 @@ export const UserSales = () => {
       align: 'center',
     },
     {
+      field: 'total',
       headerName: 'Total',
       renderCell: ({ row }) => '$' + row.total,
       width: 100,
