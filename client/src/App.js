@@ -30,6 +30,7 @@ import { ProductDetails } from './admin/pages/products/ProductDetails/ProductDet
 import { UserDetails } from './admin/pages/Users/UserDetails';
 
 import { ShoppingCart } from './Components/ShoppingCart/ShoppingCart';
+import { UserInvoices } from './Components/UserInvoices/UserInvoices'
 
 
 function App() {
@@ -42,9 +43,11 @@ function App() {
           <Route path='userRegister' element={<FormRegister />} />
           <Route path='cart' element={<ShoppingCart />} />
           <Route path='login' element={<LoginPage />} />
+          <Route path='userInvoices' element={<UserInvoices />} />
           <Route path='myWishes' element={<WishList />} />
           <Route path='perfil' element={<Perfil />} />
           <Route path='ResponseMP' element={<ResponseMP />} />
+
         </Route>
 
         <Route path='admin' element={<LayoutAdmin />}>

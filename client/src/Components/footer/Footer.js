@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
 	return (
-		<footer className="bg-light text-center footer__main ">
+		<footer className="bg-light text-center footer__main " style={{ marginTop: 'auto' }} >
 			<div className="footer__section">
 				{/* <div className="footer__col">
 					<span>Registrate gratis</span>

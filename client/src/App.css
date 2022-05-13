@@ -6,3 +6,9 @@
 body {
   background-color: #e0e1e0;
 }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

@@ -37,6 +37,12 @@ export const UserDropDown = () => {
               <button className='dropdown-item'>Mis Reseñas</button>
             </li>
             <li>
+              <Link to='/userInvoices' className='titulo'>
+                <button className='dropdown-item'>ver Facturas</button>
+              </Link>
+            </li>
+
+            <li>
               <Link className='titulo' to='/create'>
                 <button className='dropdown-item'>Vender</button>
               </Link>

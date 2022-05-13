@@ -8,7 +8,7 @@ export const getShoppingCart = createAsyncThunk(
   async () => {
     const token = JSON.parse(localStorage.getItem('userCredentials')).token;
     const response = await axios
-      .get(`http://localhost:3001/api/shoppingCart`, {
+      .get(`/api/shoppingCart`, {
         headers: { 'auth-token': token },
       })
       .then(response => response.data);
@@ -20,7 +20,7 @@ export const getShoppingCartGuest = createAsyncThunk(
   'shoppingCart/get/guest',
   async payload => {
     const response = await axios
-      .post(`http://localhost:3001/api/shoppingCart/guest`, payload)
+      .post(`/api/shoppingCart/guest`, payload)
       .then(response => response.data);
     return response;
   }
@@ -32,7 +32,7 @@ export const postShoppingCart = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userCredentials')).token;
     const response = await axios
       .post(
-        `http://localhost:3001/api/shoppingCart`,
+        `/api/shoppingCart`,
         { productId },
         {
           headers: { 'auth-token': token },
@@ -51,7 +51,7 @@ export const putShoppingCart = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userCredentials')).token;
 
     const response = await axios
-      .put(`http://localhost:3001/api/shoppingCart`, payload, {
+      .put(`/api/shoppingCart`, payload, {
         headers: { 'auth-token': token },
       })
       .then(response => response.data)
@@ -66,7 +66,7 @@ export const deleteShoppingCart = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userCredentials')).token;
 
     const response = await axios
-      .delete(`http://localhost:3001/api/shoppingCart`, {
+      .delete(`/api/shoppingCart`, {
         headers: { 'auth-token': token },
         data: { id },
       })
@@ -82,7 +82,7 @@ export const cleanShoppingCart = createAsyncThunk(
     const token = JSON.parse(localStorage.getItem('userCredentials')).token;
 
     const response = await axios
-      .delete(`http://localhost:3001/api/shoppingCart/clean`, {
+      .delete(`/api/shoppingCart/clean`, {
         headers: { 'auth-token': token },
       })
       .then(response => response.data)
@@ -96,7 +96,7 @@ export const addGuestShoppingCart = createAsyncThunk(
   async payload => {
     const token = JSON.parse(localStorage.getItem('userCredentials')).token;
     const response = await axios
-      .post(`http://localhost:3001/api/shoppingCart/addGuest`, payload, {
+      .post(`/api/shoppingCart/addGuest`, payload, {
         headers: { 'auth-token': token },
       })
       .then(response => response.data)
@@ -112,7 +112,7 @@ const initialState = {
     : [],
 };
 
-const loginSlice = createSlice({
+const shoppingCartSlice = createSlice({
   name: 'shoppingCart',
   initialState,
   reducers: {
@@ -169,6 +169,6 @@ export const {
   deleteShoppingList,
   updateShoppingList,
   cleanShoppingList,
-} = loginSlice.actions;
+} = shoppingCartSlice.actions;
 
-export default loginSlice.reducer;
+export default shoppingCartSlice.reducer;
