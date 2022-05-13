@@ -155,8 +155,8 @@ export const CreateProducts = ({
 							).token,
 						},
 					};
-					await axios.post(
-						"http://127.0.0.1:3001/api/product",
+					await axios.put(
+						"http://127.0.0.1:3001/api/editProduct",
 						formData,
 						user
 					);
