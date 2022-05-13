@@ -12,158 +12,154 @@ import "./response.css";
 //npm install nodemailer
 
 const ResponseMP = () => {
-          const querystring = new URLSearchParams(useLocation().search)
-          const payment_id =  querystring.get('payment_id')
-          const dispatch = useDispatch();
-          const [state, setState] = useState([])
-            
-          let paymentIdOrdenEl = useSelector(state => state.paymentOrderEG.paymentId);
-          let getOrderMPEl = useSelector(state => state.paymentOrderEG.paymentOrder);
-          let nroOrdenCompraEl = useSelector(state => state.paymentOrderEG.nroOrdenCompra);
-          
+    const querystring = new URLSearchParams(useLocation().search)
+    const payment_id =  querystring.get('payment_id')
+    const dispatch = useDispatch();
+    const [state, setState] = useState([])
+    
+    let paymentIdOrdenEl = useSelector(state => state.paymentOrderEG.paymentId);
+    let getOrderMPEl = useSelector(state => state.paymentOrderEG.paymentOrder);
+    let nroOrdenCompraEl = useSelector(state => state.paymentOrderEG.nroOrdenCompra);
+    
 
-          useEffect(() => {
-            dispatch(getPaymentIdMP(payment_id));
-            dispatch(getOrderMP(getOrderMPEl));        
-            dispatch(postOrderMP());        
-            setState(getOrderMPEl)
+    useEffect(() => {
+    dispatch(getPaymentIdMP(payment_id));
+    dispatch(getOrderMP(getOrderMPEl));        
+    dispatch(postOrderMP());        
+    setState(getOrderMPEl)
 
-            //dispatch(postOrderMP(getOrderMPEl));        
-          }, []);
+    //dispatch(postOrderMP(getOrderMPEl));        
+    }, []);
 
-         // console.log('dispatch(Orden Compra      ->',getOrderMPEl)
-          //console.log('dispatch(NRO. Orden Compra ->',nroOrdenCompraEl.invoiceNumber)
-         // console.log('dispatch(getOrderMP        ->',Object.keys(getOrderMPEl).length)
-          let subTotal = 0
-          let totalPagar = 0
-         //console.log('estoy  Componente ResponseMP payment_id', payment_id);
+    /* console.log('dispatch(Orden Compra      ->',getOrderMPEl)
+    console.log('dispatch(NRO. Orden Compra ->',nroOrdenCompraEl.invoiceNumber)
+    console.log('dispatch(getOrderMP        ->',Object.keys(getOrderMPEl).length) */
+    let subTotal = 0
+    let totalPagar = 0
+    //console.log('estoy  Componente ResponseMP payment_id', payment_id);
 
         // Determinar tipo de transaccion mercado pago
         // tipoTransMP(paymentIdOrdenEl?.card?.cardholder?.name)
        if(Object.keys(getOrderMPEl).length>0)genPDF()        
     
-    return ( //getOrderMPEl.length
-        Object.keys(getOrderMPEl).length>0?
-    
-        <div id="content" className="page-content container" style = {{background:'white', height:'800px'}}>
-                    <div className="page-header text-blue-d2">
+return ( //getOrderMPEl.length
+    Object.keys(getOrderMPEl).length>0 &&
 
-                        <div className="page-tools">
-                            <div className="action-buttons">
-                                <a className="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
-                                    <i className="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
-                                    Imprimir
-                                </a>
-                                <a className="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF">
-                                    <i className="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
-                                    Exportar
-                                </a>
-                            </div>
+    <div className="page-content container" style={{background:'white', height: "700px"}}>
+                <div className="page-header text-blue-d2">
+
+                    <div className="page-tools">
+                        <div className="action-buttons">
+                            <a className="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
+                                <i className="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+                                Imprimir
+                            </a>
+                            <a className="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF">
+                                <i className="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
+                                Exportar
+                            </a>
                         </div>
                     </div>
-
-            <div className="container px-0">
-                <div className="row mt-4">
-                    <div className="col-12 col-lg-12">
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="text-center text-150">
-                                    <i className="fa fa-book fa-2x text-success-m2 mr-1"></i>
-                                    <span className="text-default-d3">Orden Compra Nro. </span>
-                                    <span className="text-default-d3">{nroOrdenCompraEl?.invoiceNumber}</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr className="row brc-default-l1 mx-n1 mb-4" />
-
-                        <div className="row">
-                            <div className="col-sm-6">
-                                <div>
-                                    <span className="text-sm text-grey-m2 align-middle">Para:</span>
-                                    <span className="text-600 text-110 text-blue align-middle"> {getOrderMPEl.user.firstName} {getOrderMPEl.user.lastName}</span> 
-                                </div>
-                                <div>
-                                    <span className="text-sm text-grey-m2 align-middle">Dirección:</span>
-                                    <span className="text-600 text-110 text-blue align-middle">{getOrderMPEl.user.address}</span> 
-                                </div>
-                                <div>
-                                    <span className="text-sm text-grey-m2 align-middle">Teléfono:</span>
-                                    <span className="text-600 text-110 text-blue align-middle">{getOrderMPEl.user.phone}</span> 
-                                </div>
-                                <div>
-                                    <span className="text-sm text-grey-m2 align-middle">Email: </span>
-                                    <span className="text-600 text-110 text-blue align-middle">{getOrderMPEl.user.email}</span> 
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="mt-4">           
-                            <div className="row text-600 text-white bgc-default-tp1 py-25"
-                            >
-                                <div className="d-none d-sm-block col-1">#</div>
-                                <div className="col-9 col-sm-5">Descripción</div>
-                                <div className="d-none d-sm-block col-4 col-sm-2">Cant.</div>
-                                <div className="d-none d-sm-block col-sm-2">Unit.Precio</div>
-                                <div className="col-2">Monto</div>
-
-                            </div>
-
-                            <div className="text-95 text-secondary-d3">
-                                    {
-                                    
-                                    getOrderMPEl.shoppingCart.map((elem ) => {
-                                        subTotal   = subTotal   + elem.total
-                                        totalPagar = totalPagar + elem.subTotal
-                                    return(
-                                        
-                                            <div key={elem.title} className="row mb-2 mb-sm-0 py-25">
-                                                <div className="d-none d-sm-block col-1"></div>
-                                                <div className="col-9 col-sm-5">{elem.title}</div> 
-                                                <div className="d-none d-sm-block col-2">{elem.quantity}</div>
-                                                <div className="d-none d-sm-block col-2 text-95">{elem.price}</div>
-                                                <div className="col-2 text-secondary-d2">{elem.quantity*elem.price}</div>
-                                            </div>
-                                    )})
-                            } 
-                           </div>
-                        </div>
-                            
-                        {/*Totales Compra*/}
-                <div class="row mt-3">
-                        <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
-                            <div class="row my-2">
-                                <div class="col-7 text-right">Sub-Total</div>
-                                <div class="col-5">
-                                    <span class="text-120 text-secondary-d1">{subTotal}</span>
-                                </div>
-                            </div>
-
-                            <div class="row my-2 align-items-center bgc-primary-l3 p-2">
-                                <div class="col-7 text-right">Total a Pagar</div>
-                                <div class="col-5">
-                                    <span class="text-150 text-success-d3 opacity-2">{totalPagar}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-                 <hr />
-                            <div>
-                                <span className="text-secondary-d1 text-105">Gracias por su Compra !</span>
-                                <a href="#" className="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Continuar!</a>
-                           </div>
                 </div>
-             </div>
-        </div>
-        
-        :""
-        
-        
-                  );
+
+        <div className="container px-0">
+            <div className="mt-4">
+                <div className="col-12 col-lg-12">
+                    <div>
+                        <div className="col-12">
+                            <div className="text-center text-150">
+                                <i className="fa fa-book fa-2x text-success-m2 mr-1"></i>
+                                <span className="text-default-d3">Orden Compra Nro. </span>
+                                <span className="text-default-d3">{nroOrdenCompraEl?.invoiceNumber}</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr className="row brc-default-l1 mx-n1 mb-4" />
+
+                    <div >
+                        <div className="col-sm-6">
+                            <div>
+                                <span className="text-sm text-grey-m2 align-middle">Para:</span>
+                                <span className="text-600 text-110 text-blue align-middle"> {getOrderMPEl.user.firstName} {getOrderMPEl.user.lastName}</span> 
+                            </div>
+                            <div>
+                                <span className="text-sm text-grey-m2 align-middle">Dirección:</span>
+                                <span className="text-600 text-110 text-blue align-middle">{getOrderMPEl.user.address}</span> 
+                            </div>
+                            <div>
+                                <span className="text-sm text-grey-m2 align-middle">Teléfono:</span>
+                                <span className="text-600 text-110 text-blue align-middle">{getOrderMPEl.user.phone}</span> 
+                            </div>
+                            <div>
+                                <span className="text-sm text-grey-m2 align-middle">Email: </span>
+                                <span className="text-600 text-110 text-blue align-middle">{getOrderMPEl.user.email}</span> 
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4">           
+                        <div className="row text-600 text-white bgc-default-tp1 py-25"
+                        >
+                            <div className="d-none d-sm-block col-1">#</div>
+                            <div className="col-9 col-sm-5">Descripción</div>
+                            <div className="d-none d-sm-block col-4 col-sm-2">Cant.</div>
+                            <div className="d-none d-sm-block col-sm-2">Unit.Precio</div>
+                            <div className="col-2">Monto</div>
+
+                        </div>
+
+                        <div className="text-95 text-secondary-d3">
+                                {
+                                
+                                getOrderMPEl.shoppingCart.map((elem ) => {
+                                    subTotal   = subTotal   + elem.total
+                                    totalPagar = totalPagar + elem.subTotal
+                                return(
+                                    
+                                        <div key={elem.title} className="row mb-2 mb-sm-0 py-25">
+                                            <div className="d-none d-sm-block col-1"></div>
+                                            <div className="col-9 col-sm-5">{elem.title}</div> 
+                                            <div className="d-none d-sm-block col-2">{elem.quantity}</div>
+                                            <div className="d-none d-sm-block col-2 text-95">{elem.price}</div>
+                                            <div className="col-2 text-secondary-d2">{elem.quantity*elem.price}</div>
+                                        </div>
+                                )})
+                        } 
+                        </div>
+                    </div>
+                        
+                    {/*Totales Compra*/}
+            <div class="row mt-3">
+                    <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
+                        <div class="row my-2">
+                            <div class="col-7 text-right">Sub-Total</div>
+                            <div class="col-5">
+                                <span class="text-120 text-secondary-d1">{subTotal}</span>
+                            </div>
+                        </div>
+
+                        <div class="row my-2 align-items-center bgc-primary-l3 p-2">
+                            <div class="col-7 text-right">Total a Pagar</div>
+                            <div class="col-5">
+                                <span class="text-150 text-success-d3 opacity-2">{totalPagar}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <hr className="row brc-default-l1 mx-n1 mb-4" />
+                        <div>
+                            <span className="text-secondary-d1 text-105">Gracias por su Compra !</span>
+                            <a href="#" className="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Continuar!</a>
+                        </div>
+            </div>
+            </div>
+    </div>
+                );
 };
 export default ResponseMP
 

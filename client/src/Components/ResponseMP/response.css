@@ -5,6 +5,13 @@
 .text-secondary-d1 {
     color: #728299!important;
 }
+.page-content{
+    margin-top: 0.6em;
+}
+.container{
+    height: fit-content;
+    margin-bottom: 1.5em;
+}
 .page-header {
     margin: 0 0 1rem;
     padding-bottom: 1rem;
