@@ -9,6 +9,7 @@ import "./response.css";
 
 
 //npm i jspdf-autotable
+//npm install nodemailer
 
 const ResponseMP = () => {
           const querystring = new URLSearchParams(useLocation().search)
@@ -30,21 +31,21 @@ const ResponseMP = () => {
             //dispatch(postOrderMP(getOrderMPEl));        
           }, []);
 
-          console.log('dispatch(Orden Compra      ->',getOrderMPEl)
-          console.log('dispatch(NRO. Orden Compra ->',nroOrdenCompraEl.invoiceNumber)
-          console.log('dispatch(getOrderMP        ->',Object.keys(getOrderMPEl).length)
+         // console.log('dispatch(Orden Compra      ->',getOrderMPEl)
+          //console.log('dispatch(NRO. Orden Compra ->',nroOrdenCompraEl.invoiceNumber)
+         // console.log('dispatch(getOrderMP        ->',Object.keys(getOrderMPEl).length)
           let subTotal = 0
           let totalPagar = 0
          //console.log('estoy  Componente ResponseMP payment_id', payment_id);
 
         // Determinar tipo de transaccion mercado pago
         // tipoTransMP(paymentIdOrdenEl?.card?.cardholder?.name)
-   // if(!nroOrdenCompraEl.length) genPDF()        
+       if(Object.keys(getOrderMPEl).length>0)genPDF()        
     
     return ( //getOrderMPEl.length
         Object.keys(getOrderMPEl).length>0?
     
-        <div className="page-content container" style={{background:'white'}}>
+        <div id="content" className="page-content container" style = {{background:'white', height:'800px'}}>
                     <div className="page-header text-blue-d2">
 
                         <div className="page-tools">
@@ -158,39 +159,61 @@ const ResponseMP = () => {
                 </div>
              </div>
         </div>
-        :''
+        
+        :""
+        
+        
                   );
 };
 export default ResponseMP
 
-// const genPDF = () =>
-//   {
-      
+const genPDF = () =>
+  {
+//     <div id="elementH"></div>
+
 //     var doc = new jsPDF();
-//     var elementHTML = $('#content').html();
-//     var specialElementHandlers = {
-//         '#elementH': function (element, renderer) {
-//             return true;
-//         }
-//     };
-//     doc.fromHTML(elementHTML, 15, 15, {
+//     var elementHTML = document.getElementById("content") //$('#content').html();
+//     //
+//     console.log('Archivo HTML -->',elementHTML.innerHTML)
+
+//      var specialElementHandlers = {
+//          '#elementH': function (element, renderer) {
+//              return true;
+//          }
+//      };
+//     doc.html(elementHTML.innerHTML, {
+//         'x': 15,
+//         'y': 15,
 //         'width': 170,
 //         'elementHandlers': specialElementHandlers
 //     });
-    
-//     // Save the PDF
-//     ///doc.save('sample-document.pdf');    
+//     // doc.html(DATA.innerHTML, {
+//     //     'x': 15,
+//     //     'y': 15,
+//     //     'width': 200,
+//     //     'elementHandlers': handleElement
+//     //   });
+//      // // Save the PDF
+//    doc.save('sample1.pdf');    
 
-//     // doc.text(20, 20, 'Hola mundo');
-//     // doc.text(20, 30, 'Vamos a generar un pdf desde el lado del cliente');
-    
-//     // // Add new page
-//     // doc.addPage();
-//     // doc.text(20, 20, 'Visita programacion.net');
-    
-//     // Save the PDF
-//     doc.save('documento.pdf');    
-//   }
+
+const jsPDF1 = new jsPDF();
+
+      var doc = new jsPDF('l', 'mm', [1200, 1810]);
+      var pdfjs = document.getElementById('content');
+
+      doc.html(pdfjs, {
+          callback: function(doc) {
+              doc.save("OrdenCompra.pdf");
+          },
+          x: 10,
+          y: 10
+      });
+
+      doc.output('dataurlnewwindow');
+
+
+  }
 
 // const tipoTransMP = (payload) => { 
 //     let tipoTransaccion = ''     
