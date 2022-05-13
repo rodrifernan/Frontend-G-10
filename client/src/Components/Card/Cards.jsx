@@ -189,10 +189,10 @@ const Card = ({
 										<p className="modal__description">
 											Descripcion: {description}
 										</p>
-										<p>Brand: {brand}</p>
-										<p>Price: ${price}</p>
-										<p>Color: {color}</p>
-										<p>Disponibles: {stock}</p>
+										<p>Marca : {brand}</p>
+										<p>Precio : ${price}</p>
+										<p>Color : {color}</p>
+										<p>Disponibles : {stock}</p>
 										<p>
 											Garantia: {warranty}{" "}
 											{warranty > 1 ? "años" : "año"}

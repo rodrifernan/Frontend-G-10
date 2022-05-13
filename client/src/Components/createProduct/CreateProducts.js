@@ -1,4 +1,4 @@
-import React, { useState, useEffect, isValidElement } from "react";
+import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import "./createProduct.css";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { Input } from "./Input";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../redux/reducer/getCategorie";
 import { getAllGenres } from "../../redux/reducer/getGenre";
+import { getProductsByUser } from "../../redux/reducer/getProductsByUser";
 
 export const CreateProducts = ({
 	editDescription,
@@ -155,8 +156,8 @@ export const CreateProducts = ({
 							).token,
 						},
 					};
-					await axios.post(
-						"http://127.0.0.1:3001/api/product",
+					await axios.put(
+						"http://127.0.0.1:3001/api/editProduct",
 						formData,
 						user
 					);
@@ -166,8 +167,8 @@ export const CreateProducts = ({
 						`Producto ${name.value} Modificado correctamente`,
 						"success"
 					);
-					// // push to home
-					navigate("/perfil");
+					// reload produc store
+					dispatch(getProductsByUser());
 				}
 			} else {
 				//set error
