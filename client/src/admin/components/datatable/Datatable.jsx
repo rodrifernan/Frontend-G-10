@@ -1,62 +1,65 @@
 import "./datatable.scss";
 import { DataGrid,GridToolbar } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../../datatablesource";
+import { userColumns  } from "../../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import { useSelector } from "react-redux";
-// import { categoriesAll } from "../../../redux/reducer/getCategorie";
+
 import { allUserRegisters } from "../../../redux/reducer/getAllUsers";
 
 const Datatable = () => {
   let allUser = useSelector(allUserRegisters);
   const [data, setData] = useState(allUser);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
 
-  // let allUser = useSelector(allUserRegisters);
-  // console.log(allUser);
   
+  const [select, setSelection] = useState(null);
 
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Acción",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link to="2" style={{ textDecoration: "none" }}>
-              <div className="viewButton">Ver</div>
-            </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Deshabilitar
-            </div>
-          </div>
-        );
-      },
-    },
-  ];
+
+
+
+
+
+
+  const handleRowSelection = (ids) => {
+    const selectedIDs = new Set(ids);
+    const selectedRowData = data.filter((row) =>
+      selectedIDs.has(row.id.toString())
+    );
+    console.log(selectedRowData);
+    const validator = selectedRowData[0]? selectedRowData[0].id : null
+    setSelection( validator )
+    
+  }
+
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
         Usuarios
+      
+         <div>
+        {select !== null ?
+          <Link to={select} className="link">
+          Ver
+        </Link>:null}
         <Link to="new" className="link">
-          Agregar usuario
+        Agregar usuario
         </Link>
+        </div>
       </div>
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={userColumns.concat(actionColumn)}
+        columns={userColumns}
         pageSize={5}
         rowsPerPageOptions={[9]}
-        // checkboxSelection
+        
+        checkboxSelection
+        autoPageSize
+        autoHeight
+        onSelectionModelChange= {handleRowSelection}
         localeText={{
           toolbarColumns: "Columnas",
           toolbarFilters: "Filtros",
