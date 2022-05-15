@@ -31,6 +31,7 @@ import { UserDetails } from './admin/pages/Users/UserDetails';
 
 import { ShoppingCart } from './Components/ShoppingCart/ShoppingCart';
 import { UserInvoices } from './Components/UserInvoices/UserInvoices'
+import { ListFacturas } from './admin/pages/facturas/listFacturas/ListFacturas';
 
 
 function App() {
@@ -73,6 +74,14 @@ function App() {
           <Route path='ordenes'>
             <Route index element={<ListOrder />} />
             <Route path=':productId' element={<OrderDetails />} />
+            {/* <Route
+                path="new"
+                element={<New inputs={productInputs} title="Agregar producto" />}
+              /> */}
+          </Route>
+          <Route path='facturas'>
+            <Route index element={<ListFacturas />} />
+            {/* <Route path=':productId' element={<OrderDetails />} /> */}
             {/* <Route
                 path="new"
                 element={<New inputs={productInputs} title="Agregar producto" />}

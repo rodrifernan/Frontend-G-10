@@ -11,6 +11,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 // import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 // import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import { Link } from "react-router-dom";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
@@ -53,6 +54,12 @@ const Sidebar = () => {
           <li>
             <CreditCardIcon className="icon" />
             <span>Ordenes</span>
+          </li>
+          </Link>
+          <Link to="/admin/facturas" style={{ textDecoration: "none" }}>
+          <li>
+            <DescriptionOutlinedIcon className="icon" />
+            <span>Facturas</span>
           </li>
           </Link>
           {/* <li>

@@ -28,6 +28,8 @@ import productsByUserSlice from './reducer/getProductsByUser';
 import paymentOrderPM from './reducer/getResponseMP';
 import shoppingCart from './reducer/shoppingCart';
 import invoice from './reducer/invoice';
+import AllinvoiceSlice from './reducer/AllInvoices';
+
 
 const persistConfig = { key: 'root', version: 1, storage };
 const persistedReducer = persistReducer(persistConfig, carritoReducer);
@@ -47,6 +49,7 @@ export const store = configureStore({
     productsByUser: productsByUserSlice,
     userAll: allUserSlice,
     orderAll: allOrderSlice,
+    Allinvoices: AllinvoiceSlice,
 
     //paymentId : paymentPM,
     paymentOrderEG: paymentOrderPM,
