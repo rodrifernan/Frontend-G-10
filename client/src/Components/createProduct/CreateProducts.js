@@ -9,6 +9,7 @@ import { Input } from "./Input";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../redux/reducer/getCategorie";
 import { getAllGenres } from "../../redux/reducer/getGenre";
+import { getProductsByUser } from "../../redux/reducer/getProductsByUser";
 
 export const CreateProducts = ({
 	editDescription,
@@ -21,8 +22,10 @@ export const CreateProducts = ({
 	editStock,
 	editWarranty,
 	editDiscount,
+	isEdit,
 }) => {
 	//dispatch busqueda de las categorias
+	console.log("isEdit", isEdit);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getAllGenres());
@@ -61,7 +64,7 @@ export const CreateProducts = ({
 	const [formValid, setFormvalid] = useState(null);
 	// regex del formulario
 	const regex = {
-		name: /^.{1,20}$/,
+		name: /^.{1,50}$/,
 		description: /^.{1,2000}$/,
 		price: /[1-9]/,
 		brand: /^.{1,20}$/,
@@ -87,44 +90,86 @@ export const CreateProducts = ({
 				stock.valid === true &&
 				genre.valid === true
 			) {
-				//no mostrar error
-				setFormvalid(true);
-				// crear obj de creacion de producto
-				const formData = {
-					name: name.value,
-					description: description.value,
-					price: price.value,
-					brand: brand.value,
-					color: color.value,
-					warranty: warranty.value,
-					image: image.value,
-					discount: discount.value,
-					stock: stock.value,
-					categoryId: category.value,
-					genreId: genre.value,
-				};
-				console.log(formData);
-				// enviar post para la creacion en db
-				const user = {
-					headers: {
-						"auth-token": JSON.parse(
-							localStorage.getItem("userCredentials")
-						).token,
-					},
-				};
-				await axios.post(
-					"http://127.0.0.1:3001/api/product",
-					formData,
-					user
-				);
-				//alert de exito
-				swal(
-					"Exito!",
-					`Producto ${name.value} cargado correctamente`,
-					"success"
-				);
-				// // push to home
-				navigate("/");
+				if (isEdit === undefined) {
+					//no mostrar error
+					setFormvalid(true);
+					// crear obj de creacion de producto
+					const formData = {
+						name: name.value,
+						description: description.value,
+						price: price.value,
+						brand: brand.value,
+						color: color.value,
+						warranty: warranty.value,
+						image: image.value,
+						discount: discount.value,
+						stock: stock.value,
+						categoryId: category.value,
+						genreId: genre.value,
+					};
+					console.log(formData);
+					// enviar post para la creacion en db
+					const user = {
+						headers: {
+							"auth-token": JSON.parse(
+								localStorage.getItem("userCredentials")
+							).token,
+						},
+					};
+					await axios.post(
+						"http://127.0.0.1:3001/api/product",
+						formData,
+						user
+					);
+					//alert de exito
+					swal(
+						"Exito!",
+						`Producto ${name.value} cargado correctamente`,
+						"success"
+					);
+					// // push to home
+					navigate("/");
+				} else {
+					console.log("submit Edit");
+					setFormvalid(true);
+					// crear obj de creacion de producto
+					const formData = {
+						name: name.value,
+						description: description.value,
+						price: price.value,
+						brand: brand.value,
+						color: color.value,
+						warranty: warranty.value,
+						image: image.value,
+						discount: discount.value,
+						stock: stock.value,
+						categoryId: category.value,
+						genreId: genre.value,
+						editId: editId,
+					};
+					console.log("formdataEdit", formData);
+					// enviar post para la creacion en db
+					const user = {
+						headers: {
+							"auth-token": JSON.parse(
+								localStorage.getItem("userCredentials")
+							).token,
+						},
+					};
+					await axios.put(
+						"http://127.0.0.1:3001/api/editProduct",
+						formData,
+						user
+					);
+					//alert de exito
+					swal(
+						"Exito!",
+						`Producto ${name.value} Modificado correctamente`,
+						"success"
+					);
+					// reload produc store
+					dispatch(getProductsByUser());
+				}
 			} else {
 				//set error
 				setFormvalid(false);
@@ -173,6 +218,15 @@ export const CreateProducts = ({
 				text: "Something went wrong!",
 			});
 		}
+	};
+	// borrar una imagen
+	const handleDeleteImg = (img) => {
+		console.log("antes", image);
+		setImage({
+			...image,
+			value: image.value.filter((img2) => img2 !== img),
+		});
+		console.log("despues", image);
 	};
 	//-------------------------------------------->>>
 	// handle description
@@ -251,7 +305,7 @@ export const CreateProducts = ({
 							placeholder="Nombre del prducto a vender"
 							state={name}
 							setstate={setName}
-							msgError="tiene que contener de 8 - 15 letras"
+							msgError="Debe tener menos de 50 caracteres"
 							size="col"
 							validRegex={regex.name}
 						/>
@@ -399,6 +453,7 @@ export const CreateProducts = ({
 						<div className="create__imgPreviewContaniner">
 							{image.value.map((img) => (
 								<img
+									onClick={() => handleDeleteImg(img)}
 									className="create__imgPreview"
 									key={img}
 									src={img}

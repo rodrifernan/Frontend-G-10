@@ -28,7 +28,11 @@ import productsByUserSlice from './reducer/getProductsByUser';
 import paymentOrderPM from './reducer/getResponseMP';
 import shoppingCart from './reducer/shoppingCart';
 import invoice from './reducer/invoice';
+
 import AllinvoiceSlice from './reducer/AllInvoices';
+
+
+import sale from './reducer/sale';
 
 
 const persistConfig = { key: 'root', version: 1, storage };
@@ -44,6 +48,7 @@ export const store = configureStore({
     userPost,
     shoppingCart,
     invoice,
+    sale,
     perfil: perfilSlice,
     wish: wishSlice,
     productsByUser: productsByUserSlice,

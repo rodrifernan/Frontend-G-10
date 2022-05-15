@@ -11,7 +11,7 @@ export const UserDropDown = () => {
         <div className='dropdown'>
           <button
             className='btn dropdown-toggle registrarse btn text-white'
-            style={{ backgroundColor: 'black', width: '10rem'}}
+            style={{ backgroundColor: 'black', width: '10rem' }}
             type='button'
             id='dropdownMenuUser'
             data-bs-toggle='dropdown'
@@ -38,7 +38,13 @@ export const UserDropDown = () => {
             </li>
             <li>
               <Link to='/userInvoices' className='titulo'>
-                <button className='dropdown-item'>ver Facturas</button>
+                <button className='dropdown-item'>Facturas</button>
+              </Link>
+            </li>
+
+            <li>
+              <Link to='/userSales' className='titulo'>
+                <button className='dropdown-item'>Ventas</button>
               </Link>
             </li>
 
