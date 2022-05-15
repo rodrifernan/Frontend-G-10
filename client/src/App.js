@@ -23,10 +23,16 @@ import { ProductDetails } from './admin/pages/products/ProductDetails/ProductDet
 import { UserDetails } from './admin/pages/Users/UserDetails';
 import { LoginPage } from './Components/Login/LoginPage';
 import { ShoppingCart } from './Components/ShoppingCart/ShoppingCart';
+
+// import { UserInvoices } from './Components/UserInvoices/UserInvoices'
+import { ListFacturas } from './admin/pages/facturas/listFacturas/ListFacturas';
+
+
 import { UserInvoices } from './Components/UserInvoices/UserInvoices';
 import { UserSales } from './Components/UserSales/UserSales';
 import { FormRegister } from './Components/userForm/FormRegister';
 import { Page404 } from './pages/Page404/Page404';
+
 
 function App() {
   return (
@@ -68,6 +74,14 @@ function App() {
           <Route path='ordenes'>
             <Route index element={<ListOrder />} />
             <Route path=':productId' element={<OrderDetails />} />
+            {/* <Route
+                path="new"
+                element={<New inputs={productInputs} title="Agregar producto" />}
+              /> */}
+          </Route>
+          <Route path='facturas'>
+            <Route index element={<ListFacturas />} />
+            {/* <Route path=':productId' element={<OrderDetails />} /> */}
             {/* <Route
                 path="new"
                 element={<New inputs={productInputs} title="Agregar producto" />}
