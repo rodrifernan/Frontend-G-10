@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const userToken = JSON.parse(localStorage.getItem('userCredentials')).token
+// const userToken = JSON.parse(localStorage.getItem('userCredentials')).token
 
 export const getPaymentIdMP = createAsyncThunk(
 	"getResponseMp/getPaymentIdMP",
@@ -19,6 +19,7 @@ export const getPaymentIdMP = createAsyncThunk(
 export const getOrderMP = createAsyncThunk(
 	"getResponseMp/getOrderMP",
 	async (payload) => {
+		const userToken = JSON.parse(localStorage.getItem('userCredentials')).token
 		const response = await axios
 			.get(`/api/orders/checkout`,
 			{ headers: { "auth-token": userToken },})
@@ -32,6 +33,7 @@ export const getOrderMP = createAsyncThunk(
 export const postOrderMP = createAsyncThunk(
 	"getResponseMp/postOrderMP",
 	async () => {
+		const userToken = JSON.parse(localStorage.getItem('userCredentials')).token
 		const response = await axios
 			.post(`/api/invoice`,{},
 			{ headers: { "auth-token": userToken },})
