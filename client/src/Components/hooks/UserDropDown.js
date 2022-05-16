@@ -11,7 +11,7 @@ export const UserDropDown = () => {
         <div className='dropdown'>
           <button
             className='btn dropdown-toggle registrarse btn text-white'
-            style={{ backgroundColor: 'black', width: '10rem' }}
+            style={{ backgroundColor: 'black', width: 'fit-content' }}
             type='button'
             id='dropdownMenuUser'
             data-bs-toggle='dropdown'
