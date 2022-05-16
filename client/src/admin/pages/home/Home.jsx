@@ -1,5 +1,4 @@
-// import Sidebar from "../../components/sidebar/Sidebar";
-// import Navbar from "../../components/navbar/Navbar";
+
 import "./home.scss";
 import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
@@ -8,23 +7,26 @@ import Table from "../../components/table/Table";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 // import { getAllCategories } from "../../../redux/reducer/getCategorie";
-import {getAllUsers} from "../../../redux/reducer/getAllUsers";
-import {getAllOrders} from "../../../redux/reducer/getAllOrders";
+import { getAllUsers } from "../../../redux/reducer/getAllUsers";
+import { getAllOrders } from "../../../redux/reducer/getAllOrders";
+import { fetchProducts } from "../../../redux/reducer/products";
+import { getAllInvoices } from "../../../redux/reducer/AllInvoices";
 
 const Home = () => {
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch()
-
-useEffect(() => {
-  dispatch(getAllOrders());
-  dispatch(getAllUsers())
-}, []);
+  useEffect(() => {
+    dispatch(getAllOrders());
+    dispatch(getAllUsers());
+    dispatch(fetchProducts());
+    dispatch(getAllInvoices());
+  }, []);
 
   return (
     <div className="home">
-      {/* <Sidebar /> */}
+      
       <div className="homeContainer">
-        {/* <Navbar /> */}
+        
         <div className="widgets">
           <Widget type="user" />
           <Widget type="order" />

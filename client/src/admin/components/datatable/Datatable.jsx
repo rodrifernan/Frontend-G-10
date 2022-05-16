@@ -2,22 +2,27 @@ import "./datatable.scss";
 import { DataGrid,GridToolbar } from "@mui/x-data-grid";
 import { userColumns  } from "../../../datatablesource";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import {getAllUsers} from "../../../redux/reducer/getAllUsers";
 import { allUserRegisters } from "../../../redux/reducer/getAllUsers";
+
 
 const Datatable = () => {
   let allUser = useSelector(allUserRegisters);
   const [data, setData] = useState(allUser);
 
-
+  const dispatch = useDispatch()
   
   const [select, setSelection] = useState(null);
 
 
-
+  useEffect(() => {
+    // dispatch(getAllOrders());
+    dispatch(getAllUsers())
+    
+  }, [data.banned]);
 
 
 

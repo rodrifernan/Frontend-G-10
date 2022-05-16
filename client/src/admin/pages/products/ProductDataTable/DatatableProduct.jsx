@@ -66,6 +66,7 @@ const Datatable = () => {
         autoPageSize
         autoHeight
         onSelectionModelChange= {handleRowSelection}
+        
         localeText={{
           toolbarColumns: "Columnas",
           toolbarFilters: "Filtros",
