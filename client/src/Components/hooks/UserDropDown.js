@@ -55,11 +55,9 @@ export const UserDropDown = () => {
             </li>
             <div className='dropdown-divider'></div>
             <li>
-              <Link className='titulo' to='/'>
                 <button className='dropdown-item' onClick={out}>
                   Cerrar sesión
                 </button>
-              </Link>
             </li>
           </ul>
         </div>

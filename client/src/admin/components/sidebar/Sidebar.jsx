@@ -12,12 +12,19 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 // import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
-import { Link } from "react-router-dom";
+import HomeIcon from '@mui/icons-material/Home';
+
+import { Link, useNavigate } from "react-router-dom";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
+import { useLogOut } from '../../../Components/hooks/useLogOut'
 
 const Sidebar = () => {
   // const { dispatch } = useContext(DarkModeContext);
+  const navigate = useNavigate()
+  const out = useLogOut();
+
+
   return (
     <div className="sidebar">
       <div className="top">
@@ -93,7 +100,13 @@ const Sidebar = () => {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Cuenta</span>
           </li>
-          <li>
+
+          <li onClick={() => navigate('/')} >
+              <HomeIcon className="icon" />
+              <span>Inicio</span>
+          </li>
+
+          <li onClick={out}>
             <ExitToAppIcon className="icon" />
             <span>Cerrar Sesion</span>
           </li>
