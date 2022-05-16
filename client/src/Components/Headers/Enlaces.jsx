@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import './Header.css';
+import React, { useState, useEffect } from "react";
+import "./Header.css";
 
-import { LoginModal } from '../Login/LoginModal';
-import { UserDropDown } from '../hooks/UserDropDown';
+import { LoginModal } from "../Login/LoginModal";
+import { UserDropDown } from "../hooks/UserDropDown";
 
 //hook que devuelve un state que comprueba si hay alguien logeado
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import {
   getShoppingCart,
   getShoppingCartGuest,
-} from '../../redux/reducer/shoppingCart';
+} from "../../redux/reducer/shoppingCart";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Enlaces = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Enlaces = () => {
   );
 
   useEffect(() => {
-    if (userCredentials.userName || localStorage.getItem('userCredentials')) {
+    if (userCredentials.userName || localStorage.getItem("userCredentials")) {
       setLogin(true);
       dispatch(getShoppingCart());
     } else setLogin(false);
@@ -32,72 +32,52 @@ const Enlaces = () => {
 
   const redirectShoppingCart = () => {
     login
-      ? dispatch(getShoppingCart()).then(() => navigate('/cart'))
+      ? dispatch(getShoppingCart()).then(() => navigate("/cart"))
       : dispatch(
-          getShoppingCartGuest(JSON.parse(localStorage.getItem('shoppingCart')))
-        ).then(() => navigate('/cart'));
+          getShoppingCartGuest(JSON.parse(localStorage.getItem("shoppingCart")))
+        ).then(() => navigate("/cart"));
   };
 
   return (
-    <div className='enlaces col text-center '>
-      <ul className='nav'>
-        <li>
-          <div className=' isesion '>
-            {login ? (
-              <UserDropDown />
-            ) : (
-              <LoginModal buttonClass={'registrarse btn text-white'} />
-            )}
-          </div>
-        </li>
-        {/* <li className="nav-item">
-          <a className=" btn  text-white nav-link" href="https://picsum.photos/300">
-            <i className="fas fa-fire"></i>
-            Los mas Vendidos
-          </a>
-        </li> */}
+    <div className="enlaces align-items-center col text-center w-100 d-flex justify-content-between">
+      <div className="  col-6  ">
+        {login ? (
+          <UserDropDown />
+        ) : (
+          <LoginModal buttonClass={"registrarse btn text-white"} />
+        )}
+      </div>
 
-        {/* <li className="nav-item">
-          <a className="btn text-white nav-link" href="https://picsum.photos/300">
-            <i className="fas fa-shopping-bag"></i>
-            Mis compras
-          </a>
-        </li> */}
-        <li
-          className='nav-item'
-          style={{
-            position: 'relative',
-          }}
-        >
-          <span
-            className='shoppingCounter'
-            style={{
-              fontSize: '16px',
-              fontWeight: 'bold',
-              // backgroundColor: '#A85CF9',
-              backgroundColor: 'red',
-
-              color: 'white',
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              width: '22px',
-              height: '22px',
-              borderRadius: '50%',
-            }}
-          >
-            {shoppingList.reduce((a, b) => a + b.quantity, 0)}
-          </span>
-
-          <div
-            className='nav-link btn text-white'
+      <div className="col-6 shoppingKart d-flex justify-content-start">
+        <div>
+          <button
+            className="nav-link btn text-white position-relative"
             onClick={redirectShoppingCart}
           >
-            <i className='fas fa-shopping-cart '></i>
-            <span> Carrito</span>
-          </div>
-        </li>
-      </ul>
+            <i className="fas fa-shopping-cart "></i>
+            <span className="spankart"> Carrito</span>
+            <span
+              className="shoppingCounter"
+              style={{
+                fontSize: "16px",
+                fontWeight: "bold",
+                // backgroundColor: '#A85CF9',
+                backgroundColor: "red",
+
+                color: "white",
+                position: "absolute",
+                top: 0,
+                right: 0,
+                width: "22px",
+                height: "22px",
+                borderRadius: "50%",
+              }}
+            >
+              {shoppingList.reduce((a, b) => a + b.quantity, 0)}
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
