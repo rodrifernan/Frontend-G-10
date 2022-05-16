@@ -87,7 +87,7 @@ export const ShoppingCart = ({ login = false }) => {
             <div className='modal-body  p-0' style={{ height: '90vh' }}>
               {iframeActive && (
                 <iframe
-                  src={`http://localhost:3001/api/checkout/${userToken}`}
+                  src={`/api/checkout/${userToken}`}
                   style={{ width: '100%', height: '90vh' }}
                   title='mercadoPago'
                 ></iframe>

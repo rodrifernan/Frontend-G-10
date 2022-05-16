@@ -8,7 +8,7 @@ export const getResults = createAsyncThunk(
   async (payload) => {
     console.log(parseGetData.token);
     const response = await axios
-      .post(`http://localhost:3001/api/user/newPassword`, payload, {
+      .post(`/api/user/newPassword`, payload, {
         headers: {
           "auth-token": parseGetData.token,
         },
