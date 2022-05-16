@@ -11,8 +11,13 @@ import { getAllUsers } from "../../../redux/reducer/getAllUsers";
 import { getAllOrders } from "../../../redux/reducer/getAllOrders";
 import { fetchProducts } from "../../../redux/reducer/products";
 import { getAllInvoices } from "../../../redux/reducer/AllInvoices";
+import { io } from 'socket.io-client';
+
 
 const Home = () => {
+
+  const socket = io(process.env.REACT_APP_API || 'ws://localhost:3001');
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,10 +33,10 @@ const Home = () => {
       <div className="homeContainer">
         
         <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
+          <Widget type="usersQuantity" socket={socket} />
+          <Widget type="ordersQuantity" socket={socket} />
+          <Widget type="salesQuantity" socket={socket} />
+          <Widget type="profits" socket={socket} />
         </div>
         <div className="charts">
           <Featured />
@@ -39,7 +44,7 @@ const Home = () => {
         </div>
         <div className="listContainer">
           <div className="listTitle">Ultimas ordenes</div>
-          <Table />
+          <Table  socket={socket}/>
         </div>
       </div>
     </div>
