@@ -139,6 +139,7 @@ export const UserDetails = () => {
 								direccion={data.address}
 								tlf={data.phone}
 								userName={data.userName}
+								idUser={data.id}
 							/>
 						</div>
 					</div>
