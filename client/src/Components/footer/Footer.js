@@ -19,10 +19,10 @@ export const Footer = () => {
 						<span>Siguenos en nuestras redes sociales</span>
 					</div>
 					<div>
-						<i className="fab fa-facebook"></i>
-						<i className="fab fa-instagram"></i>
-						<i className="fab fa-github"></i>
-						<i className="fab fa-twitter"></i>
+						<i className="fab fa-facebook" onClick={()=>{window.location.href = "https://www.facebook.com/"}}></i>
+						<i className="fab fa-instagram" onClick={()=>{window.location.href = "https://www.instagram.com/"}}></i>
+						<i className="fab fa-github" onClick={()=>{window.location.href = "https://www.github.com/"}}></i>
+						<i className="fab fa-twitter" onClick={()=>{window.location.href = "https://www.twitter.com/"}}></i>
 					</div>
 				</div>
 			</div>
