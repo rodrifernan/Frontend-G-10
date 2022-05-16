@@ -31,6 +31,7 @@ import { UserSales } from "./Components/UserSales/UserSales";
 import { FormRegister } from "./Components/userForm/FormRegister";
 import { Page404 } from "./pages/Page404/Page404";
 import { FormRegisterAdmin } from "./admin/pages/Users/NewUserForm/FormRegister";
+import { RequireAuth } from "./Components/hooks/RequireAuth";
 
 function App() {
   return (
@@ -48,7 +49,7 @@ function App() {
           <Route path="perfil" element={<Perfil />} />
           <Route path="ResponseMP" element={<ResponseMP />} />
         </Route>
-
+        <Route element={<RequireAuth/>}>
         <Route path="admin" element={<LayoutAdmin />}>
           <Route index element={<HomeAdmin />} />
           {/* <Route path='login' element={<Login />} /> */}
@@ -72,6 +73,7 @@ function App() {
           <Route path="facturas">
             <Route index element={<ListFacturas />} />
           </Route>
+        </Route>
         </Route>
 
         <Route path="*" element={<Page404 />} />
