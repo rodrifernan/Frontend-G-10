@@ -4,9 +4,8 @@ import axios from "axios";
 export const getCheckoutMP = createAsyncThunk(
 	"checkout/getCheckoutMP",
 	async () => {
-		console.log('estoy accion getCheckoutMP->')
 		const response = await axios
-			.get('http://localhost:3001/api/checkout')
+			.get('/api/checkout')
 			.catch((err) => {
 			console.log(err);
 		});

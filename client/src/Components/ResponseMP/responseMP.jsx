@@ -4,13 +4,15 @@ import { useLocation } from 'react-router-dom';
 import {getPaymentIdMP, getOrderMP, postOrderMP } from "../../redux/reducer/getResponseMP";
 import jsPDF  from "jspdf";
 import "./response.css";
+import logo from './LogoEcommerce.png'
+
 //import 'jspdf-autotable
 //npm i jspdf-autotable
 //npm install nodemailer
 
 const ResponseMP = () => {
           const querystring = new URLSearchParams(useLocation().search)
-          const payment_id =  querystring.get('payment_id')
+          const payment_id =  querystring.get('payment_idQ')
           const dispatch = useDispatch();
           const [state, setState] = useState([])
             
@@ -43,7 +45,7 @@ const ResponseMP = () => {
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="text-center text-150">
-                                            <i class="fa fa-book fa-2x text-success-m2 mr-1"></i>
+                                            <img src={logo} style = {{height:'50px', margin:0}}/>
                                             <span class="text-default-d3">Orden Compra # {getOrderAllEl?.orderBd?.orderNumber}</span>
                                         </div>
                                     </div>
@@ -51,7 +53,7 @@ const ResponseMP = () => {
 
                         <hr className="row brc-default-l1 mx-n1 mb-4" />
 
-                        <div className="row">
+                        <div className="row" style = {{marginBottom: "50px"}}>
                             <div className="col-sm-6">
                                 <div>
                                     <span className="text-sm text-grey-m2 align-middle">Para:</span>
@@ -80,7 +82,8 @@ const ResponseMP = () => {
                                     </span>{getOrderAllEl?.orderBd?.createdAt.substr(8,2)}/{getOrderAllEl?.orderBd?.createdAt.substr(5,2)}/{getOrderAllEl?.orderBd?.createdAt.substr(0,4)}
                                     </div>
                                     {/* //2022-05-15 13:31:26.18-04 */}
-                                    <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Status:</span> 
+                                    <div class="my-2 d-flex"  >
+                                    <i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Status:</span> 
                                     <span class="badge badge-warning badge-pill px-25">{getOrderAllEl?.orderBd?.status}</span></div>
                                 </div>
                              </div>
@@ -90,28 +93,31 @@ const ResponseMP = () => {
 
                            <div className="row text-600 text-white bgc-default-tp1 py-25">
                                 <div className="d-none d-sm-block col-1">#</div>
-                                <div className="col-9 col-sm-5">Descripción</div>
-                                <div className="d-none d-sm-block col-4 col-sm-2">Cant.</div>
+                                <div className="col-3">Descripción</div>
+                                <div className="d-none d-sm-block col-2 col-sm-2">Cant.</div>
                                 <div className="d-none d-sm-block col-sm-2">Unit.Precio</div>
-                                <div className="col-2">Monto</div>
+                                <div className="d-none d-sm-block col-sm-2">Dcto.</div>
+                                <div className="col-2">Total</div>
                             </div>
 
                         <div class="mt-4">           
 
                             <div className="text-95 text-secondary-d3">
                                     {
-                                    getOrderMPEl?.shoppingCart?.map((elem ) => {
+                                    getOrderMPEl?.shoppingCart?.map((elem, index) => {
                                         subTotal      = subTotal      + elem.subTotal
                                         totalPagar    = totalPagar    + elem.totalPage
                                         descuentoItem = descuentoItem + elem.discountItem
                                     return(
                                         
                                             <div key={elem.title} className="row mb-2 mb-sm-0 py-25">
-                                                <div className="d-none d-sm-block col-1"></div>
-                                                <div className="col-9 col-sm-5">{elem.title}</div> 
+                                                <div className="d-none d-sm-block col-1">{index+1} </div>
+                                                <div className="col-3 ">{elem.title}</div> 
                                                 <div className="d-none d-sm-block col-2">{elem.quantity}</div>
-                                                <div className="d-none d-sm-block col-2 text-95">{elem.price}</div>
-                                                <div className="col-2 text-secondary-d2">{elem.subTotal}</div>
+                                                <div className="d-none d-sm-block col-2 text-95">${elem.price.toFixed(2)}</div>
+                                                <div className="d-none d-sm-block col-2 text-95">{elem.discountItem.toFixed(1)}%</div> 
+                                                <div className="col-2 text-secondary-d2">${elem.totalPage.toFixed(2)}</div>
+                                                
                                             </div>
                                     )})
                                     } 
@@ -120,29 +126,29 @@ const ResponseMP = () => {
                             
                         {/*Totales Compra*/}
                 <div class="row mt-3">
-                        <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
+                        <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last ml-auto" >
 
                             
-                            <div class="row my-2">
+                            {/* <div class="row my-2">
                                 <div class="col-7 text-right">Sub-Total $</div>
                                 <div class="col-5">
-                                    <span class="text-120 text-secondary-d1">{subTotal}</span>
+                                    <span class="text-120 text-secondary-d1">{subTotal.toFixed(2)}</span>
                                 </div>
-                            </div>
+                            </div> */}
 
-                            <div class="row my-2">
+                            {/* <div class="row my-2">
                                 <div class="col-7 text-right">
                                     Descuento $
                                 </div>
                                 <div class="col-5">
-                                    <span class="text-110 text-secondary-d1">{descuentoItem}</span>
+                                    <span class="text-110 text-secondary-d1">{descuentoItem.toFixed(2)}</span>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div class="row my-2 align-items-center bgc-primary-l3 p-2">
                                 <div class="col-7 text-right">Total a Pagar $</div>
                                 <div class="col-5">
-                                    <span class="text-150 text-success-d3 opacity-2">{totalPagar}</span>
+                                    <span class="text-150 text-success-d3 opacity-2">{totalPagar.toFixed(2)}</span>
                                 </div>
                             </div>
                         </div>
