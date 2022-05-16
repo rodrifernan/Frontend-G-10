@@ -27,7 +27,6 @@ export const ListFacturas = () => {
 
   useEffect(() => {
     dispatch(getAllInvoices());
-  
   }, []);
 
   const [invoiceDetails, setInvoiceDetails] = useState({ orders: [] });
@@ -70,7 +69,7 @@ export const ListFacturas = () => {
   return (
     <>
       <InvoiceModal invoice={invoiceDetails} />
-      <div className="invoiceContainer">
+      <div className="invoiceContainer-Admin">
         <div className="datatable">
           <div className="datatableTitle">Facturas de compra</div>
           <DataGrid

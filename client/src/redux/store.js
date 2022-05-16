@@ -28,7 +28,7 @@ import productsByUserSlice from './reducer/getProductsByUser';
 import paymentOrderPM from './reducer/getResponseMP';
 import shoppingCart from './reducer/shoppingCart';
 import invoice from './reducer/invoice';
-
+import userBanSlice from './reducer/userBan';
 import AllinvoiceSlice from './reducer/AllInvoices';
 
 
@@ -55,6 +55,7 @@ export const store = configureStore({
     userAll: allUserSlice,
     orderAll: allOrderSlice,
     Allinvoices: AllinvoiceSlice,
+    userBan: userBanSlice,
 
     //paymentId : paymentPM,
     paymentOrderEG: paymentOrderPM,
