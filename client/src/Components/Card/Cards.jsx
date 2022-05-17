@@ -32,10 +32,8 @@ const Card = ({
 		setEdit(!edit);
 	};
 
-	debugger;
-
-	const addShopping = ({ target }) => {
-		dispatch(addShoppingList(id));
+  const addShopping = ({ target }) => {
+    dispatch(addShoppingList(id));
 
 		if (localStorage.getItem("userCredentials")) {
 			target.parentElement.disabled = true;
@@ -58,20 +56,37 @@ const Card = ({
 	};
 
 	const addAWish = ({ target }) => {
-		target.parentElement.disabled = true;
-		target.disabled = true;
-		toast
-			.promise(dispatch(postWish(id)), {
-				loading: "Guardando...",
-				success: <b>Agregado a tu lista de deseos 😍</b>,
-				error: <b>No se puedo agregar😿</b>,
-			})
-			.then(
-				() => (
-					(target.parentElement.disabled = false),
-					(target.disabled = false)
-				)
-			);
+
+		if(localStorage.getItem("userCredentials")){
+
+			target.parentElement.disabled = true;
+			target.disabled = true;
+			toast
+				.promise(dispatch(postWish(id)), {
+					loading: "Guardando...",
+					success: <b>Agregado a tu lista de deseos 😍</b>,
+					error: <b>No se puedo agregar😿</b>,
+				})
+				.then(
+					() => (
+						(target.parentElement.disabled = false),
+						(target.disabled = false)
+					)
+				);
+		}else {
+			try {
+				window.bootstrap.Modal.getOrCreateInstance(
+					document.getElementById(`modal${id}`)
+				).hide();
+				window.bootstrap.Modal.getOrCreateInstance(
+					document.getElementById('loginModal')
+				).show();
+			} catch (error) {
+				console.log(error);
+			}
+		}
+
+
 	};
 
 	return (
