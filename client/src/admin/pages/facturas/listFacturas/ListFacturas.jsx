@@ -9,7 +9,6 @@ import { getAllInvoices } from "../../../../redux/reducer/AllInvoices";
 export const ListFacturas = () => {
 	const dispatch = useDispatch();
 	const invoices = useSelector((state) => state.Allinvoices.Allinvoices);
-	console.log(invoices);
 	const detailInvoices = invoices.map((e) => {
 		return {
 			createdAt: e.createdAt,

@@ -11,7 +11,7 @@ import { getAllOrders } from "../../../../redux/reducer/getAllOrders";
 
 const DatatableOrder = () => {
 	const dispatch = useDispatch();
-	let orderAll = useSelector(allOrdersRegisters);
+	let data = useSelector(allOrdersRegisters);
 
 	useEffect(() => {
 		dispatch(getAllOrders());
@@ -21,9 +21,6 @@ const DatatableOrder = () => {
 	// ***********************************
 
 	const [select, setSelection] = useState(0);
-
-	const [data] = useState(orderAll);
-	console.log(data);
 
 	const handleRowSelection = (ids) => {
 		const selectedIDs = new Set(ids);
