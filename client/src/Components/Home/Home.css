@@ -20,6 +20,21 @@
   .titulo {
     display: none;
   }
+  .back {
+    display: none;
+  }
+  .titulo {
+    display: none;
+  }
+  .buy {
+    display: none;
+  }
+  .ghost {
+    display: none;
+  }
+  .banner {
+    height: 125px;
+  }
 }
 
 .paginado {
