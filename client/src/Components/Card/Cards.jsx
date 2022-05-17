@@ -31,11 +31,11 @@ const Card = ({
   const handleEdit = () => {
     setEdit(!edit);
   };
-  console.log("edit", edit);
   const addShopping = ({ target }) => {
     dispatch(addShoppingList(id));
 
-    if (localStorage.getItem("userCredentials")) {
+    if (localStorage.getItem('userCredentials')) {
+      target.parentElement.disabled = true;
       target.disabled = true;
       toast
         .promise(dispatch(postShoppingCart(id)), {
@@ -43,26 +43,72 @@ const Card = ({
           success: <b>Agregado al carrito 🛒</b>,
           error: <b>No se puedo agregar al carrito 😿</b>,
         })
-        .then(() => (target.disabled = false));
+        .then(
+          () => (
+            (target.parentElement.disabled = false), (target.disabled = false)
+          )
+        );
     } else {
       toast.success("Agregado al carrito 🛒");
     }
   };
 
-  const addAWish = (productId) => {
-    dispatch(postWish(productId));
+  const addAWish = ({ target }) => {
+    target.parentElement.disabled = true;
+    target.disabled = true;
+    toast
+      .promise(dispatch(postWish(id)), {
+        loading: 'Guardando...',
+        success: <b>Agregado a tu lista de deseos 😍</b>,
+        error: <b>No se puedo agregar😿</b>,
+      })
+      .then(
+        () => (
+          (target.parentElement.disabled = false), (target.disabled = false)
+        )
+      );
   };
 
   return (
     <div className="d-flex flex-wrap">
       <Toaster position="top-center" reverseOrder={false} />
       <div
-        className="card"
-        type="button"
-        data-bs-toggle="modal"
+        className='card position-relative'
+        type='button'
+        data-bs-toggle='modal'
         data-bs-target={`#modal${id}`}
       >
-        <img className="card-img-top" src={image[0]} alt="foto" />
+        {reviews.length ? (
+          <div
+            className='generalRanking'
+            style={{
+              position: 'absolute',
+              top: '0',
+              right: '5px',
+              fontSize: '1rem',
+              zIndex: 100,
+            }}
+          >
+            {[...Array(5)].map((item, index) => (
+              <span
+                key={index}
+                className='fa fa-star checked'
+                style={{
+                  color:
+                    index + 1 <=
+                    reviews.reduce((a, b) => a + b.rating, 0) / reviews.length
+                      ? 'gold'
+                      : 'gray',
+                }}
+              ></span>
+            ))}
+            <span className='mx-1'>({reviews.length + 1})</span>
+          </div>
+        ) : (
+          <></>
+        )}
+
+        <img className='card-img-top' src={image[0]} alt='foto' />
 
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
@@ -79,11 +125,37 @@ const Card = ({
         aria-hidden="true"
       >
         {!edit ? (
-          <div className="modal-dialog modal-lg">
-            <div className="modal-content">
-              <div className="modal-body">
-                <div className="d-flex">
-                  <div className=" col-6">
+          <div className='modal-dialog modal-lg'>
+            <div className='modal-content'>
+              <div className='modal-body'>
+                <div className='d-flex'>
+                  <div className=' col-6 position-relative'>
+                    <div
+                      className='generalRanking'
+                      style={{
+                        position: 'absolute',
+                        top: '0',
+                        right: '0',
+                        fontSize: '1.5rem',
+                        zIndex: 100,
+                      }}
+                    >
+                      {[...Array(5)].map((item, index) => (
+                        <span
+                          key={index}
+                          className='fa fa-star checked'
+                          style={{
+                            color:
+                              index + 1 <=
+                              reviews.reduce((a, b) => a + b.rating, 0) /
+                                reviews.length
+                                ? 'gold'
+                                : 'gray',
+                          }}
+                        ></span>
+                      ))}
+                    </div>
+
                     <div
                       id={"carousel" + id}
                       className="carousel carousel-dark slide"
@@ -148,77 +220,108 @@ const Card = ({
                       </button>
                     </div>
 
-                    <div className="reviewsContainer">
-                      <span className="reviewsTitle">Reseñas del producto</span>
-                      <div className="reviewList">
-                        {reviews?.map((review) => (
-                          <div key={review.id} className="reviewContainer">
-                            <div className="reviewHeader">
-                              <span className="userReviewDetails">
-                                Por {review.user.userName} el{" "}
-                                {review.createdAt.substring(0, 10)}
-                              </span>
-                              <div className="userRating">
-                                {[...Array(5)].map((item, index) => (
-                                  <span
-                                    class="fa fa-star checked"
-                                    style={{
-                                      color:
-                                        index + 1 <= review.rating
-                                          ? "gold"
-                                          : "gray",
-                                    }}
-                                  ></span>
-                                ))}
+                    <div className='reviewsContainer'>
+                      <span className='reviewsTitle'>Reseñas del producto</span>
+
+                      {reviews.length ? (
+                        <div className='reviewList'>
+                          {reviews.map(review => (
+                            <div key={review.id} className='reviewContainer'>
+                              <div className='reviewHeader'>
+                                <span className='userReviewDetails'>
+                                  Por {review.user.userName} el{' '}
+                                  {review.createdAt.substring(0, 10)}
+                                </span>
+                                <div className='userRating'>
+                                  {[...Array(5)].map((item, index) => (
+                                    <span
+                                      key={index}
+                                      className='fa fa-star checked'
+                                      style={{
+                                        color:
+                                          index + 1 <= review.rating
+                                            ? 'gold'
+                                            : 'gray',
+                                      }}
+                                    ></span>
+                                  ))}
+                                </div>
                               </div>
+                              <span className='reviewComment'>
+                                {review.comment}
+                              </span>
                             </div>
-                            <span className="reviewComment">
-                              {review.comment}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <span>Este producto aún no tiene reseñas.</span>
+                      )}
                     </div>
                   </div>
-                  <div className=" col-6 text-left">
-                    <p>Nombre: {name} </p>
-                    <p className="modal__description">
-                      Descripcion: {description}
-                    </p>
-                    <p>Marca : {brand}</p>
-                    <p>Precio : ${price}</p>
-                    <p>Color : {color}</p>
-                    <p>Disponibles : {stock}</p>
+                  <div className='col-6 text-left'>
                     <p>
-                      Garantia: {warranty} {warranty > 1 ? "años" : "año"}
+                      <b>Nombre:</b> {name}{' '}
                     </p>
+                    <p className='modal__description'>
+                      <b>Descripcion:</b> {description}
+                    </p>
+                    <p>
+                      <b>Marca:</b> {brand}
+                    </p>
+                    <p>
+                      <b>Precio:</b> ${price}
+                    </p>
+                    <p>
+                      <b>Color:</b> {color}
+                    </p>
+                    <p>
+                      <b>Disponibles:</b> {stock}
+                    </p>
+                    <p>
+                      <b>Garantia:</b>
+                      Garantia: {warranty} {warranty > 1 ? 'años' : 'año'}
+                    </p>
+
+                    {navigate.pathname !== '/perfil' ? (
+                      <div className='buttonContainer'>
+                        <button
+                          type='button'
+                          className='btn'
+                          onClick={addShopping}
+                          data-bs-toggle='tooltip'
+                          data-bs-placement='top'
+                          data-bs-custom-class='custom-tooltip'
+                          title='Agregar al Carrito de compras.'
+                        >
+                          <i className='fas fa-cart-plus'></i>
+                        </button>
+                        <button
+                          type='button'
+                          className='btn'
+                          onClick={addAWish}
+                          data-bs-toggle='tooltip'
+                          data-bs-placement='top'
+                          data-bs-custom-class='custom-tooltip'
+                          title='Agregar a la lista de deseos.'
+                        >
+                          <i className='fas fa-heart'></i>
+                        </button>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
               </div>
-              <div className="modal-footer">
-                {navigate.pathname === "/perfil" ? (
-                  <button className="btn btn-warning" onClick={handleEdit}>
+              {navigate.pathname === '/perfil' ? (
+                <div className='modal-footer'>
+                  <button className='btn btn-warning' onClick={handleEdit}>
                     Editar
                   </button>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      className="btn btn-success"
-                      onClick={addShopping}
-                    >
-                      Agregar al carrito
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      onClick={() => addAWish(id)}
-                    >
-                      Agregar a la lista de deseos
-                    </button>
-                  </>
-                )}
-              </div>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         ) : (

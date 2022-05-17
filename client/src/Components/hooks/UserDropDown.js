@@ -11,13 +11,16 @@ export const UserDropDown = () => {
         <div className="dropdown menuDrop d-flex justify-content-start">
           <button
             className="btn dropdown-toggle registrarse btn text-white"
-            style={{ backgroundColor: "black", width: "fit-content" }}
+            style={{
+              backgroundColor: "black",
+              width: "fit-content",
+            }}
             type="button"
             id="dropdownMenuUser"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <i class="fas fa-user text-light iconUser  "></i>
+            <i className="fas fa-user text-light iconUser  "></i>
 
             <span className="userName">
               {JSON.parse(localStorage.getItem("userCredentials")).userName}
@@ -33,7 +36,7 @@ export const UserDropDown = () => {
                 window.location.href = "/perfil";
               }}
             >
-              Ver Perfil
+              <p>Ver Perfil</p>
             </button>
 
             <button className="dropdown-item">Mis Pedidos</button>

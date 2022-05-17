@@ -42,9 +42,9 @@ const WishList = () => {
           ""
         )}
         {Array.isArray(myWishes) && myWishes.length !== 0 ? (
-          myWishes.map((wh) => {
+          myWishes.map((wh, index) => {
             return (
-              <div className="border-bottom d-flex mx-3 py-3">
+              <div key={index} className="border-bottom d-flex mx-3 py-3">
                 <div className="px-3">
                   <img
                     className="img-thumbnail"
@@ -98,8 +98,7 @@ const WishList = () => {
             onClick={() => navigate(-1)}
             className="btn text-light btn-danger"
           >
-            <i className="fas fa-arrow-left"></i>
-            <span className="back"> Regresar</span>
+            <i className="fas fa-arrow-left"></i> Regresar
           </button>
         </div>
         <div className="text-right col-6">
@@ -107,8 +106,7 @@ const WishList = () => {
             className="btn text-light btn-success"
             disabled={myWishes.length === 0}
           >
-            <i className="fas fa-shopping-cart"></i>
-            <span className="buy">Agregar todo al Carrito!</span>
+            <i className="fas fa-shopping-cart"></i>Agregar todo al Carrito!
           </button>
         </div>
       </div>

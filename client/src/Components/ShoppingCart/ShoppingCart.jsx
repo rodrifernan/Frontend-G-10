@@ -21,7 +21,7 @@ export const ShoppingCart = ({ login = false }) => {
   const navigate = useNavigate();
   const [iframeActive, setIframeActive] = useState(false);
   const userToken = JSON.parse(localStorage.getItem("userCredentials"))?.token;
-
+  const baseUrl = process.env.REACT_APP_API || "http://localhost:3001";
   const shoppingList = useSelector(
     ({ shoppingCart }) => shoppingCart.shoppingList
   );
@@ -87,8 +87,7 @@ export const ShoppingCart = ({ login = false }) => {
             <div className="modal-body  p-0" style={{ height: "90vh" }}>
               {iframeActive && (
                 <iframe
-                  src={`http://localhost:3001/api/checkout/${userToken}`}
-                  // src={`https://ecommerceg10.herokuapp.com/api/checkout/${userToken}`}
+                  src={baseUrl + `/api/checkout/${userToken}`}
                   style={{ width: "100%", height: "90vh" }}
                   title="mercadoPago"
                 ></iframe>

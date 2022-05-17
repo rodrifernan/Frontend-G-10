@@ -13,7 +13,7 @@ import HomeAdmin from "../src/admin/pages/home/Home";
 import List from "../src/admin/pages/list/List";
 
 import ResponseMP from "../src/Components/ResponseMP/responseMP";
-import { productInputs, userInputs } from "./formSource";
+// import { productInputs, userInputs } from "./formSource";
 import LayoutAdmin from "./Components/Layout/LayoutAdmin";
 import ListProduct from "../src/admin/pages/products/list/ListProduct";
 import ListOrder from "../src/admin/pages/orders/listOrder/ListOrder";
@@ -25,7 +25,7 @@ import { ShoppingCart } from "./Components/ShoppingCart/ShoppingCart";
 
 // import { UserInvoices } from './Components/UserInvoices/UserInvoices'
 import { ListFacturas } from "./admin/pages/facturas/listFacturas/ListFacturas";
-import {EditUser} from './admin/pages/Users/EditUser/EditUser'
+// import {EditUser} from './admin/pages/Users/EditUser/EditUser'
 import { UserInvoices } from "./Components/UserInvoices/UserInvoices";
 import { UserSales } from "./Components/UserSales/UserSales";
 import { FormRegister } from "./Components/userForm/FormRegister";
@@ -34,52 +34,58 @@ import { FormRegisterAdmin } from "./admin/pages/Users/NewUserForm/FormRegister"
 import { RequireAuth } from "./Components/hooks/RequireAuth";
 
 function App() {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<LayoutUser />}>
-          <Route index element={<Home />}></Route>
-          <Route path="create" element={<CreateProducts />} />
-          <Route path="userRegister" element={<FormRegister />} />
-          <Route path="cart" element={<ShoppingCart />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="userInvoices" element={<UserInvoices />} />
-          <Route path="userSales" element={<UserSales />} />
-          <Route path="myWishes" element={<WishList />} />
-          <Route path="perfil" element={<Perfil />} />
-          <Route path="ResponseMP" element={<ResponseMP />} />
-        </Route>
-        <Route element={<RequireAuth/>}>
-        <Route path="admin" element={<LayoutAdmin />}>
-          <Route index element={<HomeAdmin />} />
-          {/* <Route path='login' element={<Login />} /> */}
-          <Route path="users">
-            <Route index element={<List />} />
-            <Route path=":userId" element={<UserDetails />} />
-            <Route path="new" element={<FormRegisterAdmin />} />
-            {/* <Route path="edit">
+	return (
+		<>
+			<Routes>
+				<Route path="/" element={<LayoutUser />}>
+					<Route index element={<Home />}></Route>
+					<Route path="create" element={<CreateProducts />} />
+					<Route path="userRegister" element={<FormRegister />} />
+					<Route path="cart" element={<ShoppingCart />} />
+					<Route path="login" element={<LoginPage />} />
+					<Route path="userInvoices" element={<UserInvoices />} />
+					<Route path="userSales" element={<UserSales />} />
+					<Route path="myWishes" element={<WishList />} />
+					<Route path="perfil" element={<Perfil />} />
+					<Route path="ResponseMP" element={<ResponseMP />} />
+				</Route>
+				<Route element={<RequireAuth />}>
+					<Route path="admin" element={<LayoutAdmin />}>
+						<Route index element={<HomeAdmin />} />
+						{/* <Route path='login' element={<Login />} /> */}
+						<Route path="users">
+							<Route index element={<List />} />
+							<Route path=":userId" element={<UserDetails />} />
+							<Route path="new" element={<FormRegisterAdmin />} />
+							{/* <Route path="edit">
               <Route path=":userId" element={<EditUser />}/>
             </Route> */}
-          </Route>
-          <Route path="products">
-            <Route index element={<ListProduct />} />
-            <Route path=":productId" element={<ProductDetails />} />
-            <Route path="new" element={<CreateProducts />} />
-          </Route>
-          <Route path="ordenes">
-            <Route index element={<ListOrder />} />
-            <Route path=":productId" element={<OrderDetails />} />
-          </Route>
-          <Route path="facturas">
-            <Route index element={<ListFacturas />} />
-          </Route>
-        </Route>
-        </Route>
+						</Route>
+						<Route path="products">
+							<Route index element={<ListProduct />} />
+							<Route
+								path=":productId"
+								element={<ProductDetails />}
+							/>
+							<Route path="new" element={<CreateProducts />} />
+						</Route>
+						<Route path="ordenes">
+							<Route index element={<ListOrder />} />
+							<Route
+								path=":productId"
+								element={<OrderDetails />}
+							/>
+						</Route>
+						<Route path="facturas">
+							<Route index element={<ListFacturas />} />
+						</Route>
+					</Route>
+				</Route>
 
-        <Route path="*" element={<Page404 />} />
-      </Routes>
-    </>
-  );
+				<Route path="*" element={<Page404 />} />
+			</Routes>
+		</>
+	);
 }
 
 export default App;
