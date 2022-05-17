@@ -75,6 +75,9 @@ const Card = ({
 				);
 		}else {
 			try {
+
+				toast.error("Inicie sesion...")
+
 				window.bootstrap.Modal.getOrCreateInstance(
 					document.getElementById(`modal${id}`)
 				).hide();

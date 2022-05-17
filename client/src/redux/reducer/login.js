@@ -31,10 +31,25 @@ export const apiLoginFacebook = createAsyncThunk(
   }
 );
 
+export const rootVerification = createAsyncThunk('login/root', async () =>
+  axios
+    .post(
+      `/api/user/root`,
+      {},
+      {
+        headers: {
+          'auth-token': JSON.parse(localStorage.getItem('userCredentials'))
+            .token,
+        },
+      }
+    )
+    .then(response => response.data)
+);
+
 const initialState = {
   userCredentials: localStorage.getItem('userCredentials')
     ? localStorage.getItem('userCredentials')
-    : [],
+    : {},
 };
 
 const loginSlice = createSlice({
@@ -46,7 +61,7 @@ const loginSlice = createSlice({
     },
     logOut: state => {
       localStorage.removeItem('userCredentials');
-      localStorage.removeItem('carrito')
+      localStorage.removeItem('carrito');
       state.userCredentials = {};
     },
   },

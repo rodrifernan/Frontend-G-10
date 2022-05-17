@@ -35,13 +35,24 @@
       height: 500px;
     }
     .PieChart__container{
-      width: 50%;
+      // width: 50%;
       height: 500px;
     }
 
     .RadarChar__container{
-      width: 50%;
+      // width: 50%;
       height: 500px;
+    }
+    .chartsPieRdar{
+      margin: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      .PieChart__container {
+        display: flex;
+        justify-content: center;
+
+      }
     }
   }
 }
