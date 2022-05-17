@@ -151,7 +151,7 @@ const Card = ({
                     <div className="reviewsContainer">
                       <span className="reviewsTitle">Reseñas del producto</span>
                       <div className="reviewList">
-                        {reviews.map((review) => (
+                        {reviews?.map((review) => (
                           <div key={review.id} className="reviewContainer">
                             <div className="reviewHeader">
                               <span className="userReviewDetails">
