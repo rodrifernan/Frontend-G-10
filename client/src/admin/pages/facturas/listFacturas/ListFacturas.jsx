@@ -52,7 +52,7 @@ export const ListFacturas = () => {
 						data-bs-toggle="modal"
 						data-bs-target="#invoiceModal"
 						onClick={() => OpenModaldetalles(row)}
-						className="btn btn-primary"
+						className="btn btn-color"
 					>
 						Ver detalles
 					</button>

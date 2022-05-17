@@ -9,8 +9,8 @@ import { getAllUsers } from "../../../redux/reducer/getAllUsers";
 import { allUserRegisters } from "../../../redux/reducer/getAllUsers";
 
 const Datatable = () => {
-	let allUser = useSelector(allUserRegisters);
-	const [data] = useState(allUser);
+	let data = useSelector(allUserRegisters);
+	console.log("aluser", data);
 
 	const dispatch = useDispatch();
 
