@@ -45,7 +45,6 @@ export const postOrderMP = createAsyncThunk(
 );
 
 const initialState = {
-	paymentId: [],
 	paymentOrder : [],
 	OdenCompra: [],
 };
@@ -56,23 +55,14 @@ const paymentIdSlice = createSlice({
 	reducers: {},
 	extraReducers: {
 
-		[getOrderMP.pending]: () => {
-			//console.log("Trayendo Datos MercadoPago Compra");
-		},
 		[getOrderMP.fulfilled]: (state, action) => {
             //console.log("Trayendo Datos MercadoPago Compra", action.payload)
 			return {...state,  paymentOrder: action.payload};
 		},
 
-		[getPaymentIdMP.pending]: () => {
-			//console.log("Trayendo Datos MercadoPago Compra");
-		},
 		[getPaymentIdMP.fulfilled]: (state, action) => {
             //console.log("Trayendo Datos MercadoPago Compra", action.payload)
 			return {...state, paymentId: action.payload};
-		},
-		[postOrderMP.pending]: () => {
-			//console.log("Trayendo Datos MercadoPago Compra");
 		},
 		[postOrderMP.fulfilled]: (state, action) => {
             console.log("Trayendo Nro Orden MercadoPago Compra", action.payload)

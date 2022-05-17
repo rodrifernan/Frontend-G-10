@@ -32,8 +32,6 @@ const Card = ({
     setEdit(!edit);
   };
 
-  debugger
-
   const addShopping = ({ target }) => {
     dispatch(addShoppingList(id));
 
