@@ -1,6 +1,12 @@
 .iconUser {
   display: none;
 }
+.mt-4{
+  justify-content: center;
+}
+.filtrado{
+  margin-top: 2rem;
+}
 @media (max-width: 768px) {
   .wrapper {
     display: grid;
@@ -68,7 +74,7 @@
   .wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    grid-template-rows: repeat(3, 1fr); /* 3 rows  */
+    grid-template-rows: repeat(2, 1fr); /* 3 rows  */
     grid-gap: 50px 30px;
     padding-bottom: 2em;
   }
