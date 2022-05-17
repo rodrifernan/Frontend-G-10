@@ -23,6 +23,7 @@ const Card = ({
   category,
   genre,
   discount,
+  reviews,
 }) => {
   const navigate = useLocation();
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const Card = ({
   };
 
   return (
-    <div className="d-flex flex-wrap cards">
+    <div className="d-flex flex-wrap">
       <Toaster position="top-center" reverseOrder={false} />
       <div
         className="card"
@@ -80,17 +81,6 @@ const Card = ({
         {!edit ? (
           <div className="modal-dialog modal-lg">
             <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id={"modalLabel" + id}>
-                  Modal title
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
               <div className="modal-body">
                 <div className="d-flex">
                   <div className=" col-6">
@@ -119,7 +109,7 @@ const Card = ({
                             className={
                               "carousel-item " + (index === 0 && "active")
                             }
-                            data-bs-interval="3000"
+                            data-bs-interval="5000"
                           >
                             <img
                               src={url}
@@ -158,10 +148,40 @@ const Card = ({
                       </button>
                     </div>
 
-                    {/* <img className='img-fluid' src={image[0]} alt='foto' /> */}
+                    <div className="reviewsContainer">
+                      <span className="reviewsTitle">Reseñas del producto</span>
+                      <div className="reviewList">
+                        {reviews.map((review) => (
+                          <div key={review.id} className="reviewContainer">
+                            <div className="reviewHeader">
+                              <span className="userReviewDetails">
+                                Por {review.user.userName} el{" "}
+                                {review.createdAt.substring(0, 10)}
+                              </span>
+                              <div className="userRating">
+                                {[...Array(5)].map((item, index) => (
+                                  <span
+                                    class="fa fa-star checked"
+                                    style={{
+                                      color:
+                                        index + 1 <= review.rating
+                                          ? "gold"
+                                          : "gray",
+                                    }}
+                                  ></span>
+                                ))}
+                              </div>
+                            </div>
+                            <span className="reviewComment">
+                              {review.comment}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                   <div className=" col-6 text-left">
-                    <p>Nombre: {name}</p>
+                    <p>Nombre: {name} </p>
                     <p className="modal__description">
                       Descripcion: {description}
                     </p>

@@ -10,8 +10,8 @@ export const UserDropDown = () => {
       {JSON.parse(localStorage.getItem("userCredentials")) ? (
         <div className="dropdown menuDrop d-flex justify-content-start">
           <button
-            className="btn dropdown-toggle registrarse align-items-center btn text-white"
-            style={{ backgroundColor: "black", width: "10rem" }}
+            className="btn dropdown-toggle registrarse btn text-white"
+            style={{ backgroundColor: "black", width: "fit-content" }}
             type="button"
             id="dropdownMenuUser"
             data-bs-toggle="dropdown"

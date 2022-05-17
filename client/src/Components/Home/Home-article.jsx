@@ -150,6 +150,7 @@ const Home = () => {
 									stock={pr.stock}
 									warranty={pr.warranty}
 									category={pr.category}
+									reviews={ pr.reviews }
 								/>
 							);
 						})

@@ -42,17 +42,17 @@ export const CreateProducts = ({
 		value: editDescription || "",
 		valid: null,
 	});
-	const [price, setPrice] = useState({ value: editPrice || 0, valid: null });
+	const [price, setPrice] = useState({ value: editPrice || "", valid: null });
 	const [brand, setBrand] = useState({ value: editBrand || "", valid: null });
 	const [color, setColor] = useState({ value: editColor || "", valid: null });
 	const [warranty, setWarranty] = useState({
-		value: editWarranty || 0,
+		value: editWarranty || "",
 		valid: null,
 	});
-	const [stock, setStock] = useState({ value: editStock || 0, valid: null });
+	const [stock, setStock] = useState({ value: editStock || "", valid: null });
 	const [image, setImage] = useState({ value: editImage || [], valid: null });
 	const [discount, setDiscount] = useState({
-		value: editDiscount || 0,
+		value: editDiscount || "",
 		valid: null,
 	});
 	const [category, setCategory] = useState({
@@ -345,7 +345,7 @@ export const CreateProducts = ({
 						<Input
 							type="number"
 							label="Garantia"
-							placeholder="1 año"
+							placeholder="Cantidad en meses"
 							state={warranty}
 							setstate={setWarranty}
 							msgError="por favor coloque tiempo de garantia"
@@ -355,7 +355,7 @@ export const CreateProducts = ({
 						<Input
 							type="number"
 							label="Descuento"
-							placeholder="si no desea descuento coloque 0%"
+							placeholder="Cantidad en %"
 							state={discount}
 							setstate={setDiscount}
 							msgError="Por favor coloque 30% - 40% - 5%"
@@ -400,7 +400,7 @@ export const CreateProducts = ({
 						<Input
 							type="number"
 							label="Precio"
-							placeholder="200"
+							placeholder="USD"
 							state={price}
 							setstate={setPrice}
 							msgError="por favor coloque un costo al producto"
@@ -410,7 +410,7 @@ export const CreateProducts = ({
 						<Input
 							type="number"
 							label="Stock del prodcuto"
-							placeholder="10"
+							placeholder="Pza"
 							state={stock}
 							setstate={setStock}
 							msgError="por favor coloque un stock valido"

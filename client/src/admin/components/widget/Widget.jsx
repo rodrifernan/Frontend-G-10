@@ -4,16 +4,28 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import {  useState } from 'react'
+import { sendNotification } from '../../../utils/notifications'
 
-const Widget = ({ type }) => {
+const Widget = ({ type, socket }) => {
+
+  const [  metric, setMetric ] = useState({amount: 0})
+
   let data;
 
+  useState( async () =>{
+    sendNotification(type === 'profits' ? 'salesQuantity': type ).then(({data}) => {
+      if(type ==='profits') {
+        setMetric({amount: (data.response * 0.02).toFixed(2) })
+      }else setMetric({amount: data.response})
+     })
+  }, [])
+
   //temporary
-  const amount = 100;
-  const diff = 20;
+  let diff = 20;
 
   switch (type) {
-    case "user":
+    case "usersQuantity":
       data = {
         title: "Usuarios",
         isMoney: false,
@@ -28,8 +40,14 @@ const Widget = ({ type }) => {
           />
         ),
       };
+
+      socket.on('usersQuantity', data => {
+        setMetric(state => ({...state, amount: data}) )
+      });
+
+      
       break;
-    case "order":
+    case "ordersQuantity":
       data = {
         title: "Ordenes",
         isMoney: false,
@@ -44,8 +62,15 @@ const Widget = ({ type }) => {
           />
         ),
       };
+
+      socket.on('ordersQuantity', data => {
+        setMetric(state => ({...state, amount: data}) )
+      });
+
+
+
       break;
-    case "earning":
+    case "salesQuantity":
       data = {
         title: "Ventas",
         isMoney: true,
@@ -57,8 +82,13 @@ const Widget = ({ type }) => {
           />
         ),
       };
+
+      socket.on('salesQuantity', data => {
+        setMetric(state => ({...state, amount: data}) )
+      });
+
       break;
-    case "balance":
+    case "profits":
       data = {
         title: "Ganancias",
         isMoney: true,
@@ -73,6 +103,12 @@ const Widget = ({ type }) => {
           />
         ),
       };
+
+      socket.on('salesQuantity', data => {
+        setMetric(state => ({...state, amount: data}) )
+      });
+
+
       break;
     default:
       break;
@@ -83,7 +119,7 @@ const Widget = ({ type }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
+          {data.isMoney && "$"} {metric.amount}
         </span>
         <span className="link">{data.link}</span>
       </div>

@@ -7,6 +7,7 @@ import { LoginFromGoogle } from '../hooks/LoginFromGoogle';
 import { LoginFromFacebook } from '../hooks/LoginFromFacebook';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { sendNotification } from '../../utils/notifications'
 
 export const Form = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ export const Form = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-
+      sendNotification('usersQuantity')
       navigate('/');
     }
   }, [userResponse]);

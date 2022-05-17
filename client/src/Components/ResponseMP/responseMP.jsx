@@ -6,6 +6,7 @@ import {
   getOrderMP,
   postOrderMP,
 } from "../../redux/reducer/getResponseMP";
+import { useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
 import "./response.css";
 import logo from "./LogoEcommerce.png";
@@ -16,8 +17,9 @@ import logo from "./LogoEcommerce.png";
 
 const ResponseMP = () => {
   const querystring = new URLSearchParams(useLocation().search);
-  const payment_id = querystring.get("payment_idQ");
+  const payment_id = querystring.get("payment_id");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [state, setState] = useState([]);
 
   let paymentIdOrdenEl = useSelector((state) => state.paymentOrderEG.paymentId);
@@ -29,10 +31,11 @@ const ResponseMP = () => {
     dispatch(postOrderMP());
     setState(getOrderMPEl);
   }, []);
+  // console.log(payment_id)
   // console.log(getOrderMPEl)
-  let subTotal = 0;
+  //let subTotal      = 0
   let totalPagar = 0;
-  let descuentoItem = 0;
+  //let descuentoItem = 0
   if (Object.keys(getOrderMPEl).length > 0) genPDF(getOrderAllEl);
   return Object.keys(getOrderMPEl).length > 0 ? (
     <div
@@ -137,9 +140,9 @@ const ResponseMP = () => {
             <div class="mt-4">
               <div className="text-95 text-secondary-d3">
                 {getOrderMPEl?.shoppingCart?.map((elem, index) => {
-                  subTotal = subTotal + elem.subTotal;
+                  // subTotal      = subTotal      + elem.subTotal
                   totalPagar = totalPagar + elem.totalPage;
-                  descuentoItem = descuentoItem + elem.discountItem;
+                  // descuentoItem = descuentoItem + elem.discountItem
                   return (
                     <div key={elem.title} className="row mb-2 mb-sm-0 py-25">
                       <div className="d-none d-sm-block col-1">
@@ -153,7 +156,7 @@ const ResponseMP = () => {
                         ${elem.price.toFixed(2)}
                       </div>
                       <div className="d-none d-sm-block col-2 text-95">
-                        {elem.discountItem.toFixed(1)}%
+                        {elem.discount.toFixed(2)}%
                       </div>
                       <div className="col-2 text-secondary-d2">
                         ${elem.totalPage.toFixed(2)}
@@ -200,7 +203,7 @@ const ResponseMP = () => {
               Gracias por su Compra !
             </span>
             <a
-              href="#"
+              onClick={() => navigate("/")}
               className="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0"
             >
               Continuar!
@@ -210,20 +213,22 @@ const ResponseMP = () => {
       </div>
     </div>
   ) : (
-    <></>
+    <>hola</>
   );
 };
 export default ResponseMP;
 
 const genPDF = async (getOrderAllEl) => {
-  const jsPDF1 = new jsPDF();
-  var doc = new jsPDF("l", "mm", [1200, 1810]);
-  var pdfjs = document.getElementById("content");
-  doc.html(pdfjs, {
-    callback: function (doc) {
-      doc.save(`OrdenCompra#${getOrderAllEl?.orderBd?.orderNumber}.pdf`);
-    },
-  }); //,
-  //x: 10,y: 10});
-  //doc.output('dataurlnewwindow');
+  try {
+    const jsPDF1 = new jsPDF();
+    var doc = new jsPDF("l", "mm", [1200, 1810]);
+    var pdfjs = document.getElementById("content");
+    await doc.html(pdfjs, {
+      callback: function (doc) {
+        doc.save(`OrdenCompra#${getOrderAllEl?.orderBd?.orderNumber}.pdf`);
+      },
+    }); //,
+    //x: 10,y: 10});
+    //doc.output('dataurlnewwindow');
+  } catch (error) {}
 };
