@@ -9,8 +9,8 @@ import { getAllUsers } from "../../../redux/reducer/getAllUsers";
 import { allUserRegisters } from "../../../redux/reducer/getAllUsers";
 
 const Datatable = () => {
-	let allUser = useSelector(allUserRegisters);
-	const [data, setData] = useState(allUser);
+	let data = useSelector(allUserRegisters);
+	console.log("aluser", data);
 
 	const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const Datatable = () => {
 	useEffect(() => {
 		// dispatch(getAllOrders());
 		dispatch(getAllUsers());
-	}, [data.banned]);
+	}, [dispatch, data.banned]);
 
 	const handleRowSelection = (ids) => {
 		const selectedIDs = new Set(ids);

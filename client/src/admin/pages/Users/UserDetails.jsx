@@ -20,7 +20,7 @@ export const UserDetails = () => {
 	const filterUserbyID = userAll.filter((e) => e.id === userId);
 	console.log(filterUserbyID[0]);
 
-	const [data, setData] = useState(filterUserbyID[0]);
+	const [data] = useState(filterUserbyID[0]);
 	console.log(data);
 	console.log(data.firstName);
 	const handleBan = () => {

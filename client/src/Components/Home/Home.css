@@ -1,19 +1,78 @@
-.wrapper{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);  /* 3 columns */
-    grid-template-rows: repeat(3, 1fr); /* 3 rows  */
-    grid-gap:50px 30px;
-    padding-bottom: 2em;
+.iconUser {
+  display: none;
 }
-@media (min-width: 850px){
-    .wrapper{
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);  /* 3 columns */
-        grid-template-rows: repeat(2, 1fr); /* 3 rows  */
-        grid-gap:50px 30px;
-}}
+@media (max-width: 768px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 columns */
+    grid-template-rows: repeat(2, 1fr); /* 3 rows  */
+    grid-gap: 50px 30px;
+  }
+  .spankart {
+    display: none;
+  }
+  .userName {
+    display: none;
+  }
+  .iconUser {
+    display: contents;
+  }
+  .titulo {
+    display: none;
+  }
+  .back {
+    display: none;
+  }
+  .titulo {
+    display: none;
+  }
+  .buy {
+    display: none;
+  }
+  .ghost {
+    display: none;
+  }
+  .banner {
+    height: 125px;
+  }
+}
 
-.paginado{
-    align-self: center;
-    height: fit-content;
+.paginado {
+  align-self: center;
+  height: fit-content;
+}
+@media (max-width: 576px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* 3 columns */
+    grid-template-rows: repeat(1, 1fr); /* 3 rows  */
+    grid-gap: 50px 30px;
+  }
+  .titulo {
+    display: none;
+  }
+  .spankart {
+    display: none;
+  }
+  .userName {
+    display: none;
+  }
+  .searchBarjsx {
+    padding-left: 50px;
+  }
+  .dropdown-menu {
+    color: red;
+  }
+}
+@media (min-width: 769px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-rows: repeat(3, 1fr); /* 3 rows  */
+    grid-gap: 50px 30px;
+    padding-bottom: 2em;
+  }
+  .dropdown-menu {
+    right: 50px;
+  }
 }

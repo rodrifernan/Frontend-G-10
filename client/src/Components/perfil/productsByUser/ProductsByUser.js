@@ -9,7 +9,7 @@ export const ProductsByUser = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getProductsByUser());
-	}, []);
+	}, [dispatch]);
 	const data = useSelector((state) => state.productsByUser.productsByUser);
 	console.log(data);
 
@@ -36,6 +36,7 @@ export const ProductsByUser = () => {
 							category={pr.categoryId}
 							genre={pr.genreId}
 							discount={pr.discount}
+							reviews={pr.reviews}
 						/>
 					))}
 				</div>

@@ -42,9 +42,9 @@ const WishList = () => {
           ""
         )}
         {Array.isArray(myWishes) && myWishes.length !== 0 ? (
-          myWishes.map((wh) => {
+          myWishes.map((wh, index) => {
             return (
-              <div className="border-bottom d-flex mx-3 py-3">
+              <div key={index} className="border-bottom d-flex mx-3 py-3">
                 <div className="px-3">
                   <img
                     className="img-thumbnail"

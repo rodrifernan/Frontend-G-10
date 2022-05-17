@@ -96,7 +96,7 @@ const Perfil = () => {
 	}, [dispatch]);
 	console.log(pwErrors);
 	const handleEdit = () => {
-		setEditar(true);
+		setEditar(!editar);
 		console.log(editar);
 	};
 	const handleAccept = () => {
@@ -143,6 +143,7 @@ const Perfil = () => {
 			});
 		}
 	};
+
 	return (
 		<div>
 			<div className="bg-light my-3">
@@ -155,7 +156,7 @@ const Perfil = () => {
 						</div>
 						<div className="col-6 text-right">
 							<button
-								className=" btn btn-primary"
+								className=" btn btn-color"
 								onClick={handleEdit}
 								disabled={editar}
 							>
@@ -196,7 +197,7 @@ const Perfil = () => {
 							<p className="py-1 text-danger">{errores.name}</p>
 							<div className="mb-3 row">
 								<label
-									for="inputPassword"
+									htmlFor="inputPassword"
 									className="col-sm-2 col-form-label"
 								>
 									Nombre de usuario
@@ -214,7 +215,7 @@ const Perfil = () => {
 							</div>
 							<div className="mb-3 row">
 								<label
-									for="inputPassword"
+									htmlFor="inputPassword"
 									className="col-sm-2 col-form-label"
 								>
 									Correo Electronico
@@ -232,7 +233,7 @@ const Perfil = () => {
 							</div>
 							<div className="mb-3 row">
 								<label
-									for="inputPassword"
+									htmlFor="inputPassword"
 									className="col-sm-2 col-form-label"
 								>
 									Direccion
@@ -250,7 +251,7 @@ const Perfil = () => {
 							</div>
 							<div className="mb-3 row">
 								<label
-									for="inputPassword"
+									htmlFor="inputPassword"
 									className="col-sm-2 col-form-label"
 								>
 									Nº de Telefono
@@ -268,6 +269,12 @@ const Perfil = () => {
 							</div>
 							<div className=" my-3 col-12 text-center">
 								<button
+									className="btn btn-color mr-2"
+									onClick={handleEdit}
+								>
+									Regresar
+								</button>
+								<button
 									type="submit"
 									disabled={!validate}
 									className=" col-2 btn btn-success text-light"
@@ -280,41 +287,42 @@ const Perfil = () => {
 				</div>
 			</div>
 			<div className="container px-3 ">
-				<h6 className="mx-4">
-					Si quieres cambiar tu contraseña{" "}
-					<button
-						type="button"
-						class="btn btn-primary"
-						data-toggle="modal"
-						data-target="#exampleModal"
-					>
-						Haz click aquí
-					</button>
-				</h6>
+				<button
+					type="button"
+					className="btn btn-color"
+					data-toggle="modal"
+					data-target="#exampleModal"
+				>
+					cambiar tu contraseña
+				</button>
+
 				<div
-					class="modal fade"
+					className="modal fade"
 					id="exampleModal"
-					tabindex="-1"
+					tabIndex="-1"
 					role="dialog"
 					aria-labelledby="exampleModalLabel"
 					aria-hidden="true"
 				>
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">
+					<div className="modal-dialog" role="document">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h5
+									className="modal-title"
+									id="exampleModalLabel"
+								>
 									Cambio de contraseñas
 								</h5>
 								<button
 									type="button"
-									class="close"
+									className="close"
 									data-dismiss="modal"
 									aria-label="Close"
 								>
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body">
+							<div className="modal-body">
 								<form onSubmit={handleChagePassword}>
 									<p className="text-danger">
 										{resultados.errors
@@ -324,7 +332,7 @@ const Perfil = () => {
 									<div className="mb-3 row">
 										<div className="col-sm-10">
 											<input
-												type="text"
+												type="password"
 												id="password"
 												className="form-control"
 												placeholder="Introduzca su contraseña actual"
@@ -339,7 +347,7 @@ const Perfil = () => {
 									<div className="mb-3 row">
 										<div className="col-sm-10">
 											<input
-												type="text"
+												type="password"
 												className="form-control"
 												placeholder="Reintroduzca su  contraseña actual"
 												name="passwordConfirmation"
@@ -353,7 +361,7 @@ const Perfil = () => {
 									<div className="mb-3 row">
 										<div className="col-sm-10">
 											<input
-												type="text"
+												type="password"
 												className="form-control"
 												placeholder="Introduzca su nueva contraseña"
 												name="newPassword"
