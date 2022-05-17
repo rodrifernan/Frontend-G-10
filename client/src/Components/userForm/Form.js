@@ -55,13 +55,13 @@ export const Form = () => {
 			sendNotification("usersQuantity");
 			navigate("/");
 		}
-	}, [userResponse]);
+	}, [dispatch, navigate, userResponse]);
 
 	useEffect(() => {
 		return () => {
 			dispatch(cleanUserResponse());
 		};
-	}, []);
+	}, [dispatch]);
 
 	const handleOnchangeActivity = (e) => {
 		setForm({
