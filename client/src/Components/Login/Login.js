@@ -37,7 +37,7 @@ export const Login = ({ redirect = null, page = false, loginClass = "" }) => {
 		return () => {
 			dispatch(cleanLogin());
 		};
-	}, []);
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (userCredentials.loading) {
@@ -93,7 +93,7 @@ export const Login = ({ redirect = null, page = false, loginClass = "" }) => {
 				} catch (error) {}
 			});
 		}
-	}, [userCredentials]);
+	}, [input.userOrEmail, redirect, shoppingList, dispatch, userCredentials]);
 
 	const handleInputChange = ({ target }) =>
 		setInput({

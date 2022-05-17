@@ -143,6 +143,7 @@ const Perfil = () => {
 			});
 		}
 	};
+
 	return (
 		<div>
 			<div className="bg-light my-3">
