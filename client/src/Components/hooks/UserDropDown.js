@@ -33,7 +33,7 @@ export const UserDropDown = () => {
                 window.location.href = "/perfil";
               }}
             >
-              <p>Ver Perfil</p>
+              Ver Perfil
             </button>
 
             <button className="dropdown-item">Mis Pedidos</button>
