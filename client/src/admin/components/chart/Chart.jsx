@@ -1,4 +1,5 @@
 import "./chart.scss";
+// import moment from 'moment'
 import {
   AreaChart,
   Area,
@@ -8,11 +9,25 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+const dayjs = require('dayjs')
+require('dayjs/locale/es')
+
+dayjs.extend(require('dayjs/plugin/utc'))
+dayjs.extend(require('dayjs/plugin/duration'))
+dayjs.extend(require('dayjs/plugin/relativeTime'))
+// let days = [];
+// let today = moment();
+// for (let i = 0; i < 6; i++){
+//    let day = today.subtract(i, 'days');
+//    days.push(day.format('dddd'));
+// }
+// console.log(days);
+
 const data = [
-  { name: "January", Total: 1200 },
-  { name: "February", Total: 2100 },
-  { name: "March", Total: 800 },
-  { name: "April", Total: 1600 },
+  { name: "Lunes", Total: 1200 },
+  { name: "Martes", Total: 2100 },
+  { name: "Miercoles", Total: 800 },
+  { name: "Jueves", Total: 1600 },
   { name: "May", Total: 900 },
   { name: "June", Total: 1700 },
 ];
