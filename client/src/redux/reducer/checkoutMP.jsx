@@ -4,9 +4,7 @@ import axios from "axios";
 export const getCheckoutMP = createAsyncThunk(
 	"checkout/getCheckoutMP",
 	async () => {
-		const response = await axios
-			.get('/api/checkout')
-			.catch((err) => {
+		await axios.get("/api/checkout").catch((err) => {
 			console.log(err);
 		});
 	}
@@ -25,7 +23,7 @@ const checkoutSlice = createSlice({
 			console.log("Checkout Datos MercadoPago Compra");
 		},
 		[getCheckoutMP.fulfilled]: (state, action) => {
-            console.log("Checkout Datos MercadoPago Compra", action.payload)
+			console.log("Checkout Datos MercadoPago Compra", action.payload);
 		},
 	},
 });
