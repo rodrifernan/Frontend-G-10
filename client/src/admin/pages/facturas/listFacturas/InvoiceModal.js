@@ -80,7 +80,7 @@ export const InvoiceModal = ({ invoice }) => {
 									</div>
 								</div>
 
-								<div className="row text-600 text-white bgc-default-tp1 py-25">
+								<div className=" row text-600 text-white bgc-default-tp1 py-25">
 									<div className="d-none d-sm-block col-1">
 										#
 									</div>
@@ -150,7 +150,7 @@ export const InvoiceModal = ({ invoice }) => {
 					<div className="modal-footer">
 						<button
 							type="button"
-							className="btn btn-secondary"
+							className="btn btn-color"
 							data-bs-dismiss="modal"
 						>
 							Cerrar

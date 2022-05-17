@@ -15,12 +15,9 @@ const Datatable = () => {
 	useEffect(() => {
 		dispatch(fetchProducts());
 	}, [dispatch]);
-	let products = useSelector(getAllProducts);
+	let data = useSelector(getAllProducts);
 
 	const [select, setSelection] = useState(null);
-
-	const [data] = useState(products);
-	console.log(data);
 
 	const handleRowSelection = (ids) => {
 		const selectedIDs = new Set(ids);

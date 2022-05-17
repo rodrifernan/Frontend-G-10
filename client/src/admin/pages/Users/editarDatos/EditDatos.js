@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { Input } from "../../../../Components/createProduct/Input";
+import { getAllUsers } from "../../../../redux/reducer/getAllUsers";
 import "./editDatos.css";
 
 export const EditDatos = ({
@@ -15,6 +17,7 @@ export const EditDatos = ({
 	userName,
 	idUser,
 }) => {
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [name, setName] = useState({ value: firstName, valid: null });
 	const [apellido, setApellido] = useState({ value: lastName, valid: null });
@@ -62,19 +65,16 @@ export const EditDatos = ({
 						).token,
 					},
 				};
-				await axios.put(
-					"/api/user",
-					formData,
-					user
-				);
-				navigate("/admin/users");
+				await axios.put("/api/user", formData, user);
 				//alert de exito
 				console.log(formData);
+				dispatch(getAllUsers());
 				swal(
 					"Exito!",
 					`se cambiaron los datos correctamente`,
 					"success"
 				);
+				navigate("/admin/users");
 			} else {
 				swal(
 					"Error!",
