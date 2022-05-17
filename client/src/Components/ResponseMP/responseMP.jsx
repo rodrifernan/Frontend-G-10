@@ -4,10 +4,6 @@ import { getOrderMP, postOrderMP } from '../../redux/reducer/getResponseMP';
 import jsPDF from 'jspdf';
 import './response.css';
 import logo from './LogoEcommerce.png';
-import {
-  cleanShoppingList,
-  cleanShoppingCart,
-} from '../../redux/reducer/shoppingCart';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -21,13 +17,8 @@ const ResponseMP = () => {
     if (!localStorage.getItem('shoppingCart') ||  !JSON.parse(localStorage.getItem('shoppingCart')).length ) {
       navigate('/');
     } else {
-      Promise.all([
-        dispatch(getOrderMP(getOrderMPEl)),
-        dispatch(postOrderMP()),
-      ]).then(data => {
-        dispatch(cleanShoppingList());
-        dispatch(cleanShoppingCart());
-      });
+       dispatch(getOrderMP(getOrderMPEl)),
+       dispatch(postOrderMP()),
     }
   }, []);
 
