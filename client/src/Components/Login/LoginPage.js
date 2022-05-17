@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
-import { Login } from './Login';
-import './LoginPage.css';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Login } from "./Login";
+import "./LoginPage.css";
+import { useNavigate } from "react-router-dom";
 
-export const LoginPage = ({ rute = '/' }) => {
-  const navigate = useNavigate();
+export const LoginPage = ({ rute = "/" }) => {
+	const navigate = useNavigate();
 
-  const redirect = () => navigate(rute);
+	const redirect = () => navigate(rute);
 
-  return (
-    <div className='loginPageContainer'>
-      <Login redirect={redirect} page={true} loginClass={'loginPage'} />
-    </div>
-  );
+	return (
+		<div className="loginPageContainer">
+			<Login redirect={redirect} page={true} loginClass={"loginPage"} />
+		</div>
+	);
 };

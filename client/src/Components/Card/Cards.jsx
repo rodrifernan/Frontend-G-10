@@ -205,6 +205,9 @@ const Card = ({
 																		index
 																	) => (
 																		<span
+																			key={
+																				index
+																			}
 																			className="fa fa-star checked"
 																			style={{
 																				color:
