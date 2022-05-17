@@ -66,7 +66,6 @@ export const EditDatos = ({
 					},
 				};
 				await axios.put("/api/user", formData, user);
-				navigate("/admin/users");
 				//alert de exito
 				console.log(formData);
 				dispatch(getAllUsers());
@@ -75,6 +74,7 @@ export const EditDatos = ({
 					`se cambiaron los datos correctamente`,
 					"success"
 				);
+				navigate("/admin/users");
 			} else {
 				swal(
 					"Error!",
