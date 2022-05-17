@@ -14,11 +14,14 @@ const ResponseMP = () => {
   let getOrderMPEl = useSelector(state => state.paymentOrderEG.paymentOrder);
   let getOrderAllEl = useSelector(state => state.paymentOrderEG.OrdenCompra);
   useEffect(() => {
-    if (!localStorage.getItem('shoppingCart') ||  !JSON.parse(localStorage.getItem('shoppingCart')).length ) {
+    if (
+      !localStorage.getItem('shoppingCart') ||
+      !JSON.parse(localStorage.getItem('shoppingCart')).length
+    ) {
       navigate('/');
     } else {
-       dispatch(getOrderMP(getOrderMPEl)),
-       dispatch(postOrderMP()),
+      dispatch(getOrderMP(getOrderMPEl));
+      dispatch(postOrderMP());
     }
   }, []);
 
