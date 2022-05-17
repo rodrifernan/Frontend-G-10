@@ -36,6 +36,7 @@ export const ProductsByUser = () => {
 							category={pr.categoryId}
 							genre={pr.genreId}
 							discount={pr.discount}
+							reviews={pr.reviews}
 						/>
 					))}
 				</div>
