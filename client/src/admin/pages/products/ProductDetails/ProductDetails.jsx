@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./ProductDetails.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { getAllProducts } from "../../../../redux/reducer/products";
 
 export const ProductDetails = () => {
+	const navigate = useNavigate();
 	//trae todas las ordenes
 	let productsAll = useSelector(getAllProducts);
 	//filtro por el numero de orden
@@ -18,6 +19,11 @@ export const ProductDetails = () => {
 
 	const [data] = useState(filterOrderbyNumberProduct[0]);
 	console.log(data);
+
+	//return table
+	const handleRegresar = () => {
+		navigate("/admin/products");
+	};
 
 	return (
 		<div className="ProductDetail__container">
@@ -84,6 +90,9 @@ export const ProductDetails = () => {
 						<img src={data.image[0]} alt="" />
 					</div>
 				</div>
+				<button className="btn btn-color" onClick={handleRegresar}>
+					Regresar
+				</button>
 			</div>
 		</div>
 	);
