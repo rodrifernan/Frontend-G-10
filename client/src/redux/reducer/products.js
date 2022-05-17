@@ -7,7 +7,15 @@ export const fetchProducts = createAsyncThunk(
     const response = await axios.get("/api/products").catch((err) => {
       console.log(err);
     });
-    return response.data;
+    const data=[]
+    for (const producto in response.data) {
+      //console.log(response.data[producto])
+      if (!response.data[producto].active) {
+        data.push(response.data[producto])
+      }
+      //console.log(data)
+    }
+    return data;//cambiar acá al final
   }
 );
 export const getByCategories = createAsyncThunk(
