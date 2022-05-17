@@ -80,6 +80,26 @@
   justify-content: space-between;
 }
 
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.buttonContainer button {
+  color: white;
+  margin: 0 0.2rem;
+  font-size: 1.5rem;
+}
+
+.buttonContainer button:first-child {
+  background-color: #2B1A53;
+}
+
+.buttonContainer button:last-child {
+  background-color: #A85CF9;
+}
+
 *::-webkit-scrollbar {
   width: 10px;
   background: #F1F1F1;
