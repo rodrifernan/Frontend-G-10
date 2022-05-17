@@ -75,8 +75,8 @@ const Home = () => {
     <>
       <Banner />
       <div className="col-12 d-flex mt-4  ">
-        <div className="col-6 ghost"></div>
-        <div className="col-xl-6 col-lg-6 col col-md-12 col-sm-12 col-12 filtrado d-flex justify-content-end">
+        
+        <div className="col-xl-6 col-lg-6 col col-md-12 col-sm-12 col-12 filtrado d-flex justify-content-center">
           <div className="col-6">
             <select
               className="form-select form-select-lg mb-1"
