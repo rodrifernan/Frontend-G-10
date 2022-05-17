@@ -84,6 +84,12 @@ export const ProductDetails = () => {
 				</div>
 				<hr className="divider" />
 				<div className="ProductDetail__container-item">
+					<h3 className="title__list">Activo</h3>
+					{data.active ? <div className="list__item"> false</div> : <div className="list__item"> true</div>}
+					
+				</div>
+				<hr className="divider" />
+				<div className="ProductDetail__container-item">
 					<h3 className="title__list">Imagen referencial</h3>
 					<div className="list__item">
 						{" "}
