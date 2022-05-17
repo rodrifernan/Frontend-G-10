@@ -26,10 +26,11 @@ const Home = () => {
     dispatch(getAllCategories());
   }, [dispatch]);
   const handleOnChange = (e) => {
-    dispatch(getByCategories(e.target.value));
+    
     if (e.target.value === "All") {
       dispatch(fetchProducts());
-    }
+    }else{dispatch(getByCategories(e.target.value));}
+    setCurrentPage(1)
   };
   let categories = useSelector(categoriesAll);
 
@@ -49,22 +50,18 @@ const Home = () => {
   const handleOnChangeOrder = (e) => {
     if (e.target.value === "sinalterar") {
       dispatch(fetchProducts());
-      setCurrentPage(1);
     } else if (e.target.value === "AaZ") {
       console.log(e.target.value);
       dispatch(sortByName());
-      setCurrentPage(1);
       console.log(products);
     } else if (e.target.value === "ZaA") {
       dispatch(sortByNameInversa());
-      setCurrentPage(1);
     } else if (e.target.value === "lowPrice") {
       dispatch(sortByPrice());
-      setCurrentPage(1);
     } else {
       dispatch(sortByPriceInversa());
-      setCurrentPage(1);
     }
+    setCurrentPage(1);
   };
   console.log(products);
   if (products.length === 0) {
@@ -75,8 +72,8 @@ const Home = () => {
     <>
       <Banner />
       <div className="col-12 d-flex mt-4  ">
-        <div className="col-6 ghost"></div>
-        <div className="col-xl-6 col-lg-6 col col-md-12 col-sm-12 col-12 filtrado d-flex justify-content-end">
+        
+        <div className="col-xl-6 col-lg-6 col col-md-12 col-sm-12 col-12 filtrado d-flex justify-content-center">
           <div className="col-6">
             <select
               className="form-select form-select-lg mb-1"
@@ -118,19 +115,17 @@ const Home = () => {
       </div>
       <div className="justify-content-center  d-flex flex-wrap">
         {/*Acá empiezan los productos */}
-        {products.length ? (
+        {currentProducts.length!==0 && (
           <Paginado
             className="paginado"
             prodPerPage={prodsPerPage}
             allProducts={products.length}
             paginado={paginado}
           />
-        ) : (
-          <div>no hay productos</div>
         )}
-        <div className="wrapper">
-          {Array.isArray(currentProducts) ? (
-            currentProducts.map((pr) => {
+        {currentProducts.length ? (
+          <div className="wrapper">
+          {currentProducts.map((pr) => {
               return (
                 <Card
                   key={pr.id}
@@ -147,13 +142,13 @@ const Home = () => {
                   reviews={pr.reviews}
                 />
               );
-            })
+          })}
+            </div>
           ) : (
-            <div className="text-light text-center">
-              <h3>{products}</h3>
+            <div className="text-dark text-center">
+              <h3 className="h3-prod">No se encuentran productos</h3>
             </div>
           )}
-        </div>
       </div>
     </>
   );
