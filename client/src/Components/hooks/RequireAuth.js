@@ -1,36 +1,27 @@
-import React from "react";
-import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { useLocation, Navigate, Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export const RequireAuth = () => {
-	// const userCredentials = useSelector(({ login }) => login.userCredentials);
-	const userCredentials = JSON.parse(
-		localStorage.getItem("userCredentials")
-	).userName;
+const RequireAuth = ({ allowedRole }) => {
+  const location = useLocation();
+  const auth = useSelector(({ login }) => login.userCredentials);
 
-	console.log(userCredentials);
-	const auth = userCredentials === "Johannes" ? true : false;
-	const location = useLocation();
+  if (allowedRole === 'user') {
+    return localStorage.getItem('userCredentials') ? (
+      <Outlet />
+    ) : (
+      <Navigate to='/login' state={{ from: location }} replace />
+    );
+  }
 
-	//   Swal.fire({
-	//     position: 'center',
-	//     icon: 'error',
-	//     title: 'Lo sentimos, pagina restringida',
-	//     timer: 1500,
-	//   });
-
-	return auth ? (
-		<Outlet />
-	) : (
-		<>
-			<Navigate to="/" state={{ from: location }} replace />
-			{/* { 
-        Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Lo sentimos, pagina restringida',
-            timer: 1500,
-          })
-      } */}
-		</>
-	);
+  if (allowedRole === 'root') {
+    return JSON.parse(localStorage.getItem('userCredentials'))?.root ? (
+      <Outlet />
+    ) : JSON.parse(localStorage.getItem('userCredentials')) ? (
+      <Navigate to='/404' state={{ from: location }} replace />
+    ) : (
+      <Navigate to='/login' state={{ from: location }} replace />
+    );
+  }
 };
+
+export default RequireAuth;
