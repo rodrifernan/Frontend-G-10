@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./OrderDetails.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { allOrdersRegisters } from "../../../../redux/reducer/getAllOrders";
 
 export const OrderDetails = () => {
+	const navigate = useNavigate();
+
 	//trae todas las ordenes
 	let orderAll = useSelector(allOrdersRegisters);
 	//filtro por el numero de orden
@@ -16,6 +18,9 @@ export const OrderDetails = () => {
 	// console.log(filterOrderbyNumberProduct[0]);
 
 	const [data] = useState(filterOrderbyNumberProduct[0]);
+	const handleRegresar = () => {
+		navigate("/admin/ordenes");
+	};
 
 	return (
 		<div className="orderDetail__container">
@@ -66,6 +71,9 @@ export const OrderDetails = () => {
 						{data.user.firstName} {data.user.lastName}{" "}
 					</div>
 				</div>
+				<button className="btn btn-color" onClick={handleRegresar}>
+					Regresar
+				</button>
 			</div>
 		</div>
 	);
