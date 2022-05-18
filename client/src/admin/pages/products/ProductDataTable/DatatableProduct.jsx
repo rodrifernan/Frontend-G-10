@@ -5,30 +5,27 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-	fetchProducts,
-	getAllProducts,
-} from "../../../../redux/reducer/products";
+
+import { getProductsAdmin } from "../../../../redux/reducer/getProductsAdmin";
 
 const Datatable = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(fetchProducts());
+		dispatch(getProductsAdmin());
 	}, [dispatch]);
-	let data = useSelector(getAllProducts);
-	const formatedData = data.map(e=>{
-		return{
-			id : e.id,
-			name:e.name,
-			price:e.price,
-			brand:e.brand,
-			color:e.color,
-			stock:e.stock,
-			category:e.category,
-			active: e.category?"Si": "No"
-
-		}
-	})
+	let data = useSelector((state) => state.productsAdmin.productsAdmin);
+	const formatedData = data.map((e) => {
+		return {
+			id: e.id,
+			name: e.name,
+			price: e.price,
+			brand: e.brand,
+			color: e.color,
+			stock: e.stock,
+			category: e.category,
+			active: e.category ? "Si" : "No",
+		};
+	});
 	console.log(formatedData);
 
 	const [select, setSelection] = useState(null);
