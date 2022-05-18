@@ -58,7 +58,7 @@ const Enlaces = () => {
 							data-bs-target='#loginModal'
 						>
 							Panel-Admin
-						</button></Link>:<div>nada</div>}
+						</button></Link>:<></>}
 					<UserDropDown />
 					</>
 				) : (
