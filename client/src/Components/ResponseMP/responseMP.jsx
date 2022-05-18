@@ -4,7 +4,7 @@ import { getOrderMP, postOrderMP } from '../../redux/reducer/getResponseMP';
 import jsPDF from 'jspdf';
 import './response.css';
 import logo from './LogoEcommerce.png';
-import {
+import shoppingCart, {
   cleanShoppingList,
   cleanShoppingCart,
 } from '../../redux/reducer/shoppingCart';
@@ -40,8 +40,7 @@ const ResponseMP = () => {
 
   const genPDF = async () => {
     try {
-      var doc = new jsPDF('p','mm',[720, 660]);
-
+      var doc = new jsPDF('p', 'mm', [720, 660]);
 
       var pdfjs = document.getElementById('content');
       await doc.html(pdfjs, {
@@ -184,10 +183,10 @@ const ResponseMP = () => {
               <div className='row mt-3'>
                 <div className='col-12 col-sm-5 text-grey text-90 order-first order-sm-last ml-auto'>
                   <div className='row my-2 align-items-center bgc-primary-l3 p-2'>
-                    <div className='col-7 text-right'>Total a Pagar $</div>
+                    <div className='col-7 text-right'>invoice / total $</div>
                     <div className='col-5'>
                       <span className='text-150 text-success-d3 opacity-2'>
-                        455
+                        {invoice.total}
                       </span>
                     </div>
                   </div>
