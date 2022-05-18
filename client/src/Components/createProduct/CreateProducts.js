@@ -66,12 +66,12 @@ export const CreateProducts = ({
 	const regex = {
 		name: /^.{1,50}$/,
 		description: /^.{1,2000}$/,
-		price: /[1-9]/,
+		price: /^\d+$/,
 		brand: /^.{1,20}$/,
 		color: /^.{1,20}$/,
-		warranty: /[1-9]/,
-		discount: /[1-9]/,
-		stock: /[1-9]/,
+		warranty: /^\d+$/,
+		discount: /^\d+$/,
+		stock: /^\d+$/,
 		genre: /^.{20,200}$/,
 	};
 	//submit del fomr
@@ -128,7 +128,7 @@ export const CreateProducts = ({
 						"success"
 					);
 					// // push to home
-					navigate("/");
+					navigate("/perfil");
 				} else {
 					console.log("submit Edit");
 					setFormvalid(true);
@@ -476,7 +476,9 @@ export const CreateProducts = ({
 						type="submit"
 						className="create__button btn btn-primary"
 					>
-						Submit
+						{isEdit === undefined
+							? "Crear Producto"
+							: "Actualizar Producto"}
 					</button>
 				</form>
 			</div>
