@@ -32,8 +32,8 @@ const Card = ({
 		setEdit(!edit);
 	};
 
-  const addShopping = ({ target }) => {
-    dispatch(addShoppingList(id));
+	const addShopping = ({ target }) => {
+		dispatch(addShoppingList(id));
 
 		if (localStorage.getItem("userCredentials")) {
 			target.parentElement.disabled = true;
@@ -56,9 +56,7 @@ const Card = ({
 	};
 
 	const addAWish = ({ target }) => {
-
-		if(localStorage.getItem("userCredentials")){
-
+		if (localStorage.getItem("userCredentials")) {
 			target.parentElement.disabled = true;
 			target.disabled = true;
 			toast
@@ -73,23 +71,20 @@ const Card = ({
 						(target.disabled = false)
 					)
 				);
-		}else {
+		} else {
 			try {
-
-				toast.error("Inicie sesion...")
+				toast.error("Inicie sesion...");
 
 				window.bootstrap.Modal.getOrCreateInstance(
 					document.getElementById(`modal${id}`)
 				).hide();
 				window.bootstrap.Modal.getOrCreateInstance(
-					document.getElementById('loginModal')
+					document.getElementById("loginModal")
 				).show();
 			} catch (error) {
 				console.log(error);
 			}
 		}
-
-
 	};
 
 	return (
@@ -370,17 +365,27 @@ const Card = ({
 
 										{navigate.pathname !== "/perfil" ? (
 											<div className="buttonContainer">
-												<button
-													type="button"
-													className="btn"
-													onClick={addShopping}
-													data-bs-toggle="tooltip"
-													data-bs-placement="top"
-													data-bs-custom-class="custom-tooltip"
-													title="Agregar al Carrito de compras."
-												>
-													<i className="fas fa-cart-plus"></i>
-												</button>
+												{stock > 0 ? (
+													<button
+														type="button"
+														className="btn"
+														onClick={addShopping}
+														data-bs-toggle="tooltip"
+														data-bs-placement="top"
+														data-bs-custom-class="custom-tooltip"
+														title="Agregar al Carrito de compras."
+													>
+														<i className="fas fa-cart-plus"></i>
+													</button>
+												) : (
+													<button
+														className="btn btn-danger"
+														disabled
+													>
+														No Disponible
+													</button>
+												)}
+
 												<button
 													type="button"
 													className="btn"
