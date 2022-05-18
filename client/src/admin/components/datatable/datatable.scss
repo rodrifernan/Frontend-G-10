@@ -76,3 +76,24 @@
     }
   }
 }
+
+.datagrid{
+  /* .MuiButton-root{
+    color: purple;
+  } */
+  //color: purple;
+  >div{
+    //color: purple;
+    //margin-top: 3rem;
+    >div{
+      //color: purple;
+      >div{
+        //color: purple;
+        >button{
+          color: #a85cf9;
+          
+        }
+      }
+    }
+  }
+}
