@@ -37,7 +37,7 @@ export const SendEmail = () => {
       <div className="text-center mb-4">
         <h3>Proceso de reelaboracion de contraseña</h3>
       </div>
-      <div className="wrapper text-center">
+      <div className="contenido text-center">
         <h5>
           En el recuadro de abajo, escriba el email con el que te registraste.
           Luego ve al correo que te mandaremos y sigue las instrucciones
@@ -54,7 +54,7 @@ export const SendEmail = () => {
           <button
             onClick={handlerSendEmail}
             disabled={error.validate === false}
-            className=" my-4 text-light btn btn-info"
+            className=" miBoton my-4 text-light btn btn-info"
           >
             Enviar correo
           </button>

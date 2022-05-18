@@ -1,4 +1,4 @@
-.wrapper{
+.contenido{
     display: flex;
     flex-flow: column;
 }
@@ -8,9 +8,14 @@
     margin-top: 1rem !important;
     margin-bottom: 0.8rem;
 }
-.text-center>h3{
-    margin-bottom: 1rem;
+.contenido>h3 {
+    margin-bottom: 2rem;
 }
-.btn{
-    margin-top: 0 !important;
+
+.contenido>h5{
+    margin-bottom: 2rem;
 }
+
+.miBoton{
+    margin-top: 1rem !important;
+} 
