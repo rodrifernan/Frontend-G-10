@@ -62,7 +62,7 @@ const paymentIdSlice = createSlice({
     },
     [postOrderMP.fulfilled]: (state, action) => {
       console.log('Trayendo Nro Orden MercadoPago Compra', action.payload);
-      return { ...state, invoice: { ...action.payload.invoice } };
+      return { ...state, invoice: { ...action.payload.invoice }, reviews: action.payload.reviews };
     },
   },
 });

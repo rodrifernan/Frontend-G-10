@@ -27,8 +27,8 @@ const ResponseMP = () => {
     } else {
       Promise.all([dispatch(getOrderMP()), dispatch(postOrderMP())]).then(
         () => {
-          dispatch(cleanShoppingList());
-          dispatch(cleanShoppingCart());
+          // dispatch(cleanShoppingList());
+          // dispatch(cleanShoppingCart());
         }
       );
     }
