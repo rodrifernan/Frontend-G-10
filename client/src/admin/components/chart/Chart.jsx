@@ -12,19 +12,10 @@ import {
 } from "recharts";
 import { useSelector } from "react-redux";
 
-const dayjs = require("dayjs");
-require("dayjs/locale/es");
+dayjs.locale("es");
+dayjs.extend(localeData);
 
-dayjs.extend(require("dayjs/plugin/utc"));
-dayjs.extend(require("dayjs/plugin/duration"));
-dayjs.extend(require("dayjs/plugin/relativeTime"));
-// let days = [];
-// let today = moment();
-// for (let i = 0; i < 6; i++){
-//    let day = today.subtract(i, 'days');
-//    days.push(day.format('dddd'));
-// }
-// console.log(days);
+// console.log(dayjs.weekdays() );
 
 let days = [];
 let today = dayjs();
