@@ -262,13 +262,13 @@ export const Form = () => {
 							</span>
 							<input
 								type="text"
-								name="idPersonal"
+								name="Documento de identidad"
 								onChange={handleOnchangeActivity}
 								className={
 									"form-control " +
 									(formErrors.idPersonal && "is-invalid")
 								}
-								placeholder="ID personal."
+								placeholder="ID / DNI / CI."
 								required
 							/>
 
