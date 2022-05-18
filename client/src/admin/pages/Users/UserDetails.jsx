@@ -58,7 +58,7 @@ export const UserDetails = () => {
 				</div>
 				<hr className="divider" />
 				<div className="userDetail__container-item">
-					<h3 className="title__list">ID personal</h3>
+					<h3 className="title__list">Documento de Identidad</h3>
 					<div className="list__item">{data.idPersonal} </div>
 				</div>
 				<hr className="divider" />
