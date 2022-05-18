@@ -54,8 +54,6 @@ const Enlaces = () => {
 					{admin ? <Link to="/admin"><button
 							type='button'
 							className={'btn registrarse btn text-white'}
-							data-bs-toggle='modal'
-							data-bs-target='#loginModal'
 						>
 							Panel-Admin
 						</button></Link>:<></>}
