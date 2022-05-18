@@ -37,7 +37,7 @@ const Featured = () => {
   // console.log(sumaVentaHoy);
 
   const montoMeta = 12000
-  const porcentajeMeta = sumaVentaHoy *100 /montoMeta
+  const porcentajeMeta = (sumaVentaHoy *100 /montoMeta).toFixed(2)
   console.log(porcentajeMeta);
 
   return (
