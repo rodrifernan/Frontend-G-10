@@ -31,7 +31,7 @@ const Featured = () => {
   // console.log(invoiceArray);
 
   const sumaVentaHoy = invoiceArray
-    .filter((e) => e.fecha === days[0])
+    .filter((e) => e.fecha === e.fecha)
     .map((e) => e.total)
     .reduce((pvalue, current) => pvalue + current, 0);
   // console.log(sumaVentaHoy);
