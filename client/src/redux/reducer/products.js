@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchProducts = createAsyncThunk(
+export const fetchProducts = createAsyncThunk(//Trae los productos para mostrtar (Solo los activos)
   "products/fetchProducts",
   async () => {
     const response = await axios.get("/api/products").catch((err) => {
@@ -10,14 +10,26 @@ export const fetchProducts = createAsyncThunk(
     const data=[]
     for (const producto in response.data) {
       //console.log(response.data[producto])
-      if (!response.data[producto].active) {
+      if (response.data[producto].active) {
         data.push(response.data[producto])
       }
       //console.log(data)
     }
-    return data;//cambiar acá al final
+    return data;
   }
 );
+
+export const fetchProductsAdmin = createAsyncThunk(//Para que le traiga todos al admin(activos/desactivos)
+  "products/fetchProductsAdmin",
+  async () => {
+    const response = await axios.get("/api/productsAdmin").catch((err) => {
+      console.log(err);
+    });
+    
+    return response.data;//cambiar acá al final
+  }
+);
+
 export const getByCategories = createAsyncThunk(
   "products/getByCategories",
   async (payload) => {
@@ -43,6 +55,7 @@ export const getByName = createAsyncThunk(
 
 const initialState = {
   products: [],
+  productsAdmin: []
 };
 
 const productsSlice = createSlice({
@@ -71,7 +84,13 @@ const productsSlice = createSlice({
       console.log("pending");
     },
     [fetchProducts.fulfilled]: (state, action) => {
-      return { products: action.payload };
+      return { productsAdmin: action.payload };
+    },
+    [fetchProductsAdmin.pending]: () => {
+      console.log("pending");
+    },
+    [fetchProductsAdmin.fulfilled]: (state, action) => {
+      return { productsAdmin: action.payload };
     },
     [getByName.pending]: () => {
       console.log("Pendinente");

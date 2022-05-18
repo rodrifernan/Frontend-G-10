@@ -6,14 +6,15 @@ import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-	fetchProducts,
+	//fetchProducts,
+	fetchProductsAdmin,
 	getAllProducts,
 } from "../../../../redux/reducer/products";
 
 const Datatable = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(fetchProducts());
+		dispatch(fetchProductsAdmin());
 	}, [dispatch]);
 	let data = useSelector(getAllProducts);
 
