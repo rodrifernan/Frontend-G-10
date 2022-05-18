@@ -215,7 +215,7 @@ export const ShoppingCart = ({ login = false }) => {
               </h3>
             </div>
           )}
-          <div className=' d-flex py-3 mx-3'>
+          <div className=' d-flex py-3 mx-3 justify-content-between'>
             <div className='col-6'>
               <button
                 className='btn text-light btn-warning'

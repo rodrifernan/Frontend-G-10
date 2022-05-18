@@ -33,7 +33,7 @@ const Card = ({
   };
 
   const addShopping = ({ target }) => {
-    dispatch(addShoppingList(id));
+    dispatch(addShoppingList({id, stock}));
 
     if (localStorage.getItem('userCredentials')) {
       target.parentElement.disabled = true;

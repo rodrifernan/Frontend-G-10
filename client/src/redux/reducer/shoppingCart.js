@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-
 import axios from 'axios';
 
 export const getShoppingCart = createAsyncThunk(
@@ -116,11 +115,11 @@ const shoppingCartSlice = createSlice({
   name: 'shoppingCart',
   initialState,
   reducers: {
-    addShoppingList: ({ shoppingList }, { payload }) => {
-      const product = shoppingList.find(item => item.productId === payload);
+    addShoppingList: ({ shoppingList }, { payload: { id, stock } }) => {
+      const product = shoppingList.find(item => item.productId === id);
       product
-        ? ++product.quantity
-        : shoppingList.push({ productId: payload, quantity: 1 });
+        ? product.quantity + 1  <= stock && ++product.quantity
+        : shoppingList.push({ productId: id, quantity: 1 });
 
       localStorage.setItem('shoppingCart', JSON.stringify(shoppingList));
     },
@@ -159,8 +158,7 @@ const shoppingCartSlice = createSlice({
       return { shoppingList: payload };
     },
 
-    [addGuestShoppingCart.fulfilled]: (state, { payload }) => {
-    },
+    [addGuestShoppingCart.fulfilled]: (state, { payload }) => {},
   },
 });
 

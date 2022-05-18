@@ -6,6 +6,12 @@ export const ButtonCounter = ({ init = 0, cb, id, max }) => {
   const [counter, setCounter] = useState(init);
 
   useEffect(() => {
+
+    if(init > max){
+      setCounter(max)
+      cb(max, id);
+    }
+
     cb(counter, id);
     inputNumber.current.value = counter;
   }, [counter]);
