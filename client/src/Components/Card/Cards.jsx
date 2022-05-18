@@ -118,7 +118,7 @@ const Card = ({
                 }}
               ></span>
             ))}
-            <span className='mx-1'>({reviews.length + 1})</span>
+            <span className='mx-1'>({reviews.length})</span>
           </div>
         ) : (
           <></>
