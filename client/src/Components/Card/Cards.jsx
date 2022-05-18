@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import './card.css';
-import { postWish } from '../../redux/reducer/getWishilist';
-import { useDispatch } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
+import React, { useState } from "react";
+import "./card.css";
+import { postWish } from "../../redux/reducer/getWishilist";
+import { useDispatch } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
 import {
   addShoppingList,
   postShoppingCart,
-} from '../../redux/reducer/shoppingCart';
-import { useLocation } from 'react-router-dom';
-import { CreateProducts } from '../createProduct/CreateProducts';
+} from "../../redux/reducer/shoppingCart";
+import { useLocation } from "react-router-dom";
+import { CreateProducts } from "../createProduct/CreateProducts";
 
 const Card = ({
   description,
@@ -33,14 +33,14 @@ const Card = ({
   };
 
   const addShopping = ({ target }) => {
-    dispatch(addShoppingList({id, stock}));
+    dispatch(addShoppingList({ id, stock }));
 
-    if (localStorage.getItem('userCredentials')) {
+    if (localStorage.getItem("userCredentials")) {
       target.parentElement.disabled = true;
       target.disabled = true;
       toast
         .promise(dispatch(postShoppingCart(id)), {
-          loading: 'Guardando...',
+          loading: "Guardando...",
           success: <b>Agregado al carrito 🛒</b>,
           error: <b>No se puedo agregar al carrito 😿</b>,
         })
@@ -50,17 +50,17 @@ const Card = ({
           )
         );
     } else {
-      toast.success('Agregado al carrito 🛒');
+      toast.success("Agregado al carrito 🛒");
     }
   };
 
   const addAWish = ({ target }) => {
-    if (localStorage.getItem('userCredentials')) {
+    if (localStorage.getItem("userCredentials")) {
       target.parentElement.disabled = true;
       target.disabled = true;
       toast
         .promise(dispatch(postWish(id)), {
-          loading: 'Guardando...',
+          loading: "Guardando...",
           success: <b>Agregado a tu lista de deseos 😍</b>,
           error: <b>No se puedo agregar😿</b>,
         })
@@ -71,13 +71,13 @@ const Card = ({
         );
     } else {
       try {
-        toast.error('Inicie sesion...');
+        toast.error("Inicie sesion...");
 
         window.bootstrap.Modal.getOrCreateInstance(
           document.getElementById(`modal${id}`)
         ).hide();
         window.bootstrap.Modal.getOrCreateInstance(
-          document.getElementById('loginModal')
+          document.getElementById("loginModal")
         ).show();
       } catch (error) {
         console.log(error);
@@ -86,184 +86,184 @@ const Card = ({
   };
 
   return (
-    <div className='d-flex flex-wrap'>
-      <Toaster position='top-center' reverseOrder={false} />
+    <div className="d-flex flex-wrap">
+      <Toaster position="top-center" reverseOrder={false} />
       <div
-        className='card position-relative'
-        type='button'
-        data-bs-toggle='modal'
+        className="card position-relative"
+        type="button"
+        data-bs-toggle="modal"
         data-bs-target={`#modal${id}`}
       >
         {reviews?.length ? (
           <div
-            className='generalRanking'
+            className="generalRanking"
             style={{
-              position: 'absolute',
-              top: '0',
-              right: '5px',
-              fontSize: '1rem',
+              position: "absolute",
+              top: "0",
+              right: "5px",
+              fontSize: "1rem",
               zIndex: 100,
             }}
           >
             {[...Array(5)].map((item, index) => (
               <span
                 key={index}
-                className='fa fa-star checked'
+                className="fa fa-star checked"
                 style={{
                   color:
                     index + 1 <=
                     reviews?.reduce((a, b) => a + b.rating, 0) / reviews.length
-                      ? 'gold'
-                      : 'gray',
+                      ? "gold"
+                      : "gray",
                 }}
               ></span>
             ))}
-            <span className='mx-1'>({reviews.length})</span>
+            <span className="mx-1">({reviews.length})</span>
           </div>
         ) : (
           <></>
         )}
 
-        <img className='card-img-top' src={image[0]} alt='foto' />
+        <img className="card-img-top" src={image[0]} alt="foto" />
 
-        <div className='card-body'>
-          <h5 className='card-title'>{name}</h5>
+        <div className="card-body">
+          <h5 className="card-title">{name}</h5>
           <span className={`badge ${category}`}>{category}</span>
-          <p className='card__precio'>Precio: ${price}</p>
+          <p className="card__precio">Precio: ${price}</p>
         </div>
       </div>
       {/* inicio modal */}
       <div
-        className='modal fade'
-        id={'modal' + id}
-        tabIndex='-1'
-        aria-labelledby={'modalLabel' + id}
-        aria-hidden='true'
+        className="modal fade"
+        id={"modal" + id}
+        tabIndex="-1"
+        aria-labelledby={"modalLabel" + id}
+        aria-hidden="true"
       >
         {!edit ? (
-          <div className='modal-dialog modal-lg'>
-            <div className='modal-content'>
-              <div className='modal-body'>
-                <div className='d-flex'>
-                  <div className='position-relative' style={{ width: '50%' }}>
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-body">
+                <div className="d-flex">
+                  <div className="position-relative" style={{ width: "50%" }}>
                     <div
-                      className='generalRanking'
+                      className="generalRanking"
                       style={{
-                        position: 'absolute',
-                        top: '0',
-                        right: '0',
-                        fontSize: '1.5rem',
+                        position: "absolute",
+                        top: "0",
+                        right: "0",
+                        fontSize: "1.5rem",
                         zIndex: 100,
                       }}
                     >
                       {[...Array(5)].map((item, index) => (
                         <span
                           key={index}
-                          className='fa fa-star checked'
+                          className="fa fa-star checked"
                           style={{
                             color:
                               index + 1 <=
                               reviews?.reduce((a, b) => a + b.rating, 0) /
                                 reviews?.length
-                                ? 'gold'
-                                : 'gray',
+                                ? "gold"
+                                : "gray",
                           }}
                         ></span>
                       ))}
                     </div>
 
                     <div
-                      id={'carousel' + id}
-                      className='carousel carousel-dark slide'
-                      data-bs-ride='carousel'
+                      id={"carousel" + id}
+                      className="carousel carousel-dark slide"
+                      data-bs-ride="carousel"
                     >
-                      <div className='carousel-indicators'>
+                      <div className="carousel-indicators">
                         {image.map((url, index) => (
                           <button
                             key={index}
-                            type='button'
-                            data-bs-target={'#carousel' + id}
+                            type="button"
+                            data-bs-target={"#carousel" + id}
                             data-bs-slide-to={index}
-                            className={index === 0 ? 'active' : ''}
-                            aria-current={index === 0 && 'true'}
-                            aria-label={'Slide ' + index + 1}
+                            className={index === 0 ? "active" : ""}
+                            aria-current={index === 0 && "true"}
+                            aria-label={"Slide " + index + 1}
                           ></button>
                         ))}
                       </div>
-                      <div className='carousel-inner'>
+                      <div className="carousel-inner">
                         {image.map((url, index) => (
                           <div
                             key={index}
                             className={
-                              'carousel-item ' + (index === 0 && 'active')
+                              "carousel-item " + (index === 0 && "active")
                             }
-                            data-bs-interval='5000'
+                            data-bs-interval="5000"
                           >
                             <img
                               src={url}
-                              className='d-block w-100'
+                              className="d-block w-100"
                               style={{
-                                height: '20rem',
+                                height: "20rem",
                               }}
-                              alt='...'
+                              alt="..."
                             />
                           </div>
                         ))}
                       </div>
                       <button
-                        className='carousel-control-prev'
-                        type='button'
-                        data-bs-target={'#carousel' + id}
-                        data-bs-slide='prev'
+                        className="carousel-control-prev"
+                        type="button"
+                        data-bs-target={"#carousel" + id}
+                        data-bs-slide="prev"
                       >
                         <span
-                          className='carousel-control-prev-icon'
-                          aria-hidden='true'
+                          className="carousel-control-prev-icon"
+                          aria-hidden="true"
                         ></span>
-                        <span className='visually-hidden'>Previous</span>
+                        <span className="visually-hidden">Previous</span>
                       </button>
                       <button
-                        className='carousel-control-next'
-                        type='button'
-                        data-bs-target={'#carousel' + id}
-                        data-bs-slide='next'
+                        className="carousel-control-next"
+                        type="button"
+                        data-bs-target={"#carousel" + id}
+                        data-bs-slide="next"
                       >
                         <span
-                          className='carousel-control-next-icon'
-                          aria-hidden='true'
+                          className="carousel-control-next-icon"
+                          aria-hidden="true"
                         ></span>
-                        <span className='visually-hidden'>Next</span>
+                        <span className="visually-hidden">Next</span>
                       </button>
                     </div>
 
-                    <div className='reviewsContainer'>
-                      <span className='reviewsTitle'>Reseñas del producto</span>
+                    <div className="reviewsContainer">
+                      <span className="reviewsTitle">Reseñas del producto</span>
 
                       {reviews?.length ? (
-                        <div className='reviewList'>
-                          {reviews?.map(review => (
-                            <div key={review.id} className='reviewContainer'>
-                              <div className='reviewHeader'>
-                                <span className='userReviewDetails'>
-                                  Por {review.user.userName} el{' '}
+                        <div className="reviewList">
+                          {reviews?.map((review) => (
+                            <div key={review.id} className="reviewContainer">
+                              <div className="reviewHeader">
+                                <span className="userReviewDetails">
+                                  Por {review.user.userName} el{" "}
                                   {review.createdAt.substring(0, 10)}
                                 </span>
-                                <div className='userRating'>
+                                <div className="userRating">
                                   {[...Array(5)].map((item, index) => (
                                     <span
                                       key={index}
-                                      className='fa fa-star checked'
+                                      className="fa fa-star checked"
                                       style={{
                                         color:
                                           index + 1 <= review.rating
-                                            ? 'gold'
-                                            : 'gray',
+                                            ? "gold"
+                                            : "gray",
                                       }}
                                     ></span>
                                   ))}
                                 </div>
                               </div>
-                              <span className='reviewComment'>
+                              <span className="reviewComment">
                                 {review.comment}
                               </span>
                             </div>
@@ -274,11 +274,14 @@ const Card = ({
                       )}
                     </div>
                   </div>
-                  <div className='text-left' style={{ width: '50%', paddingLeft: '5px'}}>
+                  <div
+                    className="text-left"
+                    style={{ width: "50%", paddingLeft: "5px" }}
+                  >
                     <p>
-                      <b>Nombre:</b> {name}{' '}
+                      <b>Nombre:</b> {name}{" "}
                     </p>
-                    <p className='modal__description'>
+                    <p className="modal__description">
                       <b>Descripcion:</b> {description}
                     </p>
                     <p>
@@ -295,39 +298,39 @@ const Card = ({
                     </p>
                     <p>
                       <b>Garantia:</b>
-                      Garantia: {warranty} {warranty > 1 ? 'años' : 'año'}
+                      Garantia: {warranty} {warranty > 1 ? "años" : "año"}
                     </p>
 
-                    {navigate.pathname !== '/perfil' ? (
-                      <div className='buttonContainer'>
+                    {navigate.pathname !== "/perfil" ? (
+                      <div className="buttonContainer">
                         {stock > 0 ? (
                           <button
-                            type='button'
-                            className='btn'
+                            type="button"
+                            className="btn"
                             onClick={addShopping}
-                            data-bs-toggle='tooltip'
-                            data-bs-placement='top'
-                            data-bs-custom-class='custom-tooltip'
-                            title='Agregar al Carrito de compras.'
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            data-bs-custom-class="custom-tooltip"
+                            title="Agregar al Carrito de compras."
                           >
-                            <i className='fas fa-cart-plus'></i>
+                            <i className="fas fa-cart-plus"></i>
                           </button>
                         ) : (
-                          <button className='btn btn-danger' disabled>
+                          <button className="btn btn-danger" disabled>
                             No Disponible
                           </button>
                         )}
 
                         <button
-                          type='button'
-                          className='btn'
+                          type="button"
+                          className="btn"
                           onClick={addAWish}
-                          data-bs-toggle='tooltip'
-                          data-bs-placement='top'
-                          data-bs-custom-class='custom-tooltip'
-                          title='Agregar a la lista de deseos.'
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          title="Agregar a la lista de deseos."
                         >
-                          <i className='fas fa-heart'></i>
+                          <i className="fas fa-heart"></i>
                         </button>
                       </div>
                     ) : (
@@ -336,9 +339,9 @@ const Card = ({
                   </div>
                 </div>
               </div>
-              {navigate.pathname === '/perfil' ? (
-                <div className='modal-footer'>
-                  <button className='btn btn-warning' onClick={handleEdit}>
+              {navigate.pathname === "/perfil" ? (
+                <div className="modal-footer">
+                  <button className="btn btn-warning" onClick={handleEdit}>
                     Editar
                   </button>
                 </div>
@@ -348,21 +351,21 @@ const Card = ({
             </div>
           </div>
         ) : (
-          <div className='modal-dialog modal-lg'>
-            <div className='modal-content'>
-              <div className='modal-header'>
-                <h5 className='modal-title' id={'modalLabel' + id}>
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id={"modalLabel" + id}>
                   Modal title
                 </h5>
                 <button
-                  type='button'
-                  className='btn-close'
-                  data-bs-dismiss='modal'
-                  aria-label='Close'
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
                   onClick={handleEdit}
                 ></button>
               </div>
-              <div className='modal-body'>
+              <div className="modal-body">
                 <CreateProducts
                   editDescription={description}
                   editName={name}
@@ -379,7 +382,7 @@ const Card = ({
                   isEdit={true}
                 />
               </div>
-              <div className='modal-footer'></div>
+              <div className="modal-footer"></div>
             </div>
           </div>
         )}

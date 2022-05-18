@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-	persistReducer,
-	FLUSH,
-	REHYDRATE,
-	PAUSE,
-	PERSIST,
-	PURGE,
-	REGISTER,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import productsSlice from "./reducer/products";
@@ -30,51 +30,45 @@ import invoice from "./reducer/invoice";
 import userBanSlice from "./reducer/userBan";
 import AllinvoiceSlice from "./reducer/AllInvoices";
 import productsAdminSlice from "./reducer/getProductsAdmin";
-
 import sale from "./reducer/sale";
 import review from "./reducer/review";
-
+import sendEmailSlice from "./reducer/forgot-password";
 
 const persistConfig = { key: "root", version: 1, storage };
 const persistedReducer = persistReducer(persistConfig, carritoReducer);
-export const store = configureStore({
-	reducer: {
-		productsAdmin: productsAdminSlice,
-		genres: genresSlice,
-		products: productsSlice,
-		user: userSlice,
-		categories: categoriesSlice,
-		carrito: persistedReducer,
-		login,
-		userPost,
-		shoppingCart,
-		invoice,
-		sale,
-		review,
-		perfil: perfilSlice,
-		wish: wishSlice,
-		productsByUser: productsByUserSlice,
-		userAll: allUserSlice,
-		orderAll: allOrderSlice,
-		Allinvoices: AllinvoiceSlice,
-		userBan: userBanSlice,
 
-		//paymentId : paymentPM,
-		paymentOrderEG: paymentOrderPM,
-		checkout: checkoutMP,
-		newPass: newPassSlice,
-	},
-	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({
-			serializableCheck: {
-				ignoredActions: [
-					FLUSH,
-					REHYDRATE,
-					PAUSE,
-					PERSIST,
-					PURGE,
-					REGISTER,
-				],
-			},
-		}),
+export const store = configureStore({
+  reducer: {
+    productsAdmin: productsAdminSlice,
+    genres: genresSlice,
+    products: productsSlice,
+    user: userSlice,
+    categories: categoriesSlice,
+    carrito: persistedReducer,
+    login,
+    userPost,
+    shoppingCart,
+    invoice,
+    sale,
+    review,
+    perfil: perfilSlice,
+    wish: wishSlice,
+    productsByUser: productsByUserSlice,
+    userAll: allUserSlice,
+    orderAll: allOrderSlice,
+    Allinvoices: AllinvoiceSlice,
+    userBan: userBanSlice,
+
+    //paymentId : paymentPM,
+    paymentOrderEG: paymentOrderPM,
+    checkout: checkoutMP,
+    newPass: newPassSlice,
+    forgotPassword: sendEmailSlice,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
