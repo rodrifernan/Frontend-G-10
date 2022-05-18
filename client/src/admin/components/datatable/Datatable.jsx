@@ -64,8 +64,8 @@ const Datatable = () => {
 				className="datagrid"
 				rows={formatedData}
 				columns={userColumns}
-				pageSize={5}
-				rowsPerPageOptions={[9]}
+				pageSize={10}
+				rowsPerPageOptions={[10]}
 				checkboxSelection
 				autoPageSize
 				autoHeight
