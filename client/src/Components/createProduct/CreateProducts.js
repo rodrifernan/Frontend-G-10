@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../redux/reducer/getCategorie";
 import { getAllGenres } from "../../redux/reducer/getGenre";
 import { getProductsByUser } from "../../redux/reducer/getProductsByUser";
+import { sendNotification } from '../../utils/notifications';
+
 
 export const CreateProducts = ({
 	editDescription,
@@ -118,11 +120,15 @@ export const CreateProducts = ({
 					};
 					await axios.post("/api/product", formData, user);
 					//alert de exito
+
+					sendNotification('newProduct')
+
 					swal(
 						"Exito!",
 						`Producto ${name.value} cargado correctamente`,
 						"success"
 					);
+
 					// // push to home
 					navigate("/perfil");
 				} else {
@@ -153,7 +159,7 @@ export const CreateProducts = ({
 						},
 					};
 					await axios.put(
-						"http://127.0.0.1:3001/api/editProduct",
+						"/api/editProduct",
 						formData,
 						user
 					);
