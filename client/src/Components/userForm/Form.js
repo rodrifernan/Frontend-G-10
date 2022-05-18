@@ -262,7 +262,7 @@ export const Form = () => {
 							</span>
 							<input
 								type="text"
-								name="idPersonal"
+								name="Documento de identidad"
 								onChange={handleOnchangeActivity}
 								className={
 									"form-control " +
