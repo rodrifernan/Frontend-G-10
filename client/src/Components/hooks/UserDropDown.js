@@ -36,7 +36,7 @@ export const UserDropDown = () => {
                 window.location.href = '/perfil';
               }}
             >
-              <p>Ver Perfil</p>
+              Ver Perfil
             </button>
 
             <button className='dropdown-item'>Mis Pedidos</button>
@@ -47,13 +47,13 @@ export const UserDropDown = () => {
                 window.location.href = '/myWishes';
               }}
             >
-              Mi lista de deseos
+             Lista de deseos
             </button>
 
             <button
               className='dropdown-item'
               onClick={() => {
-                window.location.href = '/reseñas';
+                window.location.href = '/userReviews';
               }}
             >
               Mis Reseñas

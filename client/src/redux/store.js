@@ -31,6 +31,8 @@ import userBanSlice from "./reducer/userBan";
 import AllinvoiceSlice from "./reducer/AllInvoices";
 
 import sale from "./reducer/sale";
+import review from "./reducer/review";
+
 
 const persistConfig = { key: "root", version: 1, storage };
 const persistedReducer = persistReducer(persistConfig, carritoReducer);
@@ -46,6 +48,7 @@ export const store = configureStore({
 		shoppingCart,
 		invoice,
 		sale,
+		review,
 		perfil: perfilSlice,
 		wish: wishSlice,
 		productsByUser: productsByUserSlice,

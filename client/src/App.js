@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
@@ -34,6 +31,8 @@ import { UserSales } from './Components/UserSales/UserSales';
 import { FormRegister } from './Components/userForm/FormRegister';
 import { Page404 } from './pages/Page404/Page404';
 import { FormRegisterAdmin } from './admin/pages/Users/NewUserForm/FormRegister';
+import {  UserReviews } from './Components/UserReviews/UserReviews'  ;
+
 import RequireAuth from './Components/hooks/RequireAuth';
 
 function App() {
@@ -49,9 +48,11 @@ function App() {
             <Route path='create' element={<CreateProducts />} />
             <Route path='userInvoices' element={<UserInvoices />} />
             <Route path='userSales' element={<UserSales />} />
+            <Route path='userReviews' element={<UserReviews />} />
             <Route path='myWishes' element={<WishList />} />
             <Route path='perfil' element={<Perfil />} />
             <Route path='ResponseMP' element={<ResponseMP />} />
+
           </Route>
         </Route>
 
