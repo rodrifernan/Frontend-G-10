@@ -23,7 +23,7 @@ const Datatable = () => {
 			color: e.color,
 			stock: e.stock,
 			category: e.category,
-			active: e.category ? "Si" : "No",
+			active: e.active ? "activo" : "inactivo",
 		};
 	});
 	console.log(formatedData);
