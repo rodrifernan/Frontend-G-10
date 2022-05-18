@@ -1,74 +1,70 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // const userToken = JSON.parse(localStorage.getItem('userCredentials')).token
 
 export const getPaymentIdMP = createAsyncThunk(
-	"getResponseMp/getPaymentIdMP",
-	async (payload) => {
-		
-		const response = await axios
-			.get(`/api/paymentIdPM?payment_id=${payload}`)
-			.catch((err) => {
-			console.log(err);
-		});
-		return response.data;
-	}
+  'getResponseMp/getPaymentIdMP',
+  async payload => {
+    const response = await axios
+      .get(`/api/paymentIdPM?payment_id=${payload}`)
+      .catch(err => {
+        console.log(err);
+      });
+    return response.data;
+  }
 );
 
 export const getOrderMP = createAsyncThunk(
-	"getResponseMp/getOrderMP",
-	async (payload) => {
-		const userToken = JSON.parse(localStorage.getItem('userCredentials')).token
-		const response = await axios
-			.get(`/api/orders/checkout`,
-			{ headers: { "auth-token": userToken },})
-			.catch((err) => {
-			console.log(err);
-		});
-		return response.data;
-	}
+  'getResponseMp/getOrderMP',
+  async payload => {
+    const userToken = JSON.parse(localStorage.getItem('userCredentials')).token;
+    const response = await axios
+      .get(`/api/orders/checkout`, { headers: { 'auth-token': userToken } })
+      .catch(err => {
+        console.log(err);
+      });
+    return response.data;
+  }
 );
 
 export const postOrderMP = createAsyncThunk(
-	"getResponseMp/postOrderMP",
-	async () => {
-		const userToken = JSON.parse(localStorage.getItem('userCredentials')).token
-		const response = await axios
-			.post(`/api/invoice`,{},
-			{ headers: { "auth-token": userToken },})
-			.catch((err) => {
-			console.log(err);
-		});
-		return response.data;
-	}
+  'getResponseMp/postOrderMP',
+  async () => {
+    const userToken = JSON.parse(localStorage.getItem('userCredentials')).token;
+    const response = await axios
+      .post(`/api/invoice`, {}, { headers: { 'auth-token': userToken } })
+      .catch(err => {
+        console.log(err);
+      });
+    return response.data;
+  }
 );
 
 const initialState = {
-	paymentOrder : [],
-	OdenCompra: [],
+  listOrders: {},
+  invoice: {},
 };
 
 const paymentIdSlice = createSlice({
-	name: "getResponseMp",
-	initialState,
-	reducers: {},
-	extraReducers: {
+  name: 'getResponseMp',
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [getOrderMP.fulfilled]: (state, action) => {
+      //console.log("Trayendo Datos MercadoPago Compra", action.payload)
+      return { ...state, listOrders: action.payload };
+    },
 
-		[getOrderMP.fulfilled]: (state, action) => {
-            //console.log("Trayendo Datos MercadoPago Compra", action.payload)
-			return {...state,  paymentOrder: action.payload};
-		},
-
-		[getPaymentIdMP.fulfilled]: (state, action) => {
-            //console.log("Trayendo Datos MercadoPago Compra", action.payload)
-			return {...state, paymentId: action.payload};
-		},
-		[postOrderMP.fulfilled]: (state, action) => {
-            console.log("Trayendo Nro Orden MercadoPago Compra", action.payload)
-			return {...state, OrdenCompra: action.payload };
-		},		
-	},
+    [getPaymentIdMP.fulfilled]: (state, action) => {
+      //console.log("Trayendo Datos MercadoPago Compra", action.payload)
+      return { ...state, paymentId: action.payload };
+    },
+    [postOrderMP.fulfilled]: (state, action) => {
+      console.log('Trayendo Nro Orden MercadoPago Compra', action.payload);
+      return { ...state, invoice: { ...action.payload.invoice } };
+    },
+  },
 });
 
 export default paymentIdSlice.reducer;

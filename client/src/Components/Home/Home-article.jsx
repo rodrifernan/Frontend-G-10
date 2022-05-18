@@ -36,7 +36,6 @@ const Home = () => {
 	let categories = useSelector(categoriesAll);
 
 	let products = useSelector(getAllProducts);
-	console.log("products", products);
 
 	//*****Para el paginado*****
 	const [currentPage, setCurrentPage] = useState(1);
@@ -52,9 +51,7 @@ const Home = () => {
 		if (e.target.value === "sinalterar") {
 			dispatch(fetchProducts());
 		} else if (e.target.value === "AaZ") {
-			console.log(e.target.value);
 			dispatch(sortByName());
-			console.log(products);
 		} else if (e.target.value === "ZaA") {
 			dispatch(sortByNameInversa());
 		} else if (e.target.value === "lowPrice") {
@@ -64,7 +61,6 @@ const Home = () => {
 		}
 		setCurrentPage(1);
 	};
-	console.log(products);
 	if (products.length === 0) {
 		products = "No hay resultados que mostrar";
 	}
