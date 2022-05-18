@@ -105,10 +105,10 @@ const Sidebar = () => {
             <span>Settings</span>
           </li> */}
 					<p className="title">USUARIO</p>
-					<li>
+					{/* <li>
 						<AccountCircleOutlinedIcon className="icon" />
 						<span>Cuenta</span>
-					</li>
+					</li> */}
 
 					<li onClick={() => navigate("/")}>
 						<HomeIcon className="icon" />
