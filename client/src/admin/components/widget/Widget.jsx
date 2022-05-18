@@ -16,7 +16,7 @@ const Widget = ({ type, socket }) => {
     sendNotification(type === 'profits' ? 'salesQuantity' : type).then(
       ({ data }) => {
         if (type === 'profits') {
-          setMetric({ amount: (data.response * 0.02).toFixed(2) });
+          setMetric({ amount: (data.response * 0.02) });
         } else setMetric({ amount: data.response });
       }
     );
@@ -97,7 +97,7 @@ const Widget = ({ type, socket }) => {
       };
 
       socket.on('salesQuantity', data => {
-        setMetric(state => ({ ...state, amount: data.toFixed(2) }));
+        setMetric(state => ({ ...state, amount: data }));
       });
 
       break;
@@ -120,7 +120,7 @@ const Widget = ({ type, socket }) => {
       };
 
       socket.on('salesQuantity', data => {
-        setMetric(state => ({ ...state, amount: (data * 0.02).toFixed(2) }));
+        setMetric(state => ({ ...state, amount: (data * 0.02) }));
       });
 
       break;

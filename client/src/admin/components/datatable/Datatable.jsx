@@ -9,35 +9,31 @@ import { getAllUsers } from "../../../redux/reducer/getAllUsers";
 import { allUserRegisters } from "../../../redux/reducer/getAllUsers";
 
 const Datatable = () => {
-	let data = useSelector(allUserRegisters);
-	console.log("aluser", data);
-
-	const formatedData = data.map(e=>{
-		return{
-			id : e.id,
-			userName:e.userName,
-			email:e.email,
-			firstName:e.firstName,
-			lastName:e.lastName,
-			phone:e.phone,
-			address:e.address,
-			idPersonal:e.idPersonal,
-			banned: e.banned?"Si": "No",
-			createdAt:e.createdAt,
-
-
-		}
-	})
-	console.log(formatedData);
-
 	const dispatch = useDispatch();
-
-	const [select, setSelection] = useState(null);
-
+	let data = useSelector(allUserRegisters);
 	useEffect(() => {
 		// dispatch(getAllOrders());
 		dispatch(getAllUsers());
 	}, [dispatch, data.banned]);
+	console.log("aluser", data);
+
+	const formatedData = data.map((e) => {
+		return {
+			id: e.id,
+			userName: e.userName,
+			email: e.email,
+			firstName: e.firstName,
+			lastName: e.lastName,
+			phone: e.phone,
+			address: e.address,
+			idPersonal: e.idPersonal,
+			banned: e.banned ? "Si" : "No",
+			createdAt: e.createdAt,
+		};
+	});
+	console.log(formatedData);
+
+	const [select, setSelection] = useState(null);
 
 	const handleRowSelection = (ids) => {
 		const selectedIDs = new Set(ids);
