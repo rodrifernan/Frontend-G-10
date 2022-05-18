@@ -4,7 +4,7 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { sendNotification } from '../../../utils/notifications';
 
 const Widget = ({ type, socket }) => {
@@ -12,7 +12,16 @@ const Widget = ({ type, socket }) => {
 
   let data;
 
-  useState(async () => {
+  // useState(async () => {
+  //   sendNotification(type === 'profits' ? 'salesQuantity' : type).then(
+  //     ({ data }) => {
+  //       if (type === 'profits') {
+  //         setMetric({ amount: (data.response * 0.02).toFixed(2) });
+  //       } else setMetric({ amount: data.response });
+  //     }
+  //   );
+  // }, []);
+    useEffect(async () => {
     sendNotification(type === 'profits' ? 'salesQuantity' : type).then(
       ({ data }) => {
         if (type === 'profits') {
@@ -21,6 +30,8 @@ const Widget = ({ type, socket }) => {
       }
     );
   }, []);
+
+
 
   //temporary
   let diff = 20;
