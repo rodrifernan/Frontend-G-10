@@ -116,11 +116,7 @@ export const CreateProducts = ({
 							).token,
 						},
 					};
-					await axios.post(
-						"http://127.0.0.1:3001/api/product",
-						formData,
-						user
-					);
+					await axios.post("/api/product", formData, user);
 					//alert de exito
 					swal(
 						"Exito!",
