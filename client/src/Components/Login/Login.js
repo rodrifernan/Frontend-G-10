@@ -117,6 +117,16 @@ export const Login = ({ redirect = null, page = false, loginClass = "" }) => {
     navigate("/userRegister");
   };
 
+  const hideModal = () => {
+    try {
+      const modal = window.bootstrap.Modal.getInstance(
+        document.getElementById("loginModal")
+      );
+
+      modal.hide();
+    } catch (error) {}
+  }
+
   return (
     <div className={"px-4 " + loginClass} id="loginContainer">
       <div className="form-row">
@@ -173,7 +183,7 @@ export const Login = ({ redirect = null, page = false, loginClass = "" }) => {
         </button>
         <LoginFromGoogle page />
         <Link to="/process-password">
-          <p className="mt-3">¿Ha olvidado su contraseña? ¡Haga click aquí!</p>
+          <p onClick={hideModal()} className="mt-3">¿Ha olvidado su contraseña? ¡Haga click aquí!</p>
         </Link>
       </div>
     </div>

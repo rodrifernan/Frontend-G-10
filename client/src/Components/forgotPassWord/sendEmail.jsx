@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { sendEmail, myData } from "../../redux/reducer/forgot-password";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
+import "./sendEmail.css"
 
 export const SendEmail = () => {
   const [email, setEmail] = useState({ email: "" });
@@ -36,14 +37,14 @@ export const SendEmail = () => {
       <div className="text-center mb-4">
         <h3>Proceso de reelaboracion de contraseña</h3>
       </div>
-      <div className="text-center">
+      <div className="wrapper text-center">
         <h5>
           En el recuadro de abajo, escriba el email con el que te registraste.
           Luego ve al correo que te mandaremos y sigue las instrucciones
         </h5>
         <input
           type="email"
-          className="form-control mt-3"
+          className="inputmail form-control mt-3"
           value={email.email}
           onChange={handleChange}
           name="email"
