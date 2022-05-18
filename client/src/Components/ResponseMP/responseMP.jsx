@@ -8,6 +8,7 @@ import {
   cleanShoppingList,
   cleanShoppingCart,
 } from '../../redux/reducer/shoppingCart';
+import { sendNotification } from '../../utils/notifications';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -27,8 +28,11 @@ const ResponseMP = () => {
     } else {
       Promise.all([dispatch(getOrderMP()), dispatch(postOrderMP())]).then(
         () => {
-          // dispatch(cleanShoppingList());
-          // dispatch(cleanShoppingCart());
+          sendNotification('ordersQuantity');
+          sendNotification('salesQuantity');
+          sendNotification('lastOrders');
+          dispatch(cleanShoppingList());
+          dispatch(cleanShoppingCart());
         }
       );
     }
@@ -36,7 +40,9 @@ const ResponseMP = () => {
 
   const genPDF = async () => {
     try {
-      var doc = new jsPDF('l', 'mm', [1320, 805]);
+      var doc = new jsPDF('p','mm',[720, 660]);
+
+
       var pdfjs = document.getElementById('content');
       await doc.html(pdfjs, {
         callback: function (doc) {
@@ -47,11 +53,11 @@ const ResponseMP = () => {
   };
 
   return listOrders?.shoppingCart && invoice?.invoiceNumber ? (
-    <div style={{ position: 'relative', width: '1320px', margin: '0 auto' }}>
+    <div style={{ position: 'relative', width: '700px', margin: '0 auto' }}>
       <div
         id='content'
         className='page-content container'
-        style={{ background: 'white', height: '800px' }}
+        style={{ background: 'white', height: '650px' }}
       >
         <div className='page-header text-blue-d2'>
           <h1 className='page-title text-secondary-d1'>ShopBag</h1>
@@ -139,7 +145,7 @@ const ResponseMP = () => {
                 </div>
               </div>
 
-              <div className='row text-600 text-white bgc-default-tp1 py-25'>
+              <div className='row text-600 text-white bgc-default-tp1 py-25 px-1'>
                 <div className='d-none d-sm-block col-1'>#</div>
                 <div className='col-3'>Descripción</div>
                 <div className='d-none d-sm-block col-2 col-sm-2'>Cant.</div>

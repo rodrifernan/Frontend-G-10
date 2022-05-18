@@ -1,113 +1,110 @@
-import "./widget.scss";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import {  useState } from 'react'
-import { sendNotification } from '../../../utils/notifications'
+import './widget.scss';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
+import { useState } from 'react';
+import { sendNotification } from '../../../utils/notifications';
 
 const Widget = ({ type, socket }) => {
-
-  const [  metric, setMetric ] = useState({amount: 0})
+  const [metric, setMetric] = useState({ amount: 0 });
 
   let data;
 
-  useState( async () =>{
-    sendNotification(type === 'profits' ? 'salesQuantity': type ).then(({data}) => {
-      if(type ==='profits') {
-        setMetric({amount: (data.response * 0.02).toFixed(2) })
-      }else setMetric({amount: data.response})
-     })
-  }, [])
+  useState(async () => {
+    sendNotification(type === 'profits' ? 'salesQuantity' : type).then(
+      ({ data }) => {
+        if (type === 'profits') {
+          setMetric({ amount: (data.response * 0.02).toFixed(2) });
+        } else setMetric({ amount: data.response });
+      }
+    );
+  }, []);
 
   //temporary
   let diff = 20;
 
   switch (type) {
-    case "usersQuantity":
+    case 'usersQuantity':
       data = {
-        title: "Usuarios",
+        title: 'Usuarios',
         isMoney: false,
-        link: "Ver mas",
+        link: 'Ver mas',
         icon: (
           <PersonOutlinedIcon
-            className="icon"
+            className='icon'
             style={{
-              color: "crimson",
-              backgroundColor: "rgba(255, 0, 0, 0.2)",
+              color: 'crimson',
+              backgroundColor: 'rgba(255, 0, 0, 0.2)',
             }}
           />
         ),
       };
 
       socket.on('usersQuantity', data => {
-        setMetric(state => ({...state, amount: data}) )
+        setMetric(state => ({ ...state, amount: data }));
       });
 
-      
       break;
-    case "ordersQuantity":
+    case 'ordersQuantity':
       data = {
-        title: "Ordenes",
+        title: 'Ordenes',
         isMoney: false,
-        link: "Ver mas",
+        link: 'Ver mas',
         icon: (
           <ShoppingCartOutlinedIcon
-            className="icon"
+            className='icon'
             style={{
-              backgroundColor: "rgba(218, 165, 32, 0.2)",
-              color: "goldenrod",
+              backgroundColor: 'rgba(218, 165, 32, 0.2)',
+              color: 'goldenrod',
             }}
           />
         ),
       };
 
       socket.on('ordersQuantity', data => {
-        setMetric(state => ({...state, amount: data}) )
+        setMetric(state => ({ ...state, amount: data }));
       });
 
-
-
       break;
-    case "salesQuantity":
+    case 'salesQuantity':
       data = {
-        title: "Ventas",
+        title: 'Ventas',
         isMoney: true,
-        link: "Ver mas",
+        link: 'Ver mas',
         icon: (
           <MonetizationOnOutlinedIcon
-            className="icon"
-            style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
+            className='icon'
+            style={{ backgroundColor: 'rgba(0, 128, 0, 0.2)', color: 'green' }}
           />
         ),
       };
 
       socket.on('salesQuantity', data => {
-        setMetric(state => ({...state, amount: data}) )
+        setMetric(state => ({ ...state, amount: data.toFixed(2) }));
       });
 
       break;
-    case "profits":
+    case 'profits':
       data = {
-        title: "Ganancias",
+        title: 'Ganancias',
         isMoney: true,
-        link: "Ver mas",
+        link: 'Ver mas',
         icon: (
           <AccountBalanceWalletOutlinedIcon
-            className="icon"
+            className='icon'
             style={{
-              backgroundColor: "rgba(128, 0, 128, 0.2)",
-              color: "purple",
+              backgroundColor: 'rgba(128, 0, 128, 0.2)',
+              color: 'purple',
             }}
           />
         ),
       };
 
       socket.on('salesQuantity', data => {
-        setMetric(state => ({...state, amount: data}) )
+        setMetric(state => ({ ...state, amount: (data * 0.02).toFixed(2) }));
       });
-
 
       break;
     default:
@@ -115,16 +112,16 @@ const Widget = ({ type, socket }) => {
   }
 
   return (
-    <div className="widget">
-      <div className="left">
-        <span className="title">{data.title}</span>
-        <span className="counter">
-          {data.isMoney && "$"} {metric.amount}
+    <div className='widget'>
+      <div className='left'>
+        <span className='title'>{data.title}</span>
+        <span className='counter'>
+          {data.isMoney && '$'} {metric.amount}
         </span>
-        <span className="link">{data.link}</span>
+        <span className='link'>{data.link}</span>
       </div>
-      <div className="right">
-        <div className="percentage positive">
+      <div className='right'>
+        <div className='percentage positive'>
           <KeyboardArrowUpIcon />
           {diff} %
         </div>
