@@ -16,6 +16,20 @@ const Datatable = () => {
 		dispatch(fetchProducts());
 	}, [dispatch]);
 	let data = useSelector(getAllProducts);
+	const formatedData = data.map(e=>{
+		return{
+			id : e.id,
+			name:e.name,
+			price:e.price,
+			brand:e.brand,
+			color:e.color,
+			stock:e.stock,
+			category:e.category,
+			active: e.category?"Si": "No"
+
+		}
+	})
+	console.log(formatedData);
 
 	const [select, setSelection] = useState(null);
 
@@ -45,7 +59,7 @@ const Datatable = () => {
 			</div>
 			<DataGrid
 				className="datagrid"
-				rows={data}
+				rows={formatedData}
 				// columns={userColumns.concat(actionColumn)}
 				columns={userColumns}
 				pageSize={13}
