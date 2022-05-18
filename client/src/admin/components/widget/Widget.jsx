@@ -12,16 +12,7 @@ const Widget = ({ type, socket }) => {
 
   let data;
 
-  // useState(async () => {
-  //   sendNotification(type === 'profits' ? 'salesQuantity' : type).then(
-  //     ({ data }) => {
-  //       if (type === 'profits') {
-  //         setMetric({ amount: (data.response * 0.02).toFixed(2) });
-  //       } else setMetric({ amount: data.response });
-  //     }
-  //   );
-  // }, []);
-    useEffect(async () => {
+  useState(async () => {
     sendNotification(type === 'profits' ? 'salesQuantity' : type).then(
       ({ data }) => {
         if (type === 'profits') {
@@ -30,6 +21,15 @@ const Widget = ({ type, socket }) => {
       }
     );
   }, []);
+  //   useEffect(async () => {
+  //   sendNotification(type === 'profits' ? 'salesQuantity' : type).then(
+  //     ({ data }) => {
+  //       if (type === 'profits') {
+  //         setMetric({ amount: (data.response * 0.02).toFixed(2) });
+  //       } else setMetric({ amount: data.response });
+  //     }
+  //   );
+  // }, []);
 
 
 
@@ -41,13 +41,15 @@ const Widget = ({ type, socket }) => {
       data = {
         title: 'Usuarios',
         isMoney: false,
-        link: 'Ver mas',
+        // link: 'Ver mas',
         icon: (
           <PersonOutlinedIcon
             className='icon'
             style={{
               color: 'crimson',
               backgroundColor: 'rgba(255, 0, 0, 0.2)',
+              width: '2em',
+              height: '2em'
             }}
           />
         ),
@@ -62,13 +64,15 @@ const Widget = ({ type, socket }) => {
       data = {
         title: 'Ordenes',
         isMoney: false,
-        link: 'Ver mas',
+        // link: 'Ver mas',
         icon: (
           <ShoppingCartOutlinedIcon
             className='icon'
             style={{
               backgroundColor: 'rgba(218, 165, 32, 0.2)',
               color: 'goldenrod',
+              width: '2em' ,
+              height: '2em'
             }}
           />
         ),
@@ -83,11 +87,11 @@ const Widget = ({ type, socket }) => {
       data = {
         title: 'Ventas',
         isMoney: true,
-        link: 'Ver mas',
+        // link: 'Ver mas',
         icon: (
           <MonetizationOnOutlinedIcon
             className='icon'
-            style={{ backgroundColor: 'rgba(0, 128, 0, 0.2)', color: 'green' }}
+            style={{ backgroundColor: 'rgba(0, 128, 0, 0.2)', color: 'green', width: '2em',height: '2em' }}
           />
         ),
       };
@@ -101,13 +105,15 @@ const Widget = ({ type, socket }) => {
       data = {
         title: 'Ganancias',
         isMoney: true,
-        link: 'Ver mas',
+        // link: 'Ver mas',
         icon: (
           <AccountBalanceWalletOutlinedIcon
             className='icon'
             style={{
               backgroundColor: 'rgba(128, 0, 128, 0.2)',
               color: 'purple',
+              width: '2em' ,
+              height: '2em'
             }}
           />
         ),
@@ -132,10 +138,10 @@ const Widget = ({ type, socket }) => {
         <span className='link'>{data.link}</span>
       </div>
       <div className='right'>
-        <div className='percentage positive'>
+        {/* <div className='percentage positive'>
           <KeyboardArrowUpIcon />
           {diff} %
-        </div>
+        </div> */}
         {data.icon}
       </div>
     </div>
