@@ -29,6 +29,7 @@ import shoppingCart from "./reducer/shoppingCart";
 import invoice from "./reducer/invoice";
 import userBanSlice from "./reducer/userBan";
 import AllinvoiceSlice from "./reducer/AllInvoices";
+import productsAdminSlice from "./reducer/getProductsAdmin";
 
 import sale from "./reducer/sale";
 
@@ -36,6 +37,7 @@ const persistConfig = { key: "root", version: 1, storage };
 const persistedReducer = persistReducer(persistConfig, carritoReducer);
 export const store = configureStore({
 	reducer: {
+		productsAdmin: productsAdminSlice,
 		genres: genresSlice,
 		products: productsSlice,
 		user: userSlice,
