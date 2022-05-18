@@ -42,7 +42,9 @@ export const ProductDetails = () => {
 			swal("Error!", `Producto no modificado `, "warning");
 		}
 	};
-
+	const handleClose = () => {
+		navigate("/admin/products");
+	};
 	return (
 		<div className="ProductDetail__container">
 			<div className="ProductDetail__container-list">
@@ -123,7 +125,7 @@ export const ProductDetails = () => {
 				<button
 					className="btn btn-warning ml-2"
 					data-bs-toggle="modal"
-					data-bs-target={"#editProducts"}
+					data-bs-target={"#editProductsDetail"}
 				>
 					Editar
 				</button>
@@ -139,22 +141,26 @@ export const ProductDetails = () => {
 			{/* modal para edit product */}
 			<div
 				className="modal fade"
-				id={"editProducts"}
+				id={"editProductsDetail"}
 				tabIndex="-1"
-				aria-labelledby={"editProducts"}
+				aria-labelledby={"editProductsDetail"}
 				aria-hidden="true"
 			>
 				<div className="modal-dialog modal-lg">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5 className="modal-title" id={"editProducts"}>
-								Modal title
+							<h5
+								className="modal-title"
+								id={"editProductsDetail"}
+							>
+								Editar Producto
 							</h5>
 							<button
 								type="button"
 								className="btn-close"
 								data-bs-dismiss="modal"
 								aria-label="Close"
+								onClick={handleClose}
 							></button>
 						</div>
 						<div className="modal-body">
