@@ -1,6 +1,13 @@
 .registrarse:hover {
   background-color: black;
 }
+.toggle{
+  display: flex;
+  flex-direction: row;
+}
+.registrarse{
+  margin-right: 0.8rem;
+}
 .col-6{
   width: fit-content;
 }
@@ -19,6 +26,9 @@
 }
 .shoppingKart{
   width: fit-content;
+}
+.searchBarjsx{
+  width: 33.3%;
 }
 .titulo{
   text-decoration: none;

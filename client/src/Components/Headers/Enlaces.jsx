@@ -11,12 +11,14 @@ import {
 	getShoppingCartGuest,
 } from "../../redux/reducer/shoppingCart";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { rootVerification } from "../../redux/reducer/login";
 
 const Enlaces = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [login, setLogin] = useState(true);
+	const [admin, setAdmin] = useState(false)
 	const userCredentials = useSelector(({ login }) => login.userCredentials);
 
 	const shoppingList = useSelector(
@@ -30,6 +32,7 @@ const Enlaces = () => {
 		) {
 			setLogin(true);
 			dispatch(getShoppingCart());
+			dispatch(rootVerification()).then((data)=>{data.payload ? setAdmin(true):setAdmin(false)})
 		} else setLogin(false);
 	}, [dispatch, userCredentials]);
 
@@ -45,9 +48,19 @@ const Enlaces = () => {
 
 	return (
 		<div className="enlaces align-items-center col text-center w-100 d-flex justify-content-between">
-			<div className="  col-6  ">
+			<div className=" toggle  ">
 				{login ? (
+					<>
+					{admin ? <Link to="/admin"><button
+							type='button'
+							className={'btn registrarse btn text-white'}
+							data-bs-toggle='modal'
+							data-bs-target='#loginModal'
+						>
+							Panel-Admin
+						</button></Link>:<div>nada</div>}
 					<UserDropDown />
+					</>
 				) : (
 					<LoginModal buttonClass={"registrarse btn text-white"} />
 				)}

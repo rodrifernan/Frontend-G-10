@@ -1,30 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import "./ProductDetails.css";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { getAllProducts } from "../../../../redux/reducer/products";
+import { CreateProducts } from "../../../../Components/createProduct/CreateProducts";
+import axios from "axios";
+import swal from "sweetalert";
 
 export const ProductDetails = () => {
 	const navigate = useNavigate();
 	//trae todas las ordenes
-	let productsAll = useSelector(getAllProducts);
+	let productsAll = useSelector((state) => state.productsAdmin.productsAdmin);
 	//filtro por el numero de orden
 	const { productId } = useParams();
 	console.log(productId);
-	const filterOrderbyNumberProduct = productsAll.filter(
-		(e) => e.id === productId
-	);
-	// console.log(filterOrderbyNumberProduct[0]);
+	const data = productsAll.find((e) => e.id === productId);
+	// console.log("filterProduct", filterOrderbyNumberProduct);
 
-	const [data] = useState(filterOrderbyNumberProduct[0]);
-	console.log(data);
+	// const [data] = useState(filterOrderbyNumberProduct[0]);
+	// console.log(data);
 
 	//return table
 	const handleRegresar = () => {
 		navigate("/admin/products");
 	};
-
+	const handleBanearProduct = async () => {
+		try {
+			const id = productId;
+			await axios.put("/api/activateProduct", { id });
+			// console.log("exito banned");
+			swal(
+				"Exito!",
+				`Producto ${
+					data.active ? "DesActivado" : "Activado"
+				} con exito`,
+				"success"
+			);
+			navigate("/admin/products");
+		} catch (error) {
+			console.log(error);
+			swal("Error!", `Producto no modificado `, "warning");
+		}
+	};
+	const handleClose = () => {
+		navigate("/admin/products");
+	};
 	return (
 		<div className="ProductDetail__container">
 			<div className="ProductDetail__container-list">
@@ -84,6 +104,15 @@ export const ProductDetails = () => {
 				</div>
 				<hr className="divider" />
 				<div className="ProductDetail__container-item">
+					<h3 className="title__list">Activo</h3>
+					{data.active ? (
+						<div className="list__item"> false</div>
+					) : (
+						<div className="list__item"> true</div>
+					)}
+				</div>
+				<hr className="divider" />
+				<div className="ProductDetail__container-item">
 					<h3 className="title__list">Imagen referencial</h3>
 					<div className="list__item">
 						{" "}
@@ -93,6 +122,67 @@ export const ProductDetails = () => {
 				<button className="btn btn-color" onClick={handleRegresar}>
 					Regresar
 				</button>
+				<button
+					className="btn btn-warning ml-2"
+					data-bs-toggle="modal"
+					data-bs-target={"#editProductsDetail"}
+				>
+					Editar
+				</button>
+				<button
+					className={`btn ${
+						data.active ? "btn-danger" : "btn-success"
+					} btn-success ml-2`}
+					onClick={handleBanearProduct}
+				>
+					{data.active ? "DesActivar" : "Activar"}
+				</button>
+			</div>
+			{/* modal para edit product */}
+			<div
+				className="modal fade"
+				id={"editProductsDetail"}
+				tabIndex="-1"
+				aria-labelledby={"editProductsDetail"}
+				aria-hidden="true"
+			>
+				<div className="modal-dialog modal-lg">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h5
+								className="modal-title"
+								id={"editProductsDetail"}
+							>
+								Editar Producto
+							</h5>
+							<button
+								type="button"
+								className="btn-close"
+								data-bs-dismiss="modal"
+								aria-label="Close"
+								onClick={handleClose}
+							></button>
+						</div>
+						<div className="modal-body">
+							<CreateProducts
+								editDescription={data.description}
+								editName={data.name}
+								editPrice={data.price}
+								editImage={data.image}
+								editId={data.id}
+								editColor={data.color}
+								editBrand={data.brand}
+								editStock={data.stock}
+								editWarranty={data.warranty}
+								editCategory={data.category}
+								editGenre={data.genre}
+								editDiscount={data.discount}
+								isEdit={true}
+							/>
+						</div>
+						<div className="modal-footer"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

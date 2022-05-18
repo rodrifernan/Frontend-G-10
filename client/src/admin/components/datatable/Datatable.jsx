@@ -12,6 +12,24 @@ const Datatable = () => {
 	let data = useSelector(allUserRegisters);
 	console.log("aluser", data);
 
+	const formatedData = data.map(e=>{
+		return{
+			id : e.id,
+			userName:e.userName,
+			email:e.email,
+			firstName:e.firstName,
+			lastName:e.lastName,
+			phone:e.phone,
+			address:e.address,
+			idPersonal:e.idPersonal,
+			banned: e.banned?"Si": "No",
+			createdAt:e.createdAt,
+
+
+		}
+	})
+	console.log(formatedData);
+
 	const dispatch = useDispatch();
 
 	const [select, setSelection] = useState(null);
@@ -48,7 +66,7 @@ const Datatable = () => {
 			</div>
 			<DataGrid
 				className="datagrid"
-				rows={data}
+				rows={formatedData}
 				columns={userColumns}
 				pageSize={5}
 				rowsPerPageOptions={[9]}
