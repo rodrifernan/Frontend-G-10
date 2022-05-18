@@ -1,14 +1,17 @@
 .iconUser {
   display: none;
 }
-.mt-4{
+.mt-4 {
   justify-content: center;
 }
-.filtrado{
+.filtrado {
   margin-top: 2rem;
 }
-.h3-prod{
+.h3-prod {
   margin-top: 2rem;
+}
+.signin {
+  display: none;
 }
 @media (max-width: 768px) {
   .wrapper {
@@ -71,6 +74,12 @@
   }
   .dropdown-menu {
     color: red;
+  }
+  .signin {
+    display: contents;
+  }
+  .siginWord {
+    display: none;
   }
 }
 @media (min-width: 769px) {

@@ -36,8 +36,8 @@ const Featured = () => {
     .reduce((pvalue, current) => pvalue + current, 0);
   // console.log(sumaVentaHoy);
 
-  const montoMeta = 10000
-  const porcentajeMeta = sumaVentaHoy *100 /montoMeta
+  const montoMeta = 12000
+  const porcentajeMeta = (sumaVentaHoy *100 /montoMeta).toFixed(2)
   console.log(porcentajeMeta);
 
   return (
