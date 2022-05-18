@@ -15,7 +15,7 @@ const Perfil = () => {
 	const getData = localStorage.getItem("userCredentials");
 	let myPerfil = useSelector(getAllInfo);
 	let resultados = useSelector(results);
-	console.log(resultados);
+	console.log("perfil", myPerfil);
 	let parseGetData = JSON.parse(getData);
 	const [editar, setEditar] = useState(false);
 	const [pw, setPw] = useState({});
@@ -24,8 +24,8 @@ const Perfil = () => {
 	let allUser = useSelector(allUserRegisters);
 	console.log(allUser);
 	const [form, setForm] = useState({
-		userName: "",
-		email: "",
+		userName: myPerfil.userName,
+		email: myPerfil.email,
 		address: "",
 		phone: "",
 		firstName: "",
@@ -84,6 +84,7 @@ const Perfil = () => {
 			setErrores({ name: "" });
 			setValidate(true);
 		}
+		dispatch(getPerfil(parseGetData.token));
 	};
 
 	const handleOnChange = (e) => {
@@ -92,7 +93,7 @@ const Perfil = () => {
 	};
 	useEffect(() => {
 		dispatch(getPerfil(parseGetData.token));
-		dispatch(getAllUsers());
+		// dispatch(getAllUsers());
 	}, [dispatch]);
 	console.log(pwErrors);
 	const handleEdit = () => {
@@ -118,7 +119,7 @@ const Perfil = () => {
 			form.idPersonal = myPerfil.idPersonal;
 			console.log(form);
 			let kiko = dispatch(UpdatePerfil(form));
-			console.log(kiko);
+			console.log("kiko", kiko);
 			swal({
 				title: "Los cambios han sido efectuados!",
 				text: "Recarga la pagina para visualizar los cambios",
@@ -131,7 +132,7 @@ const Perfil = () => {
 				"userCredentials",
 				JSON.stringify(parseGetData)
 			);
-			console.log(parseGetData);
+			console.log("parse", parseGetData);
 
 			setForm({
 				userName: "",
@@ -141,6 +142,7 @@ const Perfil = () => {
 				firstName: "",
 				lastName: "",
 			});
+			dispatch(getPerfil(parseGetData.token));
 		}
 	};
 
@@ -207,7 +209,7 @@ const Perfil = () => {
 										type="text"
 										className="form-control"
 										id="inputPassword"
-										name={"userName"}
+										name="userName"
 										value={form.userName}
 										onChange={handleOnChangeName}
 									/>
