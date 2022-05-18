@@ -8,7 +8,7 @@ import { getAllProducts } from "../../../../redux/reducer/products";
 export const ProductDetails = () => {
 	const navigate = useNavigate();
 	//trae todas las ordenes
-	let productsAll = useSelector(getAllProducts);
+	let productsAll = useSelector((state) => state.productsAdmin.productsAdmin);
 	//filtro por el numero de orden
 	const { productId } = useParams();
 	console.log(productId);
@@ -85,8 +85,11 @@ export const ProductDetails = () => {
 				<hr className="divider" />
 				<div className="ProductDetail__container-item">
 					<h3 className="title__list">Activo</h3>
-					{data.active ? <div className="list__item"> false</div> : <div className="list__item"> true</div>}
-					
+					{data.active ? (
+						<div className="list__item"> false</div>
+					) : (
+						<div className="list__item"> true</div>
+					)}
 				</div>
 				<hr className="divider" />
 				<div className="ProductDetail__container-item">
