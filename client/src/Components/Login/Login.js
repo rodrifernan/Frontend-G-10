@@ -183,7 +183,7 @@ export const Login = ({ redirect = null, page = false, loginClass = "" }) => {
         </button>
         <LoginFromGoogle page />
         <Link to="/process-password">
-          <p onClick={hideModal()} className="mt-3">¿Ha olvidado su contraseña? ¡Haga click aquí!</p>
+          <p onClick={hideModal} className="mt-3">¿Ha olvidado su contraseña? ¡Haga click aquí!</p>
         </Link>
       </div>
     </div>
