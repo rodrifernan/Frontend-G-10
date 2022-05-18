@@ -272,7 +272,7 @@ export const Form = () => {
 									"form-control " +
 									(formErrors.idPersonal && "is-invalid")
 								}
-								placeholder="ID personal."
+								placeholder="ID de Identificacion"
 								required
 							/>
 
