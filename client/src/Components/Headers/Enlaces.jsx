@@ -53,10 +53,8 @@ const Enlaces = () => {
                 <button
                   type="button"
                   className={"btn registrarse btn text-white"}
-                  data-bs-toggle="modal"
-                  data-bs-target="#loginModal"
                 >
-                  <i class="fas fa-chart-line iconAdmin"></i>
+                  <i className="fas fa-chart-line iconAdmin"></i>
                   <span className="panelAdmin"> Panel-Admin</span>
                 </button>
               </Link>

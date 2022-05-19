@@ -27,7 +27,7 @@ export const LoginModal = ({ buttonClass = "", styles = {} }) => {
         data-bs-toggle="modal"
         data-bs-target="#loginModal"
       >
-        <i class="fas fa-sign-in-alt signin"></i>
+        <i className="fas fa-sign-in-alt signin"></i>
         <span className="siginWord"> Iniciar Sesión</span>
       </button>
       <div
