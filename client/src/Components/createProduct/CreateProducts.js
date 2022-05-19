@@ -122,6 +122,9 @@ export const CreateProducts = ({
 					//alert de exito
 
 					sendNotification('newProduct')
+					sendNotification('getRadarChar')
+					sendNotification('getPieChar')
+
 
 					swal(
 						"Exito!",

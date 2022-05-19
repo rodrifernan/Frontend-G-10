@@ -134,7 +134,7 @@ const Home = () => {
         </div> */}
         <div className='chartsPieRdar'>
           <div className='PieChart__container '>
-            <PieChar />
+            <PieChar socket={socket} />
           </div>
           <div className='RadarChar__container '>
             <RadarChar socket={socket} />
