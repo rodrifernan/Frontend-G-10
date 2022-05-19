@@ -78,7 +78,7 @@ const WishList = () => {
           })
         ) : (
           <div className="text-center">
-            <h3>Su Lista de deseo esa vacio. Agregue algunos productos!</h3>
+            <h3>Su Lista de deseos está vacía. Agregue algunos productos!</h3>
           </div>
         )}
         {Array.isArray(myWishes) && myWishes.length > 1 ? (
