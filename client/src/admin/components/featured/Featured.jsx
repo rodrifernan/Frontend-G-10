@@ -50,6 +50,12 @@ const Featured = ({ socket }) => {
           weekSale: saleByDate(response, 'week'),
           monthSale: saleByDate(response, 'month'),
         }));
+      }else {
+        setSaleReport(state => ({
+          ...state,
+          weekSale: saleByDate(response, 'week'),
+          monthSale: saleByDate(response, 'month'),
+        }));
       }
     });
   }, []);
