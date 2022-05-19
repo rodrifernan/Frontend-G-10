@@ -21,20 +21,16 @@ const SearchBar = () => {
       <div className="search-content justify-content-start d-flex">
         <div className="input-group inputSearch rounded ">
           <input
-            type="search"
-            className="form-control  rounded"
-            placeholder="Buscar un producto..."
-            aria-label="Search"
-            aria-describedby="search-addon"
+            type="text"
+            placeholder="Buscar"
             onChange={handleOnChange}
+            required
           />
-          <button
+
+          <i
+            class="fas fa-search icon searchButton"
             onClick={handleOnSubmit}
-            className="input-group-text border-0"
-            id="search-addon"
-          >
-            <i className="fas fa-search"></i>
-          </button>
+          ></i>
         </div>
       </div>
     </div>
