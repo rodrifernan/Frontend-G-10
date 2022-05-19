@@ -31,6 +31,9 @@ const ResponseMP = () => {
           sendNotification('ordersQuantity');
           sendNotification('salesQuantity');
           sendNotification('lastOrders');
+          sendNotification('profitAmount');
+          sendNotification('getRadarChar');
+
           dispatch(cleanShoppingList());
           dispatch(cleanShoppingCart());
         }

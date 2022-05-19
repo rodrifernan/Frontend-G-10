@@ -123,7 +123,7 @@ const Home = () => {
           <Widget type='usersQuantity' socket={socket} />
           <Widget type='ordersQuantity' socket={socket} />
           <Widget type='salesQuantity' socket={socket} />
-          <Widget type='profits' socket={socket} />
+          <Widget type='profitAmount' socket={socket} />
         </div>
         <div className='charts'>
           <Featured />
@@ -137,7 +137,7 @@ const Home = () => {
             <PieChar />
           </div>
           <div className='RadarChar__container '>
-            <RadarChar />
+            <RadarChar socket={socket} />
           </div>
         </div>
 
