@@ -33,6 +33,7 @@ const ResponseMP = () => {
           sendNotification('lastOrders');
           sendNotification('profitAmount');
           sendNotification('getRadarChar');
+          sendNotification('salesReport')
 
           dispatch(cleanShoppingList());
           dispatch(cleanShoppingCart());

@@ -126,7 +126,7 @@ const Home = () => {
           <Widget type='profitAmount' socket={socket} />
         </div>
         <div className='charts'>
-          <Featured />
+          <Featured  socket={socket} />
           <Chart title='Ultimos 7 dias (Ventas)' aspect={2 / 1} />
         </div>
         {/* <div className="barChar__container">
