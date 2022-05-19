@@ -1,97 +1,79 @@
-import "./chart.scss";
-import dayjs from "dayjs";
-import { es } from "dayjs/locale/es";
-import localeData from "dayjs/plugin/localeData";
-import {
-	AreaChart,
-	Area,
-	XAxis,
-	CartesianGrid,
-	Tooltip,
-	ResponsiveContainer,
-} from "recharts";
-import { useSelector } from "react-redux";
+import './chart.scss';
+import { useState, useEffect } from 'react';
 
-dayjs.locale("es");
+import dayjs from 'dayjs';
+import { es } from 'dayjs/locale/es';
+import localeData from 'dayjs/plugin/localeData';
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+import { sendNotification } from '../../../utils/notifications';
+
+dayjs.locale('es');
 dayjs.extend(localeData);
 
-// console.log(dayjs.weekdays() );
+const Chart = ({ aspect, title, socket}) => {
+  const [data, setData] = useState([{ name: '', Total: 0 }]);
 
-let days = [];
-let today = dayjs();
-for (let i = 0; i < 6; i++) {
-	let day = today.subtract(i, "day");
-	days.push(day.format("YYYY-MM-DD"));
-}
-console.log(days);
+  const dateBetween = (date, number, unit = 'day') => {
+    const init = dayjs().subtract(number, unit).startOf(unit);
+    const end = dayjs().format().substring(0, 10);
 
-const Chart = ({ aspect, title }) => {
-	const invoices = useSelector((state) => state.Allinvoices.Allinvoices);
+    return date >= init.format().substring(0, 10) && date <= end;
+  };
 
-	const invoiceArray = invoices.map((e) => {
-		return {
-			total: e.total,
-			fecha: e.createdAt.substring(0, 10),
-		};
-	});
-	console.log(invoiceArray);
+  useEffect(() => {
+    sendNotification('salesReport').then(({ data: { response } }) => {
+      const validDates = response.filter(({ date }) => dateBetween(date, 7));
+      setData(
+        validDates.map(({ date, total }) => ({ name: date, Total: total })).reverse()
+      );
+    });
+  }, []);
 
-	const sumaVentaHoy = invoiceArray
-		.filter((e) => e.fecha === days[0])
-		.map((e) => e.total)
-		.reduce((pvalue, current) => pvalue + current, 0);
-	console.log(sumaVentaHoy);
+  socket.on('salesReport', data => {
+		const validDates = data.filter(({ date }) => dateBetween(date, 7));
+		setData(
+			validDates.map(({ date, total }) => ({ name: date, Total: total })).reverse()
+		);
+  });
 
-	const data = [
-		{ name: days[5], Total: 30 },
-		{ name: days[4], Total: 3100 },
-		{ name: days[3], Total: 800 },
-		{ name: days[2], Total: 500 },
-		{ name: days[1], Total: 100 },
-		{ name: days[0], Total: sumaVentaHoy },
-	];
 
-	return (
-		<div className="chart">
-			<div className="title">{title}</div>
-			<ResponsiveContainer width="100%" aspect={aspect}>
-				<AreaChart
-					width={730}
-					height={250}
-					data={data}
-					margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-				>
-					<defs>
-						<linearGradient id="total" x1="0" y1="0" x2="0" y2="1">
-							<stop
-								offset="5%"
-								stopColor="#8884d8"
-								stopOpacity={0.8}
-							/>
-							<stop
-								offset="95%"
-								stopColor="#8884d8"
-								stopOpacity={0}
-							/>
-						</linearGradient>
-					</defs>
-					<XAxis dataKey="name" stroke="gray" />
-					<CartesianGrid
-						strokeDasharray="3 3"
-						className="chartGrid"
-					/>
-					<Tooltip />
-					<Area
-						type="monotone"
-						dataKey="Total"
-						stroke="#8884d8"
-						fillOpacity={1}
-						fill="url(#total)"
-					/>
-				</AreaChart>
-			</ResponsiveContainer>
-		</div>
-	);
+  return (
+    <div className='chart'>
+      <div className='title'>{title}</div>
+      <ResponsiveContainer width='100%' aspect={aspect}>
+        <AreaChart
+          width={730}
+          height={250}
+          data={data}
+          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+        >
+          <defs>
+            <linearGradient id='total' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='#8884d8' stopOpacity={0.8} />
+              <stop offset='95%' stopColor='#8884d8' stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis dataKey='name' stroke='gray' />
+          <CartesianGrid strokeDasharray='3 3' className='chartGrid' />
+          <Tooltip />
+          <Area
+            type='monotone'
+            dataKey='Total'
+            stroke='#8884d8'
+            fillOpacity={1}
+            fill='url(#total)'
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
+  );
 };
 
 export default Chart;
