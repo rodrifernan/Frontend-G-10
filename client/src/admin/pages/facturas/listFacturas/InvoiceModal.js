@@ -31,22 +31,22 @@ export const InvoiceModal = ({ invoice }) => {
 							<div className="page-header text-blue-d2">
 								<div className="page-tools">
 									<div className="action-buttons">
-										<a
+										{/* <a
 											className="btn bg-white btn-light mx-1px text-95"
 											href="#top"
 											data-title="Print"
 										>
 											<i className="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
 											Imprimir
-										</a>
-										<a
+										</a> */}
+										{/* <a
 											className="btn bg-white btn-light mx-1px text-95"
 											href="#top"
 											data-title="PDF"
 										>
 											<i className="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
 											Exportar
-										</a>
+										</a> */}
 									</div>
 								</div>
 							</div>

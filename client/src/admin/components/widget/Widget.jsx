@@ -1,10 +1,9 @@
 import './widget.scss';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { sendNotification } from '../../../utils/notifications';
 
 const Widget = ({ type, socket }) => {
@@ -12,31 +11,27 @@ const Widget = ({ type, socket }) => {
 
   let data;
 
-  useState(async () => {
-    sendNotification(type === 'profits' ? 'salesQuantity' : type).then(
+  useEffect(() => {
+    sendNotification(type).then(
       ({ data }) => {
-        if (type === 'profits') {
-          setMetric({ amount: (data.response * 0.02).toFixed(2) });
-        } else setMetric({ amount: data.response });
+        setMetric({ amount: data.response });
       }
     );
   }, []);
-
-  //temporary
-  let diff = 20;
 
   switch (type) {
     case 'usersQuantity':
       data = {
         title: 'Usuarios',
         isMoney: false,
-        link: 'Ver mas',
         icon: (
           <PersonOutlinedIcon
             className='icon'
             style={{
               color: 'crimson',
               backgroundColor: 'rgba(255, 0, 0, 0.2)',
+              width: '2em',
+              height: '2em',
             }}
           />
         ),
@@ -51,13 +46,15 @@ const Widget = ({ type, socket }) => {
       data = {
         title: 'Ordenes',
         isMoney: false,
-        link: 'Ver mas',
+        // link: 'Ver mas',
         icon: (
           <ShoppingCartOutlinedIcon
             className='icon'
             style={{
               backgroundColor: 'rgba(218, 165, 32, 0.2)',
               color: 'goldenrod',
+              width: '2em',
+              height: '2em',
             }}
           />
         ),
@@ -72,38 +69,43 @@ const Widget = ({ type, socket }) => {
       data = {
         title: 'Ventas',
         isMoney: true,
-        link: 'Ver mas',
         icon: (
           <MonetizationOnOutlinedIcon
             className='icon'
-            style={{ backgroundColor: 'rgba(0, 128, 0, 0.2)', color: 'green' }}
-          />
-        ),
-      };
-
-      socket.on('salesQuantity', data => {
-        setMetric(state => ({ ...state, amount: data.toFixed(2) }));
-      });
-
-      break;
-    case 'profits':
-      data = {
-        title: 'Ganancias',
-        isMoney: true,
-        link: 'Ver mas',
-        icon: (
-          <AccountBalanceWalletOutlinedIcon
-            className='icon'
             style={{
-              backgroundColor: 'rgba(128, 0, 128, 0.2)',
-              color: 'purple',
+              backgroundColor: 'rgba(0, 128, 0, 0.2)',
+              color: 'green',
+              width: '2em',
+              height: '2em',
             }}
           />
         ),
       };
 
       socket.on('salesQuantity', data => {
-        setMetric(state => ({ ...state, amount: (data * 0.02).toFixed(2) }));
+        setMetric(state => ({ ...state, amount: data }));
+      });
+
+      break;
+    case 'profitAmount':
+      data = {
+        title: 'Ganancias',
+        isMoney: true,
+        icon: (
+          <AccountBalanceWalletOutlinedIcon
+            className='icon'
+            style={{
+              backgroundColor: 'rgba(128, 0, 128, 0.2)',
+              color: 'purple',
+              width: '2em',
+              height: '2em',
+            }}
+          />
+        ),
+      };
+
+      socket.on('profitAmount', data => {
+        setMetric(state => ({ ...state, amount: data }));
       });
 
       break;
@@ -121,10 +123,10 @@ const Widget = ({ type, socket }) => {
         <span className='link'>{data.link}</span>
       </div>
       <div className='right'>
-        <div className='percentage positive'>
+        {/* <div className='percentage positive'>
           <KeyboardArrowUpIcon />
           {diff} %
-        </div>
+        </div> */}
         {data.icon}
       </div>
     </div>

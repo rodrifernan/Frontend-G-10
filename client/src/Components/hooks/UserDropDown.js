@@ -38,8 +38,8 @@ export const UserDropDown = () => {
             >
               Ver Perfil
             </button>
-
-            <button className='dropdown-item'>Mis Pedidos</button>
+            
+            {/* <button className='dropdown-item'>Mis Pedidos</button> */}
 
             <button
               className='dropdown-item'

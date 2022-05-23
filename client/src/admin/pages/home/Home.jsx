@@ -123,21 +123,25 @@ const Home = () => {
           <Widget type='usersQuantity' socket={socket} />
           <Widget type='ordersQuantity' socket={socket} />
           <Widget type='salesQuantity' socket={socket} />
-          <Widget type='profits' socket={socket} />
+          <Widget type='profitAmount' socket={socket} />
         </div>
         <div className='charts'>
-          <Featured />
-          <Chart title='Ultimos 7 dias (Ventas)' aspect={2 / 1} />
+          <Featured socket={socket} />
+          <Chart
+            title='Ultimos 7 dias (Ventas)'
+            aspect={2 / 1}
+            socket={socket}
+          />
         </div>
         {/* <div className="barChar__container">
         <BarChar/>
         </div> */}
         <div className='chartsPieRdar'>
           <div className='PieChart__container '>
-            <PieChar />
+            <PieChar socket={socket} />
           </div>
           <div className='RadarChar__container '>
-            <RadarChar />
+            <RadarChar socket={socket} />
           </div>
         </div>
 

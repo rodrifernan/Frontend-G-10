@@ -78,7 +78,7 @@ const WishList = () => {
           })
         ) : (
           <div className="text-center">
-            <h3>Su Lista de deseo esa vacio. Agregue algunos productos!</h3>
+            <h3>Su Lista de deseos está vacía. Agregue algunos productos!</h3>
           </div>
         )}
         {Array.isArray(myWishes) && myWishes.length > 1 ? (
@@ -101,14 +101,14 @@ const WishList = () => {
             <i className="fas fa-arrow-left"></i> Regresar
           </button>
         </div>
-        <div className="text-right col-6">
+        {/* <div className="text-right col-6">
           <button
             className="btn text-light btn-success"
             disabled={myWishes.length === 0}
           >
             <i className="fas fa-shopping-cart"></i>Agregar todo al Carrito!
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

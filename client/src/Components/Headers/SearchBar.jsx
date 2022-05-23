@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getByName } from "../../redux/reducer/products";
 import { useDispatch } from "react-redux";
 import "./SearchBar.css";
+import { BsSearch } from 'react-icons/bs';
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -17,25 +18,38 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="search">
-      <div className="search-content justify-content-start d-flex">
-        <div className="input-group inputSearch rounded ">
+    // <div className="search">
+    //   <div className="search-content justify-content-start d-flex">
+    //     <div className="input-group inputSearch rounded ">
+    //       <input
+    //         type="text"
+    //         placeholder="Buscar"
+    //         onChange={handleOnChange}
+    //         required
+    //       />
+
+    //       <i
+    //         class="fas fa-search icon searchButton"
+    //         onClick={handleOnSubmit}
+    //       ></i>
+    //     </div>
+    //   </div>
+    // </div>
+
+    <div className="searchbar_container">
+      <div className="searchbar">
+        <form onSubmit={handleOnSubmit}>
           <input
-            type="search"
-            className="form-control  rounded"
-            placeholder="Buscar un producto..."
-            aria-label="Search"
-            aria-describedby="search-addon"
+            value={input}
             onChange={handleOnChange}
-          />
-          <button
-            onClick={handleOnSubmit}
-            className="input-group-text border-0"
-            id="search-addon"
-          >
-            <i className="fas fa-search"></i>
+            placeholder="Buscar"
+            type="text"
+          ></input>
+
+          <button name="name" type="submit">
+            <BsSearch/>
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

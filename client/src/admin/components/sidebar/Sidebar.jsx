@@ -20,69 +20,60 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLogOut } from "../../../Components/hooks/useLogOut";
 
 const Sidebar = () => {
-	// const { dispatch } = useContext(DarkModeContext);
-	const navigate = useNavigate();
-	const out = useLogOut();
+  // const { dispatch } = useContext(DarkModeContext);
+  const navigate = useNavigate();
+  const out = useLogOut();
 
-	return (
-		<div className="sidebar">
-			<div className="top">
-				<Link to="/admin/" style={{ textDecoration: "none" }}>
-					<img
-						src="https://res.cloudinary.com/dr8u3dssn/image/upload/v1651677898/Pink_Yellow_Cute_Bag_Cop_Ecommerce_Shop_Logo_1_v9mvoc.png"
-						alt=""
-					/>
-				</Link>
-			</div>
-			<hr />
-			<div className="center">
-				<ul>
-					<p className="title">PRINCIPAL</p>
-					<Link to="/admin/" style={{ textDecoration: "none" }}>
-						<li>
-							<DashboardIcon className="icon" />
-							<span>Panel de control</span>
-						</li>
-					</Link>
-					<p className="title">LISTAS</p>
-					<Link to="/admin/users" style={{ textDecoration: "none" }}>
-						<li>
-							<PersonOutlineIcon className="icon icon-color" />
-							<span>Usuarios</span>
-						</li>
-					</Link>
-					<Link
-						to="/admin/products"
-						style={{ textDecoration: "none" }}
-					>
-						<li>
-							<StoreIcon className="icon" />
-							<span>Productos</span>
-						</li>
-					</Link>
-					<Link
-						to="/admin/ordenes"
-						style={{ textDecoration: "none" }}
-					>
-						<li>
-							<CreditCardIcon className="icon" />
-							<span>Ordenes</span>
-						</li>
-					</Link>
-					<Link
-						to="/admin/facturas"
-						style={{ textDecoration: "none" }}
-					>
-						<li>
-							<DescriptionOutlinedIcon className="icon" />
-							<span>Facturas</span>
-						</li>
-					</Link>
-					{/* <li>
+  return (
+    <div className="sidebar">
+      <div className="top">
+        <Link to="/admin/" style={{ textDecoration: "none" }}>
+          <img
+            src="https://res.cloudinary.com/dr8u3dssn/image/upload/v1651677898/Pink_Yellow_Cute_Bag_Cop_Ecommerce_Shop_Logo_1_v9mvoc.png"
+            alt=""
+          />
+        </Link>
+      </div>
+      <hr />
+      <div className="center">
+        <ul>
+          <p className="title">PRINCIPAL</p>
+          <Link to="/admin/" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Panel de control</span>
+            </li>
+          </Link>
+          <p className="title">LISTAS</p>
+          <Link to="/admin/users" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonOutlineIcon className="icon icon-color" />
+              <span>Usuarios</span>
+            </li>
+          </Link>
+          <Link to="/admin/products" style={{ textDecoration: "none" }}>
+            <li>
+              <StoreIcon className="icon" />
+              <span>Productos</span>
+            </li>
+          </Link>
+          <Link to="/admin/ordenes" style={{ textDecoration: "none" }}>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Ordenes</span>
+            </li>
+          </Link>
+          <Link to="/admin/facturas" style={{ textDecoration: "none" }}>
+            <li>
+              <DescriptionOutlinedIcon className="icon" />
+              <span>Facturas</span>
+            </li>
+          </Link>
+          {/* <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
           </li> */}
-					{/* <p className="title">USEFUL</p>
+          {/* <p className="title">USEFUL</p>
           <li>
             <InsertChartIcon className="icon" />
             <span>Stats</span>
@@ -91,7 +82,7 @@ const Sidebar = () => {
             <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
           </li> */}
-					{/* <p className="title">SERVICE</p>
+          {/* <p className="title">SERVICE</p>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
             <span>System Health</span>
@@ -104,24 +95,24 @@ const Sidebar = () => {
             <SettingsApplicationsIcon className="icon" />
             <span>Settings</span>
           </li> */}
-					<p className="title">USUARIO</p>
-					<li>
+          <p className="title">USUARIO</p>
+          {/* <li>
 						<AccountCircleOutlinedIcon className="icon" />
 						<span>Cuenta</span>
-					</li>
+					</li> */}
 
-					<li onClick={() => navigate("/")}>
-						<HomeIcon className="icon" />
-						<span>Inicio</span>
-					</li>
+          <li onClick={() => navigate("/")}>
+            <HomeIcon className="icon" />
+            <span>Inicio</span>
+          </li>
 
-					<li onClick={out}>
-						<ExitToAppIcon className="icon" />
-						<span>Cerrar Sesion</span>
-					</li>
-				</ul>
-			</div>
-			{/* <div className="bottom">
+          <li onClick={out}>
+            <ExitToAppIcon className="icon" />
+            <span>Cerrar Sesion</span>
+          </li>
+        </ul>
+      </div>
+      {/* <div className="bottom">
         <div
           className="colorOption"
           onClick={() => dispatch({ type: "LIGHT" })}
@@ -131,8 +122,8 @@ const Sidebar = () => {
           onClick={() => dispatch({ type: "DARK" })}
         ></div>
       </div> */}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default Sidebar;
