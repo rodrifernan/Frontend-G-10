@@ -261,7 +261,7 @@ export const Form = () => {
 								<i className="fas fa-address-book"></i>
 							</span>
 							<input
-								type="text"
+								type="password"
 								name="Documento de identidad"
 								onChange={handleOnchangeActivity}
 								className={
